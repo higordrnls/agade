@@ -58,7 +58,9 @@ Ao iniciar o checkout, o sistema cria um pedido em estado temporário.
 
 ---
 
-## Estados do pedido
+## Estados do pedido (ORDERS.status — domínio comercial)
+
+**Correção (v1.1):** o campo `status` do pedido cobre exclusivamente o ciclo comercial — criação e pagamento. Ele não representa as etapas físicas de fabricação. As versões anteriores deste documento mostravam um único fluxo linear indo até `delivered`, o que contradizia o PRD 06 (Orders) e o PRD 07 (Production), que já tratam produção como um domínio à parte. Esta versão corrige isso.
 
 O pedido percorre os seguintes estados:
 
@@ -72,26 +74,6 @@ pending_payment
 ↓
 
 paid
-
-↓
-
-in_production
-
-↓
-
-quality_check
-
-↓
-
-ready_to_ship
-
-↓
-
-shipped
-
-↓
-
-delivered
 ```
 
 Fluxos alternativos:
@@ -104,7 +86,13 @@ pending_payment
 cancelled
 ```
 
-ou
+```
+pending_payment
+
+↓
+
+expired
+```
 
 ```
 paid
@@ -115,6 +103,20 @@ refunded
 ```
 
 Toda alteração de estado deve gerar histórico.
+
+---
+
+## Transição para produção
+
+Ao atingir o estado `paid`, o sistema cria automaticamente uma **Ordem de Produção** (entidade `PRODUCTION_ORDERS`, vinculada por `order_id`), com seu próprio campo de status, independente do status comercial do pedido:
+
+```
+queued → scheduled → printing → quality_check → finishing → approved
+```
+
+(com os desvios `paused`, `failed` e `rejected` — ver PRD 07 para a definição completa.)
+
+O `ORDERS.status` permanece `paid` durante toda a fabricação. É o status da Ordem de Produção que evolui até `approved`; somente então o pedido é considerado apto para expedição e entrega. A visão "aguardando pagamento → em produção → controle de qualidade → pronto para envio → enviado → entregue" que o cliente vê (PRD 02, Fluxo 09) é uma **visão composta**, derivada da combinação de `ORDERS.status` + `PRODUCTION_ORDERS.status` — não é ela própria um terceiro enum a ser armazenado.
 
 ---
 
@@ -334,8 +336,11 @@ Relaciona-se diretamente com:
 
 # Status
 
-Versão **1.0**
+Versão **1.1**
 
 Este documento estabelece as regras oficiais de negócio do MVP da Agadê.
 
 Qualquer alteração funcional futura deverá atualizar este documento antes da implementação.
+
+**Changelog:**
+- **v1.1** — Corrigida a seção "Estados do pedido": separado o status comercial (`ORDERS.status`) do status de fabricação (`PRODUCTION_ORDERS.status`, ver PRD 07), e adicionado o estado `expired` ao fluxo formal (já existia em prosa, mas não no diagrama).
