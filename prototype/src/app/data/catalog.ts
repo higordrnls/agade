@@ -8,12 +8,14 @@ export type CatalogProduct = {
   name: string;
   description: string;
   concept: string;
+  image: string;
   colors: CatalogColor[];
 };
 
 export const dropOneProducts: CatalogProduct[] = [
   {
     ref: "01",
+    image: "/imagens/catalog/drop-01/01-inicio.png",
     name: "Início",
     description: "Cat-eye sutil, com armação geométrica leve.",
     concept: "A entrada na linguagem autoral da AGADE: precisa, leve e essencial.",
@@ -26,6 +28,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "02",
+    image: "/imagens/catalog/drop-01/02-raiz.png",
     name: "Raiz",
     description: "Redondo clássico com bordas chanfradas em 3D.",
     concept: "Referência clássica reinterpretada pela fabricação digital.",
@@ -38,6 +41,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "03",
+    image: "/imagens/catalog/drop-01/03-frequencia.png",
     name: "Frequência",
     description: "Retangular minimalista executivo.",
     concept: "Estrutura sóbria para uma presença precisa e contemporânea.",
@@ -50,6 +54,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "04",
+    image: "/imagens/catalog/drop-01/04-pulso.png",
     name: "Pulso",
     description: "Oitogonal futurista e marcante.",
     concept: "Geometria expressiva com vocação experimental.",
@@ -62,6 +67,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "05",
+    image: "/imagens/catalog/drop-01/05-horizonte.png",
     name: "Horizonte",
     description: "Solar oversized com lentes degradê.",
     concept: "Volume solar pensado como uma peça de presença.",
@@ -74,6 +80,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "06",
+    image: "/imagens/catalog/drop-01/06-calor.png",
     name: "Calor",
     description: "Oval compacto vintage anos 90.",
     concept: "Uma leitura compacta do vintage com fabricação contemporânea.",
@@ -86,6 +93,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "07",
+    image: "/imagens/catalog/drop-01/07-vibracao.png",
     name: "Vibração",
     description: "Linhas retas com ponte dupla imponente.",
     concept: "Estrutura gráfica que transforma a ponte em elemento de linguagem.",
@@ -98,6 +106,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "08",
+    image: "/imagens/catalog/drop-01/08-essencia.png",
     name: "Essência",
     description: "Minimalismo absoluto em fio-duplo.",
     concept: "A redução da forma ao mínimo necessário.",
@@ -110,6 +119,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "09",
+    image: "/imagens/catalog/drop-01/09-fluidez.png",
     name: "Fluidez",
     description: "Formato borboleta suave para rostos delicados.",
     concept: "Curvas suaves e proporções delicadas em uma silhueta orgânica.",
@@ -122,6 +132,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "10",
+    image: "/imagens/catalog/drop-01/10-contraste.png",
     name: "Contraste",
     description: "Oversized quadrado com plásticos translúcidos e engenharia aparente.",
     concept: "Volume e transparência usados para revelar a própria construção.",
@@ -134,6 +145,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "11",
+    image: "/imagens/catalog/drop-01/11-aura.png",
     name: "Aura",
     description: "Geométrico assimétrico de vanguarda.",
     concept: "Assimetria controlada como assinatura de uma peça autoral.",
@@ -146,6 +158,7 @@ export const dropOneProducts: CatalogProduct[] = [
   },
   {
     ref: "12",
+    image: "/imagens/catalog/drop-01/12-marco-zero.png",
     name: "Marco Zero",
     description: "Peça comemorativa dos 24 anos com relevo 3D da Baía de Todos-os-Santos.",
     concept: "Uma peça autoral que marca a origem e a identidade territorial da AGADE.",
