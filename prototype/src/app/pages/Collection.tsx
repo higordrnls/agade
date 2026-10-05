@@ -48,7 +48,7 @@ export default function Collection() {
       </section>
 
       {/* Catalog Grid */}
-      <section className="py-12 px-6">
+      <section id="drop-01" className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {dropOneProducts.map((product, index) => (
@@ -97,20 +97,18 @@ export default function Collection() {
                     >
                       COLORWAYS
                     </p>
-                    <div className="space-y-2">
+                    <div className="flex items-center gap-3">
                       {product.colors.map((color) => (
-                        <div key={color.name} className="text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-                          <span className="font-medium">{color.name}</span>
-                          <span className="text-muted-foreground"> — {color.description}</span>
-                        </div>
+                        <span
+                          key={color.name}
+                          title={color.name}
+                          aria-label={color.name}
+                          className="block w-7 h-7 rounded-full border border-black/15 shadow-sm"
+                          style={{ backgroundColor: color.color }}
+                        />
                       ))}
                     </div>
                   </div>
-
-                  <button className="mt-7 inline-flex items-center gap-2 text-sm hover:text-accent transition-colors">
-                    <span style={{ fontFamily: 'var(--font-mono)' }}>View Model</span>
-                    <ArrowRight size={18} />
-                  </button>
                 </div>
               </motion.article>
             ))}
@@ -194,10 +192,13 @@ export default function Collection() {
             <p className="text-xl text-muted-foreground mb-8" style={{ fontFamily: 'var(--font-sans)' }}>
               Twelve models. Four color variations each. Built around a single material language.
             </p>
-            <button className="inline-flex items-center gap-2 px-10 py-5 bg-black text-white hover:bg-accent transition-all duration-300 text-lg">
+            <a
+              href="#drop-01"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-black text-white hover:bg-accent transition-all duration-300 text-lg"
+            >
               <span style={{ fontFamily: 'var(--font-mono)' }}>Explore Drop 01</span>
               <ArrowRight size={24} />
-            </button>
+            </a>
           </motion.div>
         </div>
       </section>
