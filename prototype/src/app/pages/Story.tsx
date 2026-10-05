@@ -7,7 +7,7 @@ export default function Story() {
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1769414217270-507459a16298?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwb3B0aWNhbCUyMGdsYXNzZXN8ZW58MXx8fHwxNzcyNTQzMjc1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+            src="/imagens/catalog/drop-01/11-aura.png"
             alt="AGADE Story"
             className="w-full h-full object-cover"
           />
@@ -37,41 +37,39 @@ export default function Story() {
             className="mb-16"
           >
             <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-              5 Years of Dedication
+              A Concept in Development
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-              Since 2021, AGADE has been on a mission to revolutionize the eyewear industry. 
-              What began as a rigorous optical study evolved into a brand that seamlessly merges 
-              scientific precision with artistic expression.
+              AGADE is a portfolio concept exploring how Brazilian design, digital fabrication and circular materials could come together in a contemporary eyewear experience.
             </p>
           </motion.div>
 
           <div className="space-y-16">
             {[
               {
-                year: "2021",
+                year: "CONCEPT",
                 title: "The Beginning",
-                description: "Our journey started with a simple question: Can eyewear be both scientifically perfect and sustainably beautiful? We embarked on an extensive optical study, partnering with leading researchers to understand the intricacies of vision correction and frame design."
+                description: "The concept began with a question: how can eyewear combine expressive form, digital fabrication and a more circular material narrative?"
               },
               {
-                year: "2022",
+                year: "MATERIAL",
                 title: "Material Innovation",
-                description: "Discovery of recycled PETg as our primary material. Through countless iterations, we perfected the process of transforming post-consumer PET bottles into premium eyewear frames, maintaining optical clarity while reducing environmental impact."
+                description: "Recycled PET-G became part of the material direction explored by the project, connecting additive manufacturing with a circular design narrative."
               },
               {
-                year: "2023",
+                year: "FABRICATION",
                 title: "3D Printing Mastery",
-                description: "Implementation of cutting-edge 3D printing technology. This allowed us to achieve unprecedented precision in frame construction while offering virtually unlimited customization options for our clients."
+                description: "3D printing became the central fabrication language explored in the prototype, enabling complex forms and a more direct relationship between digital design and physical production."
               },
               {
-                year: "2024",
+                year: "DROP 01",
                 title: "Brand Launch",
-                description: "AGADE officially launched, introducing our first collection to the world. The response was overwhelming, validating our vision of high-tech engineering meeting humanistic luxury."
+                description: "The first conceptual catalog was organized as Drop 01, with twelve models developed as a visual and product-system exercise."
               },
               {
-                year: "2026",
+                year: "NEXT",
                 title: "Global Recognition",
-                description: "Today, AGADE stands as a testament to Brazilian innovation in luxury eyewear. Our commitment to sustainability, precision, and storytelling continues to shape the future of how we see and are seen."
+                description: "The next phase is to test the experience, refine the system and gradually translate the concept into a stronger technical implementation."
               },
             ].map((milestone, index) => (
               <motion.div
@@ -120,11 +118,11 @@ export default function Story() {
             {[
               {
                 title: "Innovation",
-                description: "We push boundaries. Our 5-year optical study continues to inform every design decision, ensuring that each frame represents the pinnacle of optical engineering."
+                description: "We push boundaries. We use design, prototyping and digital fabrication as tools for exploring new forms of eyewear."
               },
               {
                 title: "Sustainability",
-                description: "We believe luxury and responsibility go hand in hand. Every frame we create gives new life to discarded materials, proving that sustainability can be beautiful."
+                description: "The project explores how circular materials and digital fabrication can participate in a more responsible vision of luxury."
               },
               {
                 title: "Identity",
