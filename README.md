@@ -1,29 +1,52 @@
 # Agadê
 
-> Plataforma digital da **Agadê Moda Ocular LTDA ME**.
+> **Projeto conceitual de portfólio — não é uma empresa ou operação comercial em funcionamento.**
 
-A Agadê é uma marca brasileira de moda ocular que desenvolve armações autorais impressas em 3D a partir de filamento PET-G reciclado, unindo design contemporâneo, manufatura digital e economia circular.
+A Agadê é uma proposta de marca brasileira de moda ocular que explora armações autorais produzidas por fabricação digital, unindo design contemporâneo, manufatura digital e economia circular.
 
-Este repositório concentra todo o ecossistema digital da marca, incluindo a experiência de e-commerce, personalização de produtos, logística reversa, carteira de créditos verdes e ferramentas administrativas.
+Este repositório documenta e prototipa essa proposta de produto e experiência digital. Os modelos, renders, especificações, dados comerciais e demais elementos apresentados são **conceituais e fictícios**, criados para demonstrar a visão do projeto.
 
 ---
 
 # Status do Projeto
 
-> **Fase Atual:** Desenvolvimento do MVP — Drop 1
+> **Fase Atual:** Protótipo conceitual — Drop 01
 
-## Roadmap
+O projeto está atualmente concentrado na validação da experiência e da linguagem visual por meio de um protótipo frontend.
+
+### O que existe hoje
 
 - ✅ Branding Book
 - ✅ Architecture Decision Records (ADR)
 - ✅ Product Requirements Document (PRD)
-- ⏳ Design de Interface (Figma)
+- ✅ Catálogo conceitual do Drop 01
+- ✅ Renders conceituais dos 12 modelos
+- ⏳ Migração do protótipo para Next.js
 - ⏳ Estrutura inicial do banco de dados
-- ⏳ Desenvolvimento Frontend
 - ⏳ Integração Supabase
-- ⏳ Integração Mercado Pago
+- ⏳ Fluxos de personalização e checkout
 - ⏳ Testes
 - ⏳ Deploy
+
+> As etapas de backend, pagamentos, produção e operação comercial são parte da visão futura do projeto e **não representam funcionalidades atualmente disponíveis**.
+
+---
+
+# Sobre os Dados Conceituais
+
+Para fins de portfólio, o projeto utiliza dados fictícios para representar como uma futura operação poderia funcionar.
+
+Isso inclui, quando aplicável:
+
+- produtos e variantes;
+- renders e imagens conceituais;
+- preços e informações comerciais;
+- especificações técnicas estimadas;
+- SKUs e inventário;
+- fluxos de personalização;
+- sustentabilidade e economia circular.
+
+Esses dados não devem ser interpretados como produtos disponíveis para compra, especificações de produtos fabricados ou informações de uma empresa em operação.
 
 ---
 
@@ -42,7 +65,18 @@ A implementação nunca deve contradizer esses princípios sem revisão formal.
 
 # Stack Tecnológica
 
-## Frontend
+## Protótipo atual
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Motion
+- React Router
+
+## Arquitetura planejada
+
+### Frontend
 
 - Next.js
 - React
@@ -50,7 +84,7 @@ A implementação nunca deve contradizer esses princípios sem revisão formal.
 - Tailwind CSS
 - Framer Motion
 
-## Backend (BaaS)
+### Backend (BaaS)
 
 - Supabase
     - PostgreSQL
@@ -59,20 +93,22 @@ A implementação nunca deve contradizer esses princípios sem revisão formal.
     - Storage
     - Edge Functions
 
-## Infraestrutura
+### Infraestrutura
 
 - Vercel
 - Supabase Managed
 
-## Pagamentos
+### Pagamentos
 
 - Mercado Pago
+
+> A stack planejada acima representa a arquitetura definida nos documentos do projeto. A implementação será feita progressivamente, após a validação do protótipo.
 
 ---
 
 # Arquitetura
 
-A arquitetura segue uma abordagem **Backend as a Service (BaaS)**.
+A arquitetura futura segue uma abordagem **Backend as a Service (BaaS)**.
 
 O objetivo é minimizar infraestrutura operacional, concentrando as regras de negócio em:
 
@@ -81,7 +117,7 @@ O objetivo é minimizar infraestrutura operacional, concentrando as regras de ne
 - Edge Functions
 - Políticas de segurança
 
-Não existe servidor dedicado nesta primeira versão do projeto.
+Não existe servidor dedicado previsto para a arquitetura planejada.
 
 ---
 
@@ -89,11 +125,12 @@ Não existe servidor dedicado nesta primeira versão do projeto.
 
 ```text
 .
-├── app/
-├── components/
-├── lib/
-├── public/
-├── styles/
+├── prototype/
+│   ├── public/
+│   │   └── imagens/
+│   │       └── catalog/
+│   │           └── drop-01/
+│   └── src/
 ├── docs/
 │   ├── adr/
 │   ├── prd/
@@ -101,3 +138,12 @@ Não existe servidor dedicado nesta primeira versão do projeto.
 │   └── assets/
 ├── supabase/
 └── README.md
+```
+
+---
+
+# Objetivo do Projeto
+
+A Agadê é desenvolvida como um projeto de portfólio para explorar, na prática, a construção de um produto digital completo: da definição de marca e produto à arquitetura de software, experiência de e-commerce, dados e futura infraestrutura.
+
+O objetivo não é apenas apresentar uma interface visual, mas demonstrar o processo de transformar uma ideia em um sistema digital coerente, documentado e tecnicamente estruturado.
