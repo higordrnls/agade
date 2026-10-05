@@ -5,7 +5,7 @@ export default function Sustainability() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[6TBDvh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="/imagens/catalog/drop-01/10-contraste.png"
@@ -40,9 +40,7 @@ export default function Sustainability() {
               Circularity as a Design Direction
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-              Every AGADE frame tells a story of transformation. What was once a discarded PET bottle 
-              becomes a statement of luxury and responsibility. This is our commitment to the planet, 
-              to our craft, and to future generations.
+              The project explores recycled PET-G as a possible material direction for digitally fabricated eyewear. The process described here is conceptual and would require material, manufacturing and environmental validation.
             </p>
           </motion.div>
         </div>
