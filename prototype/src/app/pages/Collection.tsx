@@ -60,21 +60,12 @@ export default function Collection() {
                 transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
                 className="border border-black/10 bg-secondary/30"
               >
-                <div className="aspect-[4/5] bg-black/5 flex items-center justify-center p-8">
-                  <div className="text-center">
-                    <span
-                      className="text-xs tracking-widest text-accent"
-                      style={{ fontFamily: 'var(--font-mono)' }}
-                    >
-                      REF {product.ref}
-                    </span>
-                    <p
-                      className="mt-3 text-sm text-muted-foreground"
-                      style={{ fontFamily: 'var(--font-mono)' }}
-                    >
-                      IMAGE / RENDER PENDING
-                    </p>
-                  </div>
+                <div className="aspect-[4/5] bg-white flex items-center justify-center overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={`Render conceitual do modelo ${product.name}, REF ${product.ref}`}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
 
                 <div className="p-7">
