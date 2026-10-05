@@ -154,10 +154,10 @@ export default function Technology() {
                 icon: <Zap size={32} />,
                 title: "Manufacturing",
                 specs: [
-                  "Layer height: 0.05mm",
-                  "Print speed: Optimized",
-                  "Post-processing: 8 stages",
-                  "Quality control: 100%"
+                  "Example layer height: 0.05mm",
+                  "Conceptual post-processing workflow",
+                  "Quality control: to be validated",
+                  "Production timeline: to be determined"
                 ]
               },
               {
