@@ -8,7 +8,7 @@ export default function Technology() {
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1703221561813-cdaa308cf9e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHwzRCUyMHByaW50aW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzI1MzUwNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            src="/imagens/catalog/drop-01/04-pulso.png"
             alt="3D Printing Technology"
             className="w-full h-full object-cover"
           />
@@ -23,7 +23,7 @@ export default function Technology() {
             Technology
           </h1>
           <p className="text-sm tracking-widest text-white/80" style={{ fontFamily: 'var(--font-mono)' }}>
-            PRECISION ENGINEERING MEETS OPTICAL SCIENCE
+            DIGITAL FABRICATION AS DESIGN LANGUAGE
           </p>
         </motion.div>
       </section>
@@ -37,12 +37,10 @@ export default function Technology() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl mb-8" style={{ fontFamily: 'var(--font-serif)' }}>
-              The Science of Sight
+              The Technology Behind the Concept
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-              Our 5-year optical study, initiated in 2021, forms the foundation of every AGADE frame. 
-              We've combined cutting-edge 3D printing technology with advanced materials science to 
-              create eyewear that's not just beautiful, but optically superior.
+              This prototype explores 3D printing as a design and manufacturing language for eyewear. The technical details shown here are conceptual and serve as a direction for future validation.
             </p>
           </motion.div>
         </div>
@@ -69,10 +67,10 @@ export default function Technology() {
               </p>
               <ul className="space-y-4 mb-8">
                 {[
-                  "Micron-level precision in frame geometry",
-                  "Complex internal structures for optimal weight distribution",
-                  "Customization without traditional tooling constraints",
-                  "Reduced material waste compared to traditional methods",
+                  "Controlled geometry through digital modeling",
+                  "Exploration of lightweight structural forms",
+                  "Digital variation without traditional tooling",
+                  "Potential for more material-efficient prototyping",
                 ].map((item, index) => (
                   <motion.li
                     key={index}
@@ -94,7 +92,7 @@ export default function Technology() {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.unsplash.com/photo-1770219792093-85830ce757b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVjaXNpb24lMjBlbmdpbmVlcmluZyUyMGRldGFpbHxlbnwxfHx8fDE3NzI1NDMyNzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                src="/imagens/catalog/drop-01/08-essencia.png"
                 alt="Precision Engineering"
                 className="w-full h-[500px] object-cover"
               />
@@ -126,10 +124,10 @@ export default function Technology() {
                 icon: <Eye size={32} />,
                 title: "Optical Precision",
                 specs: [
-                  "99.9% lens alignment accuracy",
-                  "Compensated for facial asymmetry",
-                  "Optimized pantoscopic tilt",
-                  "Custom vertex distance"
+                  "Conceptual lens alignment target",
+                  "Future fit validation",
+                  "Fit geometry to be validated",
+                  "Prescription parameters to be validated"
                 ]
               },
               {
@@ -166,8 +164,8 @@ export default function Technology() {
                 icon: <Microscope size={32} />,
                 title: "Research-Backed",
                 specs: [
-                  "5-year optical study",
-                  "1000+ test subjects",
+                  "Conceptual research direction",
+                  "User testing planned for future validation",
                   "Peer-reviewed methods",
                   "Continuous improvement"
                 ]
@@ -176,9 +174,9 @@ export default function Technology() {
                 icon: <Settings size={32} />,
                 title: "Customization",
                 specs: [
-                  "250+ dimension variations",
-                  "Infinite color options",
-                  "Personalized fit algorithm",
+                  "Parametric variations",
+                  "Defined colorway system",
+                  "Fit logic planned for future validation",
                   "Digital try-on ready"
                 ]
               },
@@ -230,14 +228,14 @@ export default function Technology() {
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { step: "01", title: "Digital Scan", description: "Precise facial measurements" },
-              { step: "02", title: "AI Optimization", description: "Algorithm-based design" },
+              { step: "01", title: "Digital Scan", description: "Facial measurements" },
+              { step: "02", title: "Design Optimization", description: "Parametric design exploration" },
               { step: "03", title: "3D Printing", description: "Layer-by-layer construction" },
               { step: "04", title: "Post-Processing", description: "Finishing and quality" },
-              { step: "05", title: "Optical Testing", description: "Alignment verification" },
-              { step: "06", title: "Surface Treatment", description: "UV coating application" },
+              { step: "05", title: "Optical Testing", description: "Optical validation" },
+              { step: "06", title: "Surface Treatment", description: "Surface treatment" },
               { step: "07", title: "Assembly", description: "Lens integration" },
-              { step: "08", title: "Final Inspection", description: "100% quality check" },
+              { step: "08", title: "Final Inspection", description: "Final quality review" },
             ].map((stage, index) => (
               <motion.div
                 key={stage.step}
