@@ -1,28 +1,8 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { dropOneProducts } from "../data/catalog";
 
 export default function Collection() {
-  const collections = [
-    {
-      name: "Minimal",
-      description: "Clean lines, subtle curves. The essence of contemporary eyewear.",
-      image: "https://images.unsplash.com/photo-1755869985928-0e61815beddb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBleWVnbGFzc2VzJTIwbWluaW1hbHxlbnwxfHx8fDE3NzI1NDMyNzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      details: ["Ultra-thin frame • 12g weight • 4 colorways"]
-    },
-    {
-      name: "Architect",
-      description: "Geometric precision meets architectural inspiration.",
-      image: "https://images.unsplash.com/photo-1769414217270-507459a16298?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwb3B0aWNhbCUyMGdsYXNzZXN8ZW58MXx8fHwxNzcyNTQzMjc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      details: ["Angular design • 14g weight • 6 colorways"]
-    },
-    {
-      name: "Classic",
-      description: "Timeless elegance with modern materials and construction.",
-      image: "https://images.unsplash.com/photo-1769414259128-bf8a66a41701?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBleWV3ZWFyJTIwZGlzcGxheXxlbnwxfHx8fDE3NzI1NDMyNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      details: ["Round frame • 15g weight • 8 colorways"]
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -52,77 +32,98 @@ export default function Collection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
+            <p className="text-sm tracking-widest text-accent mb-4" style={{ fontFamily: 'var(--font-mono)' }}>
+              DROP 01 · 12 MODELS · 48 SKUS
+            </p>
             <h2 className="text-5xl mb-8" style={{ fontFamily: 'var(--font-serif)' }}>
-              Three Philosophies, Infinite Possibilities
+              Twelve Forms, One Material Language
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-              Our collection represents three distinct design languages, each refined through years 
-              of optical research. Choose your foundation, then customize every dimension to match 
-              your facial geometry and personal aesthetic.
+              The first official AGADE drop brings together twelve authorial models,
+              each developed around architecture, digital fabrication and a distinct
+              point of view.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Collections Grid */}
+      {/* Catalog Grid */}
       <section className="py-12 px-6">
-        <div className="max-w-7xl mx-auto space-y-24">
-          {collections.map((collection, index) => (
-            <motion.div
-              key={collection.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className={`grid md:grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'md:grid-flow-dense' : ''
-              }`}
-            >
-              <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-                <div className="relative group overflow-hidden">
-                  <img
-                    src={collection.image}
-                    alt={collection.name}
-                    className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {dropOneProducts.map((product, index) => (
+              <motion.article
+                key={product.ref}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+                className="border border-black/10 bg-secondary/30"
+              >
+                <div className="aspect-[4/5] bg-black/5 flex items-center justify-center p-8">
+                  <div className="text-center">
+                    <span
+                      className="text-xs tracking-widest text-accent"
+                      style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                      REF {product.ref}
+                    </span>
+                    <p
+                      className="mt-3 text-sm text-muted-foreground"
+                      style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                      IMAGE / RENDER PENDING
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <span className="text-sm tracking-widest text-accent mb-4 block" style={{ fontFamily: 'var(--font-mono)' }}>
-                    COLLECTION {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-                    {collection.name}
-                  </h3>
-                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                    {collection.description}
-                  </p>
-                  <div className="space-y-4 mb-8">
-                    {collection.details.map((detail, detailIndex) => (
-                      <div
-                        key={detailIndex}
-                        className="text-sm tracking-wide text-muted-foreground"
+
+                <div className="p-7">
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div>
+                      <span
+                        className="text-xs tracking-widest text-muted-foreground"
                         style={{ fontFamily: 'var(--font-mono)' }}
                       >
-                        {detail}
-                      </div>
-                    ))}
+                        DROP 01 · {product.ref}
+                      </span>
+                      <h3 className="text-3xl mt-2" style={{ fontFamily: 'var(--font-serif)' }}>
+                        {product.name}
+                      </h3>
+                    </div>
                   </div>
-                  <button className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white hover:bg-accent transition-all duration-300">
-                    <span style={{ fontFamily: 'var(--font-mono)' }}>Customize This Frame</span>
-                    <ArrowRight size={20} />
+
+                  <p className="text-base leading-relaxed mb-3" style={{ fontFamily: 'var(--font-sans)' }}>
+                    {product.description}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6" style={{ fontFamily: 'var(--font-sans)' }}>
+                    {product.concept}
+                  </p>
+
+                  <div className="border-t border-black/10 pt-5">
+                    <p
+                      className="text-xs tracking-widest text-muted-foreground mb-3"
+                      style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                      COLORWAYS
+                    </p>
+                    <div className="space-y-2">
+                      {product.colors.map((color) => (
+                        <div key={color.name} className="text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
+                          <span className="font-medium">{color.name}</span>
+                          <span className="text-muted-foreground"> — {color.description}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button className="mt-7 inline-flex items-center gap-2 text-sm hover:text-accent transition-colors">
+                    <span style={{ fontFamily: 'var(--font-mono)' }}>View Model</span>
+                    <ArrowRight size={18} />
                   </button>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -139,28 +140,28 @@ export default function Collection() {
               Made for You
             </h2>
             <p className="text-lg text-white/70 max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-sans)' }}>
-              Each collection serves as a starting point. Our customization process ensures your 
-              frames are optimized for your unique facial structure, prescription, and style preferences.
+              Each model is a starting point for a future customization flow.
+              The MVP will focus on color and lens type before the virtual try-on experience.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
               {
-                title: "Facial Scan",
-                description: "Precise 3D mapping of your face for perfect fit"
-              },
-              {
-                title: "Prescription Integration",
-                description: "Optimized for your exact optical requirements"
+                title: "Model Selection",
+                description: "Choose the frame that matches your visual language"
               },
               {
                 title: "Color Selection",
-                description: "Translucent pink, opaque black, white, or custom"
+                description: "Select one of the four defined color variations"
               },
               {
-                title: "Final Adjustments",
-                description: "Fine-tune every dimension to your preference"
+                title: "Lens Type",
+                description: "Prescription, sun or blue-light/rest lenses"
+              },
+              {
+                title: "Virtual Try-On",
+                description: "Preview the selected configuration before purchase"
               },
             ].map((step, index) => (
               <motion.div
@@ -188,78 +189,6 @@ export default function Collection() {
         </div>
       </section>
 
-      {/* Color Palette */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-              Signature Colors
-            </h2>
-            <p className="text-lg text-muted-foreground" style={{ fontFamily: 'var(--font-sans)' }}>
-              Our brand palette reflects minimalist sophistication
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="w-full aspect-square bg-black mb-4 border border-black/10" />
-              <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-serif)' }}>Opaque Black</h3>
-              <p className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-                #000000
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-center"
-            >
-              <div className="w-full aspect-square bg-white border border-black/10 mb-4" />
-              <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-serif)' }}>Pure White</h3>
-              <p className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-                #FFFFFF
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-center"
-            >
-              <div className="w-full aspect-square bg-accent mb-4 opacity-60 border border-black/10" />
-              <h3 className="text-xl mb-2" style={{ fontFamily: 'var(--font-serif)' }}>Translucent Pink</h3>
-              <p className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-                #FF6B7A
-              </p>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mt-12 text-center"
-          >
-            <p className="text-sm text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-              Custom color matching available for orders of 3+ frames
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-24 px-6 bg-secondary">
         <div className="max-w-4xl mx-auto text-center">
@@ -269,13 +198,13 @@ export default function Collection() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-              Begin Your Journey
+              Explore the Drop
             </h2>
             <p className="text-xl text-muted-foreground mb-8" style={{ fontFamily: 'var(--font-sans)' }}>
-              Schedule a consultation to experience the AGADE difference
+              Twelve models. Four color variations each. Built around a single material language.
             </p>
             <button className="inline-flex items-center gap-2 px-10 py-5 bg-black text-white hover:bg-accent transition-all duration-300 text-lg">
-              <span style={{ fontFamily: 'var(--font-mono)' }}>Book Consultation</span>
+              <span style={{ fontFamily: 'var(--font-mono)' }}>Explore Drop 01</span>
               <ArrowRight size={24} />
             </button>
           </motion.div>
