@@ -5,10 +5,10 @@ export default function Sustainability() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[6TBDvh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1756362399416-503694e40cf5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMHJlY3ljbGluZyUyMGJvdHRsZXN8ZW58MXx8fHwxNzcyNTQzMjc1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+            src="/imagens/catalog/drop-01/10-contraste.png"
             alt="Sustainability"
             className="w-full h-full object-cover"
           />
@@ -23,7 +23,7 @@ export default function Sustainability() {
             Sustainability
           </h1>
           <p className="text-sm tracking-widest text-white/80" style={{ fontFamily: 'var(--font-mono)' }}>
-            FROM BOTTLE TO BEAUTY
+            FROM MATERIAL TO OBJECT
           </p>
         </motion.div>
       </section>
@@ -37,7 +37,7 @@ export default function Sustainability() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl mb-8" style={{ fontFamily: 'var(--font-serif)' }}>
-              Circular Economy in Action
+              Circularity as a Design Direction
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
               Every AGADE frame tells a story of transformation. What was once a discarded PET bottle 
@@ -70,27 +70,27 @@ export default function Sustainability() {
               {
                 icon: <Package size={32} />,
                 title: "Collection",
-                description: "Post-consumer PET bottles sourced from certified recycling programs"
+                description: "Recycled material sourcing to be validated"
               },
               {
                 icon: <Recycle size={32} />,
                 title: "Processing",
-                description: "Bottles cleaned, sorted, and broken down into polymer granules"
+                description: "Material preparation and processing"
               },
               {
                 icon: <Leaf size={32} />,
                 title: "Conversion",
-                description: "PET transformed into high-grade PETg filament for 3D printing"
+                description: "PET-G filament as the explored fabrication input"
               },
               {
                 icon: <TrendingDown size={32} />,
                 title: "Production",
-                description: "Precision 3D printing with minimal waste and zero harmful emissions"
+                description: "3D printing with waste and emissions to be measured"
               },
               {
                 icon: <Heart size={32} />,
                 title: "Creation",
-                description: "Premium eyewear frames ready to enhance your vision and style"
+                description: "Conceptual eyewear ready for testing and validation"
               },
             ].map((step, index) => (
               <motion.div
@@ -126,31 +126,31 @@ export default function Sustainability() {
             className="text-center mb-16"
           >
             <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-              Our Environmental Impact
+              Potential Impact
             </h2>
             <p className="text-lg text-muted-foreground" style={{ fontFamily: 'var(--font-sans)' }}>
-              Measurable results from our commitment to sustainability
+              Impact metrics are not yet validated
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                metric: "100%",
-                label: "Recycled Materials",
-                description: "Every frame is made entirely from post-consumer recycled PET bottles",
+                metric: "Concept",
+                label: "Recycled Material Direction",
+                description: "The concept explores recycled PET-G; final material composition is not yet validated",
                 icon: <Recycle size={40} />
               },
               {
-                metric: "85%",
-                label: "Less CO₂",
-                description: "Compared to traditional acetate frame production methods",
+                metric: "TBD",
+                label: "CO₂ Impact",
+                description: "To be measured against a defined production baseline",
                 icon: <TrendingDown size={40} />
               },
               {
                 metric: "0",
-                label: "Waste to Landfill",
-                description: "Our closed-loop system ensures zero production waste",
+                label: "Production Waste",
+                description: "Waste recovery and circularity targets require future validation",
                 icon: <Leaf size={40} />
               },
             ].map((impact, index) => (
@@ -197,24 +197,24 @@ export default function Sustainability() {
           <div className="space-y-8">
             {[
               {
-                title: "Carbon Neutral by 2028",
-                description: "We're on track to achieve complete carbon neutrality across our entire supply chain within two years, offsetting all emissions through verified renewable energy projects."
+                title: "Carbon Impact Target",
+                description: "A future carbon strategy would require measurement, a defined baseline and verified reduction or compensation methods."
               },
               {
-                title: "Closed-Loop Manufacturing",
-                description: "Every scrap of material from our production process is recaptured and reused. Nothing goes to waste. Every defective frame is remelted and reprinted."
+                title: "Material Recovery",
+                description: "The project explores material recovery as a future direction; actual recycling and reprocessing workflows still need physical validation."
               },
               {
-                title: "Ethical Sourcing",
-                description: "We work exclusively with certified recycling facilities that uphold the highest labor and environmental standards, ensuring our materials are sourced responsibly."
+                title: "Responsible Sourcing",
+                description: "Supplier criteria and certifications would be defined before any commercial operation."
               },
               {
-                title: "Lifetime Warranty",
-                description: "Our frames are built to last. We offer a lifetime warranty on all structural components, reducing the need for replacement and encouraging long-term use."
+                title: "Product Longevity",
+                description: "Long-term durability and warranty terms would be defined after product and manufacturing validation."
               },
               {
-                title: "Take-Back Program",
-                description: "When your AGADE frames reach the end of their life, return them to us. We'll recycle them into new frames, completing the circle."
+                title: "Take-Back Concept",
+                description: "A future take-back flow could connect returned frames to material recovery and the circular wallet concept."
               },
             ].map((commitment, index) => (
               <motion.div
@@ -266,21 +266,21 @@ export default function Sustainability() {
               className="space-y-6"
             >
               <div className="bg-white border border-black/10 p-6">
-                <div className="text-4xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>15</div>
+                <div className="text-4xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>Concept</div>
                 <div className="text-sm tracking-widest" style={{ fontFamily: 'var(--font-mono)' }}>
-                  PET BOTTLES PER FRAME
+                  MATERIAL INPUT — TO BE VALIDATED
                 </div>
               </div>
               <div className="bg-white border border-black/10 p-6">
-                <div className="text-4xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>50+</div>
+                <div className="text-4xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>TBD</div>
                 <div className="text-sm tracking-widest" style={{ fontFamily: 'var(--font-mono)' }}>
-                  YEARS EXPECTED LIFESPAN
+                  EXPECTED LIFESPAN — TO BE VALIDATED
                 </div>
               </div>
               <div className="bg-white border border-black/10 p-6">
                 <div className="text-4xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>∞</div>
                 <div className="text-sm tracking-widest" style={{ fontFamily: 'var(--font-mono)' }}>
-                  RECYCLING CYCLES POSSIBLE
+                  RECYCLING CYCLES — TO BE VALIDATED
                 </div>
               </div>
             </motion.div>
