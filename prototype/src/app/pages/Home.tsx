@@ -9,7 +9,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1755869985928-0e61815beddb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBleWVnbGFzc2VzJTIwbWluaW1hbHxlbnwxfHx8fDE3NzI1NDMyNzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            src="/imagens/catalog/drop-01/05-horizonte.png"
             alt="AGADE Eyewear"
             className="w-full h-full object-cover"
           />
@@ -29,7 +29,7 @@ export default function Home() {
               Where 3D Precision Meets Brazilian Luxury
             </p>
             <p className="text-sm md:text-base mb-12 text-white/70 tracking-widest uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
-              5 Years of Optical Innovation • Est. 2021
+              CONCEPT PROJECT • DROP 01
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -86,19 +86,19 @@ export default function Home() {
               {
                 icon: <Sparkles size={40} />,
                 title: "Innovation",
-                description: "3D printed precision engineering backed by rigorous optical science research since 2021.",
+                description: "3D-printed eyewear explored through form, digital fabrication and material experimentation.",
                 link: "/technology",
               },
               {
                 icon: <Recycle size={40} />,
                 title: "Sustainability",
-                description: "Circular economy at its finest. From PET bottles to premium eyewear frames.",
+                description: "A conceptual circular model connecting recycled material, digital fabrication and product design.",
                 link: "/sustainability",
               },
               {
                 icon: <LineChart size={40} />,
                 title: "Identity",
-                description: "Brazilian luxury with minimalist aesthetics and storytelling at our core.",
+                description: "A Brazilian design language built around architecture, identity and contemporary eyewear.",
                 link: "/story",
               },
             ].map((pillar, index) => (
@@ -140,7 +140,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.unsplash.com/photo-1769414259128-bf8a66a41701?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBleWV3ZWFyJTIwZGlzcGxheXxlbnwxfHx8fDE3NzI1NDMyNzV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                src="/imagens/catalog/drop-01/12-marco-zero.png"
                 alt="AGADE Collection"
                 className="w-full h-[600px] object-cover"
               />
@@ -157,8 +157,7 @@ export default function Home() {
                 Crafted with Precision
               </h2>
               <p className="text-lg text-white/80 mb-8 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                Each frame represents years of optical research, combining cutting-edge 3D printing technology 
-                with sustainable materials to create eyewear that's both beautiful and responsible.
+                Each frame is a conceptual exploration of 3D-printed eyewear, combining expressive form, digital fabrication and a circular material narrative.
               </p>
               <Link
                 to="/collection"
@@ -177,10 +176,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { number: "5", label: "Years of Research", suffix: "+" },
-              { number: "100", label: "Recycled Bottles per Frame", suffix: "%" },
-              { number: "3D", label: "Printing Technology", suffix: "" },
-              { number: "∞", label: "Customization Options", suffix: "" },
+              { number: "12", label: "Concept Models", suffix: "" },
+              { number: "48", label: "Concept SKUs", suffix: "" },
+              { number: "3D", label: "Printing Language", suffix: "" },
+              { number: "4", label: "Colorways per Model", suffix: "" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
