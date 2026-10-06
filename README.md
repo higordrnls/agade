@@ -1,133 +1,162 @@
 # Agadê
 
-> **Projeto conceitual de portfólio — não é uma empresa ou operação comercial em funcionamento.**
+> **Conceptual portfolio project — not a company or currently operating commercial business.**
 
-A Agadê é uma proposta de marca brasileira de moda ocular que explora armações autorais produzidas por fabricação digital, unindo design contemporâneo, manufatura digital e economia circular.
+Agadê is a conceptual Brazilian eyewear brand exploring digitally manufactured frames, combining contemporary design, digital fabrication, and circular economy principles.
 
-Este repositório documenta e prototipa essa proposta de produto e experiência digital. Os modelos, renders, especificações, dados comerciais e demais elementos apresentados são **conceituais e fictícios**, criados para demonstrar a visão do projeto.
+This repository documents and prototypes the product, brand, and digital experience behind the concept.
 
----
-
-# Status do Projeto
-
-> **Fase Atual:** Protótipo conceitual — Drop 01
-
-O projeto está atualmente concentrado na validação da experiência e da linguagem visual por meio de um protótipo frontend.
-
-### O que existe hoje
-
-- ✅ Branding Book
-- ✅ Architecture Decision Records (ADR)
-- ✅ Product Requirements Document (PRD)
-- ✅ Catálogo conceitual do Drop 01
-- ✅ Renders conceituais dos 12 modelos
-- ⏳ Migração do protótipo para Next.js
-- ⏳ Estrutura inicial do banco de dados
-- ⏳ Integração Supabase
-- ⏳ Fluxos de personalização e checkout
-- ⏳ Testes
-- ⏳ Deploy
-
-> As etapas de backend, pagamentos, produção e operação comercial são parte da visão futura do projeto e **não representam funcionalidades atualmente disponíveis**.
+All products, renders, specifications, commercial data, inventory, and other business-related information presented in this repository are **fictional and conceptual**, created exclusively to demonstrate the project's vision and technical development.
 
 ---
 
-# Sobre os Dados Conceituais
+## Project Status
 
-Para fins de portfólio, o projeto utiliza dados fictícios para representar como uma futura operação poderia funcionar.
+> **Current Phase:** Conceptual Prototype — Drop 01
 
-Isso inclui, quando aplicável:
+The project is currently focused on validating its visual language, product experience, and digital architecture through a frontend prototype.
 
-- produtos e variantes;
-- renders e imagens conceituais;
-- preços e informações comerciais;
-- especificações técnicas estimadas;
-- SKUs e inventário;
-- fluxos de personalização;
-- sustentabilidade e economia circular.
+### Current progress
 
-Esses dados não devem ser interpretados como produtos disponíveis para compra, especificações de produtos fabricados ou informações de uma empresa em operação.
+* ✅ Brand Book
+* ✅ Architecture Decision Records (ADR)
+* ✅ Product Requirements Document (PRD)
+* ✅ Conceptual Drop 01 catalog
+* ✅ Conceptual renders for 12 frame models
+* 🚧 Frontend prototype
+* ⏳ Migration to Next.js
+* ⏳ Initial database structure
+* ⏳ Supabase integration
+* ⏳ Customization flows
+* ⏳ Checkout flow
+* ⏳ Testing
+* ⏳ Deployment
 
----
-
-# Princípios do Projeto
-
-Toda decisão técnica deve preservar os pilares fundamentais da Agadê:
-
-- Performance
-- Simplicidade
-- Sustentabilidade
-- Consistência de marca
-
-A implementação nunca deve contradizer esses princípios sem revisão formal.
+> Backend, payment, manufacturing, logistics, and commercial operations are part of the project's future vision and **are not currently available or operational**.
 
 ---
 
-# Stack Tecnológica
+## About the Conceptual Data
 
-## Protótipo atual
+Because Agadê is a portfolio project, the repository uses fictional data to simulate how a future operation could work.
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- Motion
-- React Router
+This may include:
 
-## Arquitetura planejada
+* Products and variants
+* Conceptual renders and imagery
+* Prices and commercial information
+* Estimated technical specifications
+* SKUs and inventory
+* Product customization data
+* Sustainability and circular economy information
+* Future commerce and fulfillment flows
 
-### Frontend
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-
-### Backend (BaaS)
-
-- Supabase
-    - PostgreSQL
-    - Authentication
-    - Row Level Security (RLS)
-    - Storage
-    - Edge Functions
-
-### Infraestrutura
-
-- Vercel
-- Supabase Managed
-
-### Pagamentos
-
-- Mercado Pago
-
-> A stack planejada acima representa a arquitetura definida nos documentos do projeto. A implementação será feita progressivamente, após a validação do protótipo.
+These elements should not be interpreted as real products available for purchase, confirmed manufacturing specifications, real inventory, or information belonging to an operating company.
 
 ---
 
-# Arquitetura
+## Project Principles
 
-A arquitetura futura segue uma abordagem **Backend as a Service (BaaS)**.
+Every technical and product decision should preserve Agadê's core principles:
 
-O objetivo é minimizar infraestrutura operacional, concentrando as regras de negócio em:
+* **Performance**
+* **Simplicity**
+* **Sustainability**
+* **Brand consistency**
 
-- Banco PostgreSQL
-- Row Level Security
-- Edge Functions
-- Políticas de segurança
-
-Não existe servidor dedicado previsto para a arquitetura planejada.
+Implementation decisions should not contradict these principles without formal review through the project's architectural documentation.
 
 ---
 
-# Estrutura do Repositório
+## Documentation
+
+The repository contains the project's main product, brand, and architectural documentation.
+
+### Brand
+
+The Brand Book defines Agadê's visual and conceptual identity, including its positioning, visual language, and design principles.
+
+### Product
+
+The Product Requirements Documents define the intended product experience, features, business logic, and future capabilities.
+
+### Architecture
+
+Architecture Decision Records document significant technical decisions and the reasoning behind them.
+
+The documentation is intentionally kept alongside the implementation so that the evolution of the product and its technical decisions can be tracked together.
+
+---
+
+## Technology Stack
+
+### Current Prototype
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Motion
+* React Router
+
+### Planned Architecture
+
+#### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+
+#### Backend — BaaS
+
+* Supabase
+
+  * PostgreSQL
+  * Authentication
+  * Row Level Security (RLS)
+  * Storage
+  * Edge Functions
+
+#### Infrastructure
+
+* Vercel
+* Supabase Managed
+
+#### Payments
+
+* Mercado Pago
+
+> The planned stack represents the architecture defined in the project's documentation. Components will be implemented progressively as the prototype is validated.
+
+---
+
+## Architecture
+
+The planned architecture follows a **Backend as a Service (BaaS)** approach.
+
+The goal is to minimize operational infrastructure while keeping business rules, data integrity, and security close to the data layer.
+
+The architecture primarily relies on:
+
+* PostgreSQL
+* Row Level Security
+* Edge Functions
+* Database policies
+* Managed infrastructure
+
+No dedicated application server is planned for the current architecture.
+
+---
+
+## Repository Structure
 
 ```text
 .
 ├── prototype/
 │   ├── public/
-│   │   └── imagens/
+│   │   └── images/
 │   │       └── catalog/
 │   │           └── drop-01/
 │   └── src/
@@ -142,8 +171,44 @@ Não existe servidor dedicado previsto para a arquitetura planejada.
 
 ---
 
-# Objetivo do Projeto
+## Why Agadê?
 
-A Agadê é desenvolvida como um projeto de portfólio para explorar, na prática, a construção de um produto digital completo: da definição de marca e produto à arquitetura de software, experiência de e-commerce, dados e futura infraestrutura.
+Agadê is being developed as a portfolio project to explore the practical process of building a digital product from the ground up.
 
-O objetivo não é apenas apresentar uma interface visual, mas demonstrar o processo de transformar uma ideia em um sistema digital coerente, documentado e tecnicamente estruturado.
+The project brings together:
+
+**Brand → Product → UX → Frontend → Data → Architecture**
+
+Rather than focusing exclusively on the visual interface, the goal is to demonstrate how these layers can be developed as parts of the same system.
+
+The repository therefore serves both as a prototype and as a record of the decisions, constraints, and technical evolution behind it.
+
+---
+
+## Project Goals
+
+The main goal is to explore the construction of a complete digital commerce experience around a fictional physical product.
+
+This includes:
+
+* Translating a brand concept into a digital product
+* Designing a coherent e-commerce experience
+* Modeling products, variants, and inventory
+* Exploring customization flows
+* Designing a scalable data architecture
+* Applying security principles through database policies and RLS
+* Documenting architectural decisions
+* Exploring the relationship between digital manufacturing and circular economy
+* Building and validating the experience incrementally
+
+The intention is not simply to produce a polished interface, but to demonstrate the process of turning an idea into a **coherent, documented, and technically structured digital system**.
+
+---
+
+## Disclaimer
+
+Agadê is a **fictional conceptual project created for portfolio and educational purposes**.
+
+It is not currently operating as a commercial business, and the products presented in the repository are not available for purchase.
+
+Any resemblance to real companies, products, prices, SKUs, inventory, or commercial operations is coincidental or part of the project's fictional design exercise.
