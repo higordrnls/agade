@@ -344,3 +344,13 @@ Qualquer alteração funcional futura deverá atualizar este documento antes da 
 
 **Changelog:**
 - **v1.1** — Corrigida a seção "Estados do pedido": separado o status comercial (`ORDERS.status`) do status de fabricação (`PRODUCTION_ORDERS.status`, ver PRD 07), e adicionado o estado `expired` ao fluxo formal (já existia em prosa, mas não no diagrama).
+
+---
+
+## Adendo comercial — 2026-11-09
+As regras acima de produção sob demanda e Carteira Verde são exclusivas da **linha fabril futura**. Na revenda, "disponível" significa estoque físico real elegível, conferido e não comprometido; não equivale a capacidade futura de produção/reposição.
+- Reserva por SKU transacional e idempotente, com expiração/reversão; impedir sobrevenda. Sem integração multicanal confiável, usar alocação de estoque por canal ou operar um canal por vez.
+- Pagamento confirmado pelo intermediador libera processamento; não oferecer crédito próprio pós-pago no lançamento. Pix expirado libera reserva.
+- Ruptura bloqueia anúncio como pronta entrega. Atrasos exigem comunicação proativa e respeito aos direitos do consumidor.
+- Devoluções só retornam ao saldo vendável depois da inspeção; ajustes, mudanças de preço e status devem ser auditáveis.
+- Expedição condicionada a conferência física e documento fiscal aplicável.
