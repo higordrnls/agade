@@ -429,3 +429,11 @@ Relaciona-se diretamente com:
 Versão **1.0**
 
 Este documento define oficialmente o funcionamento do checkout e do ciclo de pedidos da plataforma Agadê.
+
+---
+
+## Adendo de cumprimento comercial — 2026-11-09
+Para revenda inicial, após o pedido paid seguem etapas separadas de **documentação fiscal → separação → conferência → embalagem → postagem real → entrega → pós-venda**, todas com instante, origem e motivo, sem confundir estado comercial/pagamento com estado logístico.
+A reserva de estoque físico deve ocorrer transacionalmente e reverter em expiração de pagamento; webhooks e integrações precisam de idempotência e reconciliação. Etiqueta criada não é postagem.
+Bloquear expedição se faltar documento fiscal obrigatório ou aprovação da conferência. Registrar prazo prometido e efetivo, região, custo de frete, devolução, reembolso e motivos.
+Login obrigatório para checkout versus compra como convidado é decisão a revisar antes da implementação; evitar cadastro desnecessário e perda de conversão.
