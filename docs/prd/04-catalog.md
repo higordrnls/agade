@@ -310,3 +310,10 @@ Relaciona-se diretamente com:
 Versão **1.0**
 
 Este documento estabelece a estrutura oficial do catálogo da Agadê para o MVP.
+
+---
+
+## Adendo de catálogo — 2026-11-09
+A hierarquia Coleção → Produto → Variante → SKU → Inventário é comum a ambas as linhas. Cada produto deve distinguir **curadoria comercial de terceiros** de **autoria fabril futura**, e pronta entrega de produção futura.
+Na curadoria registrar fornecedor, origem declarada, lote, custo integral, nota de entrada, materiais, documentação verificável de proteção UV, fotos, preço por canal e saldo físico elegível. SKU representa configuração vendável; inventário registra unidade/lote e movimentações.
+Renders e os doze nomes do Drop 01 são **conceituais**, não ofertas ou SKUs disponíveis. Dados de filamento, impressão e controle industrial só são exigidos para a futura linha fabril. Alegações ambientais e técnicas deverão ter provas.

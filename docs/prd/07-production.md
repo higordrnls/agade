@@ -390,3 +390,11 @@ O módulo será considerado concluído quando:
 - falhas gerarem novas tentativas sem perda de histórico;
 - inspeções aprovarem ou rejeitarem peças;
 - todos os eventos permanecerem rastreáveis.
+
+---
+
+## Ativação futura condicionada — 2026-11-09
+Este PRD MES **não integra o MVP comercial**. Um pedido pago de revenda de terceiros nunca deve gerar Ordem de Produção 3D.
+Gates para futuro P&D: operação comercial financeiramente viável; orçamento técnico e reserva de caixa; origem rastreável e especificação correta de filamento comercial pós-consumo; protótipos e ensaios; custo completo por peça, capacidade, rejeições e exigências regulatórias; piloto autorizado.
+PET, PETG, rPET e rPETG não são equivalentes. Não anunciar conteúdo reciclado sem rastreabilidade. Carteira Verde e logística reversa ficam suspensas até existir cadeia de coleta, destinação e política verificáveis.
+Comparar 2 ou 4 ciclos editoriais anuais com eventos de moda brasileiros; calendário não constitui autorização suficiente para iniciar fabricação.
