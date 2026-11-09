@@ -183,3 +183,11 @@ Versão: **1.0**
 Este documento estabelece a visão oficial do produto para o desenvolvimento do MVP (Drop 01).
 
 Alterações de escopo deverão ser discutidas antes da implementação e, quando necessário, refletidas em novos PRDs ou ADRs.
+
+---
+
+## Adendo de escopo — 2026-11-09
+A visão acima descreve a **linha industrial/circular futura** e o protótipo conceitual, não os requisitos do lançamento comercial. O repositório continua sem produto real à venda.
+**MVP comercial planejado:** curadoria de óculos solares sem grau de terceiros; estoque físico conferido, documento de aquisição e evidências técnicas das lentes; pagamento por intermediador, fiscal, frete, atendimento e indicadores operacionais. Canais de marketplace e site próprio serão selecionados por pesquisas e custos, antes de comprar estoque.
+**Fora deste MVP:** fabricação por impressão 3D, produção sob demanda, Carteira Verde, logística reversa, prova virtual e oferta dos 12 modelos autorais conceituais. Permanecem como visão futura condicionada a investimento, ensaios, viabilidade econômica e requisitos legais.
+**Editorial:** blog e newsletter com adesão voluntária planejados, sem substituir transparência, segurança no checkout e acesso aos direitos do consumidor.
