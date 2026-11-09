@@ -285,3 +285,12 @@ Este documento será considerado atendido quando:
 - o sistema produzir logs e métricas suficientes para operação;
 - os requisitos mínimos de SEO e acessibilidade estiverem implementados;
 - a qualidade técnica for mantida durante todo o ciclo de desenvolvimento.
+
+---
+
+## Adendo LGPD, continuidade e operação — 2026-11-09
+- PostgreSQL pode ser fonte transacional; não exportar cadastros pessoais irrestritamente para Notion, Sheets, BI ou GitHub público.
+- Inventário de dados e finalidades, minimização, acesso mínimo, MFA administrativo, políticas RLS testadas, gestão de segredos, retenção e descarte. Analytics, cookies e newsletter devem ter gestão apropriada de preferências e opção clara de descadastro.
+- Backups com retenção, restauração efetivamente testada, objetivos de recuperação, auditoria e plano de continuidade; n8n e dashboards não são backups.
+- Eventos operacionais com timestamps e IDs: pagamento, nota, separação, embalagem, postagem, entrega, devolução; métricas de atraso e integridade por etapa.
+- Testes de duas compras da última unidade, Pix expirado, webhook duplicado, falha fiscal, perda de integração marketplace, devolução não inspecionada e restauração de dados.
