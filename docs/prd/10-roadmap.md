@@ -336,3 +336,13 @@ Com este documento conclui-se oficialmente a documentação funcional da versão
 A partir deste ponto, a evolução do projeto deverá ocorrer prioritariamente através da implementação, validação prática, abertura de Issues, novos ADRs quando necessários e evolução incremental do código.
 
 A arquitetura passa a ser validada pela implementação, e não pela documentação.
+
+---
+
+## Compatibilização de fases — 2026-11-09
+O roadmap acima mantém valor como visão de produto **industrial/circular futuro**. Nova trilha inicial anterior às fases fabris:
+- **C0 Pesquisa pré-operacional:** normas, fornecedor, UV, regime fiscal, público, custos e canais; sem estoque comprado.
+- **C1 MVP comercial:** curadoria real, estoque físico, reservas, gateway, fiscal, logística, atendimento, site/editorial e marketplace apenas conforme pesquisa; observabilidade diária mínima.
+- **C2 Consolidação:** margem e fluxo de caixa reais, KPIs, performance de canais, satisfação, reposição e comunicação.
+- **F0–F3 Futuro fabril:** reserva de investimento → P&D e ensaios → custo/processo/conformidade → lote piloto; Carteira Verde apenas após cadeia viável.
+Blog editorial e newsletter opt-in podem evoluir desde C1. Estudar dois ciclos editoriais anuais como base e quatro como cenário, sem obrigação de produção industrial em cada um.
