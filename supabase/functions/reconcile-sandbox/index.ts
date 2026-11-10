@@ -7,11 +7,11 @@ const json = (body: unknown, status=200) =>
 
 Deno.serve(async (request: Request) => {
   if (request.method !== "POST") return json({ error: "Método não permitido" },405);
-  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true") return json({ error: "Inativo" },503);
+  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true" || Deno.env.get("MP_ACCOUNT_ENV") !== "test") return json({ error: "Inativo" },503);
   const key=Deno.env.get("AGADE_CRON_TEST_SECRET"), supplied=request.headers.get("x-agade-cron-key");
   const token=Deno.env.get("MP_TEST_ACCESS_TOKEN"), project=Deno.env.get("SUPABASE_URL");
   const serviceKey=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!key || key.length<32 || supplied!==key || !token?.startsWith("TEST-") || !project || !serviceKey) {
+  if (!key || key.length<32 || supplied!==key || !token?.startsWith("APP_USR-") || !project || !serviceKey) {
     return json({ error: "Não autorizado" },401);
   }
   const headers={ apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type":"application/json" };
