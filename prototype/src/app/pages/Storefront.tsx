@@ -21,18 +21,18 @@ export default function Storefront(){
   if(sort==="name")entries.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
   return entries;
  },[search,sort,state.products]);
- return <div className="min-h-screen bg-white text-[#171717]">
-  <header className="bg-[#f2f3f7] px-6 sm:px-10 pt-16 pb-20">
+ return <div className="min-h-screen bg-[#fff9ef] text-[#38251e]">
+  <header className="bg-[#efd5bd] px-6 sm:px-10 pt-16 pb-20">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#102e90] mb-6">AGADE / EDIÇÃO 01</p>
-    <h1 className="text-[clamp(3.7rem,8vw,8rem)] leading-[.95] tracking-[-.055em] font-normal" style={{fontFamily:"var(--font-serif)"}}>Óculos de sol.</h1>
-    <p className="mt-7 max-w-2xl text-base sm:text-lg text-[#555] leading-relaxed">Peças escolhidas para acompanhar quem tem um jeito próprio de ver o mundo.</p>
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#a54f39] mb-6">AGADE / EDIÇÃO 01</p>
+    <h1 className="text-[clamp(3.7rem,8vw,8rem)] leading-[.95] tracking-[-.055em] font-normal" style={{fontFamily:"var(--font-serif)"}}>Óculos para sentir o sol.</h1>
+    <p className="mt-7 max-w-2xl text-base sm:text-lg text-[#655043] leading-relaxed">Curadoria solar com personalidade. Formas, cores e histórias para quem vive de olhar aberto.</p>
    </div>
   </header>
   <section className="max-w-[1500px] mx-auto px-6 sm:px-10 py-12 md:py-20" aria-busy={loading}>
    <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 pb-5 border-b border-black/20 mb-9">
     <div><p className="uppercase text-[11px] tracking-[.17em] text-[#666] mb-2">A SELEÇÃO</p>
-     <h2 className="text-2xl sm:text-3xl font-normal" style={{fontFamily:"var(--font-serif)"}}>Escolha o seu olhar.</h2></div>
+     <h2 className="text-2xl sm:text-3xl font-normal" style={{fontFamily:"var(--font-serif)"}}>Encontre sua forma.</h2></div>
     <div className="flex flex-wrap gap-4 sm:gap-6 items-center">
      <form onSubmit={e=>{e.preventDefault();const data=new FormData(e.currentTarget);const v=String(data.get("busca")??"").trim();setParams(v?{busca:v}:{})}}
        className="flex items-center gap-2 border-b border-black/30 pb-2">
@@ -63,7 +63,7 @@ export default function Storefront(){
      <p className="text-[#555] mt-6 leading-relaxed">Os modelos serão apresentados aqui assim que imagens, características e disponibilidade estiverem confirmadas.</p>
      <Link to="/" className="inline-flex items-center gap-3 mt-8 text-xs tracking-[.15em] uppercase font-medium border-b border-black pb-2">Voltar à página inicial <ArrowRight size={16}/></Link>
     </div>
-    <div className="relative min-h-[350px] overflow-hidden bg-[#d6d8e3]">
+    <div className="relative min-h-[350px] overflow-hidden bg-[#cb8063]">
      <img src="/imagens/catalog/drop-01/11-aura.png" loading="lazy" alt="Imagem de estudo da direção visual AGADE" className="absolute inset-0 w-full h-full object-cover"/>
      <span className="absolute bottom-5 right-5 text-white bg-black/45 px-3 py-2 text-[10px] uppercase tracking-[.15em]">Estudo visual</span>
     </div>
@@ -71,7 +71,7 @@ export default function Storefront(){
    {!loading && state.status==="ready" && state.products.length>0 && products.length===0 && <p role="status" className="py-16 text-[#555]">Nenhum modelo encontrado para “{search}”. Tente outra busca.</p>}
    {!loading && state.status==="ready" && products.length>0 && <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-7 gap-y-14">
     {products.map(p=><article key={p.product_id} className="group">
-     <Link to={`/produto/${encodeURIComponent(p.slug)}`} aria-label={`Ver detalhes de ${p.name}`} className="relative block aspect-[3/4] bg-[#f3f3f2] overflow-hidden flex items-center justify-center">
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} aria-label={`Ver detalhes de ${p.name}`} className="relative block aspect-[3/4] bg-[#f1dfce] overflow-hidden flex items-center justify-center">
       {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" decoding="async" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:
         <span className="text-[#777] text-xs">Fotografia em preparação</span>}
       {p.collection_name&&<span className="absolute top-4 left-4 text-[10px] tracking-[.12em] uppercase bg-white px-3 py-2">{p.collection_name}</span>}
@@ -81,7 +81,7 @@ export default function Storefront(){
       <span className="text-sm font-medium whitespace-nowrap">{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span>
      </div>
      {p.editorial_description&&<p className="text-sm text-[#555] leading-relaxed mt-3">{p.editorial_description}</p>}
-     <Link to={`/produto/${encodeURIComponent(p.slug)}`} className="mt-4 inline-flex text-[11px] uppercase tracking-[.12em] text-[#102e90] border-b border-[#102e90] pb-1">Ver detalhes e variações <ArrowRight size={14} className="ml-2"/></Link>
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} className="mt-4 inline-flex text-[11px] uppercase tracking-[.12em] text-[#102e90] border-b border-[#a54f39] pb-1">Ver detalhes e variações <ArrowRight size={14} className="ml-2"/></Link>
     </article>)}
    </div>}
   </section>
