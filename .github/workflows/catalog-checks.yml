@@ -35,8 +35,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Test sandbox payment contract
-        run: node --experimental-strip-types --test supabase/tests/checkout.test.mjs
+      - name: Test sandbox payment contract and webhook security
+        run: node --experimental-strip-types --test supabase/tests/checkout.test.mjs supabase/tests/reconciliation.test.mjs
 
   database:
     runs-on: ubuntu-latest
@@ -73,5 +73,7 @@ jobs:
         run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261111_orders_reservations.sql
       - name: Verify catalog security and integrity
         run: psql -v ON_ERROR_STOP=1 -f supabase/tests/catalog_security.sql
+      - name: Apply provider linkage migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261112_provider_reconciliation.sql
       - name: Verify orders and stock reservations
         run: psql -v ON_ERROR_STOP=1 -f supabase/tests/order_reservations.sql
