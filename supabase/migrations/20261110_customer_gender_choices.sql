@@ -10,7 +10,7 @@ alter table public.customer_profiles
 
 alter table public.customer_profiles
  add constraint customer_gender_identity_check check(
-  gender_identity in (
+  gender_identity is not null and gender_identity in (
    'cis_woman','cis_man','trans_woman','trans_man','travesti',
    'nonbinary','agender','genderfluid','bigender','genderqueer',
    'self_described','prefer_not'
