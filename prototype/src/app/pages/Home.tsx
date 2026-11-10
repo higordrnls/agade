@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, MoveUpRight, Sun } from "lucide-react";
 import { loadStorefrontCatalog, type StorefrontState } from "../data/storefrontCatalog";
 
@@ -11,7 +11,7 @@ const display={fontFamily:"var(--font-serif)"};
 function EditorialPhoto({id,alt,className="",position="center",priority=false}:{id:number;alt:string;className?:string;position?:string;priority?:boolean}){
  return <img src={image(id,priority?1600:1100)} alt={alt} loading={priority?"eager":"lazy"} fetchPriority={priority?"high":"auto"} decoding="async" style={{objectPosition:position}} className={`h-full w-full object-cover ${className}`}/>;
 }
-function TextLink({to,children,light=false}:{to:string;children:React.ReactNode;light?:boolean}){
+function TextLink({to,children,light=false}:{to:string;children:ReactNode;light?:boolean}){
  return <Link to={to} className={`group inline-flex items-center justify-between gap-7 min-h-12 rounded-full px-6 py-3 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 ${light?"bg-[#fff8ed] text-[#6d4045] hover:bg-white":"bg-[#a95e46] text-[#fff9ee] hover:bg-[#884735]"}`}>
   <span>{children}</span><ArrowUpRight size={18} className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"/>
  </Link>;
@@ -46,10 +46,10 @@ export default function Home(){
      <div className="absolute inset-0 bg-gradient-to-t from-[#203521]/35 via-transparent to-transparent" aria-hidden="true"/>
      <div className="absolute top-5 right-5 sm:top-10 sm:right-10 w-[104px] h-[104px] sm:w-[142px] sm:h-[142px] rounded-full bg-[#fff5e5] text-[#9a5946] flex flex-col items-center justify-center text-center rotate-[11deg] shadow-md">
       <Sun size={24} strokeWidth={1.5} aria-hidden="true"/>
-      <span className="mt-1 text-[10px] sm:text-xs tracking-[.15em] uppercase font-bold">Feito<br/>de sol*</span>
+      <span className="mt-1 text-[10px] sm:text-xs tracking-[.15em] uppercase font-bold">Estudo<br/>solar*</span>
      </div>
      <div className="absolute bottom-5 left-5 right-5 flex flex-wrap justify-between items-end gap-3 text-white">
-      <p className={typeLabel+" max-w-[230px] drop-shadow-md"}>*Expressão editorial, não alegação de fabricação ou origem</p>
+      <p className={typeLabel+" max-w-[230px] drop-shadow-md"}>*Fotografia editorial ilustrativa, sem relação com os produtos</p>
       <p className={typeLabel+" drop-shadow-md"}>Imagem de referência · Pexels</p>
      </div>
     </div>
