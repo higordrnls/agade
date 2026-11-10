@@ -5,11 +5,13 @@ const respond = (body: unknown, status = 200) => Response.json(body, {
   status, headers: { "Cache-Control": "no-store" },
 });
 
-function getBackendKey(): string | undefined {
-  const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+// O catálogo é exposto APENAS por RPC pública para anon/authenticated.
+// Evitamos service_role aqui: esse papel NÃO recebeu EXECUTE da RPC.
+function getCatalogKey(): string | undefined {
+  const legacy = Deno.env.get("SUPABASE_ANON_KEY");
   if (legacy) return legacy;
   try {
-    const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
+    const keys = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
     return typeof keys.default === "string" ? keys.default : undefined;
   } catch {
     return undefined;
@@ -30,24 +32,30 @@ Deno.serve(async (request: Request) => {
   }
 
   const url = Deno.env.get("SUPABASE_URL");
-  const backendKey = getBackendKey();
+  const catalogKey = getCatalogKey();
   const token = Deno.env.get("MP_TEST_ACCESS_TOKEN");
   const status: Record<string, string> = {
     database: "not_checked",
     mercado_pago: "not_checked",
   };
 
-  if (!url || !backendKey) {
+  if (!url || !catalogKey) {
     status.database = "configuration_missing";
   } else {
     try {
       const catalog = await fetch(`${url}/rest/v1/rpc/list_storefront_catalog`, {
         method: "POST",
-        headers: { apikey: backendKey, "Content-Type": "application/json" },
+        headers: {
+          apikey: catalogKey,
+          ...(catalogKey.startsWith("eyJ") ? { Authorization: `Bearer ${catalogKey}` } : {}),
+          "Content-Type": "application/json",
+        },
         body: "{}",
         signal: AbortSignal.timeout(7000),
       });
-      status.database = catalog.ok ? "connected" : "error";
+      status.database = catalog.ok ? "connected" :
+        catalog.status === 401 || catalog.status === 403 ? "permission_denied" :
+        catalog.status === 404 ? "rpc_not_found" : "api_error";
     } catch {
       status.database = "unreachable";
     }
