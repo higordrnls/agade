@@ -12,8 +12,9 @@ function valid(value:unknown):value is CartItem {
  if(!value||typeof value!=="object")return false;
  const v=value as Partial<CartItem>;
  return typeof v.productId==="string"&&typeof v.variantId==="string"&&typeof v.sku==="string"&&typeof v.name==="string"&&typeof v.color==="string"
-   &&Number.isInteger(v.priceCents)&&v.priceCents!>=0 &&Number.isInteger(v.quantity)&&v.quantity!>0&&v.quantity!<=10
-   &&Number.isInteger(v.stockSnapshot)&&v.stockSnapshot!>0
+   &&typeof v.priceCents==='number'&&Number.isInteger(v.priceCents)&&v.priceCents>=0
+   &&typeof v.quantity==='number'&&Number.isInteger(v.quantity)&&v.quantity>0&&v.quantity<=10
+   &&typeof v.stockSnapshot==='number'&&Number.isInteger(v.stockSnapshot)&&v.stockSnapshot>0
    &&(v.imageUrl===null||typeof v.imageUrl==="string");
 }
 export function CartProvider({children}:{children:ReactNode}){
