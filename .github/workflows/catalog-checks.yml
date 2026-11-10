@@ -66,7 +66,12 @@ jobs:
         run: |
           psql -v ON_ERROR_STOP=1 -c "CREATE ROLE anon NOLOGIN;"
           psql -v ON_ERROR_STOP=1 -c "CREATE ROLE authenticated NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE service_role NOLOGIN;"
       - name: Apply catalog schema
         run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261110_catalogo_comercial.sql
+      - name: Apply order reservation migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261111_orders_reservations.sql
       - name: Verify catalog security and integrity
         run: psql -v ON_ERROR_STOP=1 -f supabase/tests/catalog_security.sql
+      - name: Verify orders and stock reservations
+        run: psql -v ON_ERROR_STOP=1 -f supabase/tests/order_reservations.sql
