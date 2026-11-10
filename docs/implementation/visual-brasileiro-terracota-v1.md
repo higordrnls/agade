@@ -32,3 +32,18 @@ As fotografias enviadas são **referências de direção de arte**, não ativos 
 ## Fontes legais
 - https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm
 - https://www2.camara.leg.br/legin/fed/decret/2013/decreto-7962-15-marco-2013-775557-publicacaooriginal-139266-pe.html
+
+## Refinamento de paleta aprovado em 10/11/2026
+A identidade mantém a combinação brasileira e editorial, mas **equilibra massas cromáticas**:
+- Creme / branco quente `#FFFAF2` — superfície principal, respiro e fundo da loja
+- Areia / creme profundo `#F7F0E5` — alternância entre seções
+- Terracota `#A95E46` — assinatura identitária, usos seletivos
+- Verde `#56725B` — naturalidade, seções editoriais e rodapé
+- Verde pálido `#E5E9DC` — suporte para seções de leitura
+- Azul `#24469A` — contraste editorial, faixas, links e CTAs
+- Vinho `#785254` — acento eventual, evitar grandes superfícies
+- **Coral queimado e marrom quente removidos como cores centrais.**
+- Botões com cantos arredondados, área de toque de ao menos 44 px, textos mais claros; no header mobile, conta acessível pelo menu para evitar sobreposição com a logomarca.
+- Seções alternadas claras/médias, evitando acumulação de vinho, marrom e terracota.
+
+Esta revisão busca preservar maximalismo equilibrado, sem descaracterizar a marca ou introduzir novas fotos comerciais fictícias.
