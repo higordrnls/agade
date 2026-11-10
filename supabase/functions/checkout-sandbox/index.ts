@@ -1,10 +1,13 @@
-// Integração experimental com Mercado Pago Orders API.
-// DESATIVADA por padrão, sem endpoint público de compra.
-// Requer o segredo ADMIN_SANDBOX_KEY e um token de teste Mercado Pago.
+// AGADE — Checkout experimental Mercado Pago Orders API.
+// Desativado por padrão. Não habilitar vendas reais com esta função.
 import { buildTestOrder, assertMercadoPagoCheckoutUrl } from "../_shared/checkout.ts";
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
+
+const restHeaders = (key: string) => ({
+  apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json",
+});
 
 Deno.serve(async (request: Request) => {
   if (request.method !== "POST") return json({ error: "Método não permitido" }, 405);
@@ -16,33 +19,35 @@ Deno.serve(async (request: Request) => {
   if (!secret || secret.length < 32 || !token?.startsWith("TEST-") || !projectUrl || !serviceKey) {
     return json({ error: "Ambiente de teste não configurado" }, 503);
   }
-  // Chave privada exclusivamente no servidor; não chamar a função diretamente do navegador.
+  // Chave privada não pode aparecer em frontend, URLs nem logs.
   if (request.headers.get("x-agade-admin-test-key") !== secret) return json({ error: "Não autorizado" }, 401);
 
   try {
     const input = await request.json();
     if (typeof input?.sku !== "string" || input.sku.length > 80 ||
         !Number.isInteger(input.quantity) || input.quantity < 1 || input.quantity > 10 ||
-        typeof input.reference !== "string") {
+        typeof input.reference !== "string" || !/^[A-Za-z0-9_-]{1,64}$/.test(input.reference)) {
       return json({ error: "Dados inválidos" }, 400);
     }
-    // Consulta com autoridade de servidor. O cliente não fornece valor ou título.
-    const response = await fetch(
-      `${projectUrl}/rest/v1/catalog_variants?select=sku,price_cents,available_stock,reserved_stock,active,catalog_products!inner(name,status)&sku=eq.${encodeURIComponent(input.sku)}&limit=1`,
-      { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` } },
-    );
-    if (!response.ok) return json({ error: "Falha de consulta ao catálogo" }, 502);
-    const variants = await response.json();
-    const variant = variants[0];
-    if (!variant || variant.active !== true || variant.catalog_products?.status !== "active" ||
-        variant.available_stock - variant.reserved_stock < input.quantity) {
-      return json({ error: "Produto indisponível" }, 409);
+    // Atomicamente reserva estoque e congela o preço do catálogo.
+    const reservationResponse = await fetch(`${projectUrl}/rest/v1/rpc/reserve_test_order`, {
+      method: "POST",
+      headers: restHeaders(serviceKey),
+      body: JSON.stringify({ p_reference: input.reference, p_sku: input.sku, p_quantity: input.quantity }),
+    });
+    if (!reservationResponse.ok) return json({ error: "Reserva indisponível" }, 409);
+    const [reservation] = await reservationResponse.json();
+    if (!reservation || reservation.order_status !== "pending_payment") {
+      return json({ error: "Pedido já encerrado" }, 409);
     }
-    const payload = buildTestOrder([
-      { sku: variant.sku, title: variant.catalog_products.name, quantity: input.quantity, unitPriceCents: variant.price_cents },
-    ], input.reference);
 
-    // Não há reservas/pedidos ou reconciliação nesta etapa: SOMENTE credenciais de teste.
+    // Um retry com mesma referência reutiliza a reserva e a idempotência do MP.
+    // Não aceita preço enviado pelo comprador.
+    const payload = buildTestOrder([{
+      sku: input.sku, title: input.sku, quantity: input.quantity,
+      unitPriceCents: reservation.unit_price_cents,
+    }], input.reference);
+
     const checkout = await fetch("https://api.mercadopago.com/v1/orders", {
       method: "POST",
       headers: {
@@ -52,9 +57,26 @@ Deno.serve(async (request: Request) => {
       },
       body: JSON.stringify(payload),
     });
-    if (!checkout.ok) return json({ error: "Não foi possível criar pedido de teste" }, 502);
+    // Não liberar imediatamente reserva após erro de rede: a order pode existir no MP.
+    if (!checkout.ok) return json({ error: "Pedido em análise; repetir com mesma referência" }, 502);
     const order = await checkout.json();
-    return json({ order_id: order.id, checkout_url: assertMercadoPagoCheckoutUrl(order.checkout_url) });
+    if (order.external_reference !== input.reference || order.total_amount !== payload.total_amount ||
+        order.live_mode === true || typeof order.id !== "string" || typeof order.checkout_url !== "string") {
+      return json({ error: "Resposta do provedor inconsistente" }, 502);
+    }
+
+    // Vincular o ID do MP à reserva antes de permitir o redirecionamento.
+    const attach = await fetch(`${projectUrl}/rest/v1/rpc/attach_test_provider_order`, {
+      method: "POST",
+      headers: restHeaders(serviceKey),
+      body: JSON.stringify({ p_reference: input.reference, p_provider_order_id: order.id }),
+    });
+    if (!attach.ok) return json({ error: "Vínculo pendente; pagamento não liberado" }, 409);
+    return json({
+      order_id: order.id,
+      checkout_url: assertMercadoPagoCheckoutUrl(order.checkout_url),
+      reference: input.reference,
+    });
   } catch {
     return json({ error: "Falha ao preparar checkout de teste" }, 400);
   }
