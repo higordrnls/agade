@@ -12,7 +12,6 @@ export default function Home(){
  useEffect(()=>{let mounted=true;loadStorefrontCatalog().then(x=>{if(mounted)setCatalog(x)});return()=>{mounted=false}},[]);
  const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
  return <div className="bg-white text-[#171717]">
-  {/* Fotografia na primeira dobra; nenhum texto fabril aparece no front. */}
   <section className="relative min-h-[min(760px,calc(100svh-7rem))] h-[75svh] max-h-[940px] overflow-hidden bg-[#202524]">
    <img src={imgRoot+"05-horizonte.png"} alt="Composição visual editorial da AGADE, apresentada como estudo de campanha"
      className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high"/>
