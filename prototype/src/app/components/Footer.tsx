@@ -14,6 +14,7 @@ export default function Footer(){
      <Link to="/sobre" className="hover:underline underline-offset-4">A AGADE</Link>
      <Link to="/" className="hover:underline underline-offset-4">Página inicial</Link>
      <Link to="/conta" className="hover:underline underline-offset-4">Minha conta</Link>
+     <Link to="/guia" className="hover:underline underline-offset-4">Guia de escolha</Link>
      <Link to="/ajuda" className="hover:underline underline-offset-4">Dúvidas e atendimento</Link>
      <p className="mt-5 text-white/60 leading-relaxed">Uma marca independente de curadoria de óculos solares. Primeira seleção em preparação.</p>
     </div>
