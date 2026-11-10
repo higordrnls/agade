@@ -45,7 +45,8 @@ export default function Navigation() {
       </form>}
     </nav>
     {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-[#fff7ed] flex flex-col gap-5 shadow-sm">
-      <form action="/loja" role="search" className="flex items-center gap-2 border border-[#e6d3c5] bg-white rounded-2xl p-2 mb-2"><label htmlFor="mobile-catalog-search" className="sr-only">Buscar óculos</label><input id="mobile-catalog-search" name="busca" type="search" placeholder="Buscar óculos" className="min-w-0 flex-1 px-2 py-2 text-sm bg-transparent"/><button type="submit" aria-label="Pesquisar" className="min-w-11 min-h-11 flex items-center justify-center rounded-xl bg-[#a95e46] text-white"><Search size={18}/></button></form>\n      {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
+      <form action="/loja" role="search" className="flex items-center gap-2 border border-[#e6d3c5] bg-white rounded-2xl p-2 mb-2"><label htmlFor="mobile-catalog-search" className="sr-only">Buscar óculos</label><input id="mobile-catalog-search" name="busca" type="search" placeholder="Buscar óculos" className="min-w-0 flex-1 px-2 py-2 text-sm bg-transparent"/><button type="submit" aria-label="Pesquisar" className="min-w-11 min-h-11 flex items-center justify-center rounded-xl bg-[#a95e46] text-white"><Search size={18}/></button></form>
+      {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
       <Link to="/conta" className="text-lg tracking-wide" onClick={()=>setOpen(false)}>MINHA CONTA</Link>
     </div>}
   </header>;
