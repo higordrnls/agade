@@ -24,7 +24,8 @@ test('commercial pages do not claim on-demand manufacture',()=>{
  }
 });
 test('checkout is not exposed as operational',()=>{
- assert.match(src('pages/Storefront.tsx'),/Compra online em preparação/);
+ assert.match(src('pages/Storefront.tsx'),/Ver detalhes e variações/);
+ assert.match(src('pages/Product.tsx'),/Compra online em preparação/);
  assert.match(src('pages/Home.tsx'),/loadStorefrontCatalog/);
 });
 
