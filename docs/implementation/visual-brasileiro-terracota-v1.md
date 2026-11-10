@@ -47,3 +47,6 @@ A identidade mantém a combinação brasileira e editorial, mas **equilibra mass
 - Seções alternadas claras/médias, evitando acumulação de vinho, marrom e terracota.
 
 Esta revisão busca preservar maximalismo equilibrado, sem descaracterizar a marca ou introduzir novas fotos comerciais fictícias.
+
+## Correção final de hierarquia cromática
+Feedback posterior: azul e verde estavam excessivos, terracota e vinho insuficientes. Priorizar **creme/areia como base**, **terracota e vinho como cores expressivas**, **verde de apoio discreto** e **azul profundo original AGADE `#102E90` apenas como detalhe/contraste pontual**. Substituir o cobalto provisório `#24469A`; não deixar largas superfícies azuis nem duas grandes seções verde e azul consecutivas. Manter botões arredondados e ergonomia mobile. Coral e marrom quente não voltam como protagonistas.
