@@ -10,9 +10,10 @@ export function verifiedOrderOutcome(
   expected: { providerId: string; reference: string; totalCents: number },
 ): "paid" | "cancelled" | "pending" {
   if (external.id !== expected.providerId ||
+      !expected.providerId.startsWith("ORDTST") ||
       external.external_reference !== expected.reference ||
       centsFromAmount(external.total_amount) !== expected.totalCents ||
-      external.live_mode !== false) {
+      external.live_mode === true) {
     throw new Error("Order divergente ou não simulada");
   }
   if (external.status === "processed" && external.status_detail === "accredited" &&
