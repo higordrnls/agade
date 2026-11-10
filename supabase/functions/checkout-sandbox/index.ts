@@ -1,7 +1,7 @@
 // Integração experimental com Mercado Pago Orders API.
 // DESATIVADA por padrão, sem endpoint público de compra.
 // Requer o segredo ADMIN_SANDBOX_KEY e um token de teste Mercado Pago.
-import { buildTestOrder, assertMercadoPagoCheckoutUrl } from "../../_shared/checkout.ts";
+import { buildTestOrder, assertMercadoPagoCheckoutUrl } from "../_shared/checkout.ts";
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
