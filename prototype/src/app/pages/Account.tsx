@@ -38,9 +38,9 @@ export default function Account(){
   setStatus("sending");
   try{
    const redirect=`${window.location.origin}/conta`;
-   const res=await fetch(`${envUrl!.replace(/\/$/,"")}/auth/v1/otp`,{
+   const res=await fetch(`${envUrl!.replace(/\/$/,"")}/auth/v1/otp?redirect_to=${encodeURIComponent(redirect)}`,{
     method:"POST",headers:headers(),
-    body:JSON.stringify({email:email.trim().toLowerCase(),create_user:true,options:{email_redirect_to:redirect}}),
+    body:JSON.stringify({email:email.trim().toLowerCase(),create_user:true}),
    });
    if(!res.ok)throw new Error("Não foi possível enviar o acesso. Confira a configuração de e-mail no Supabase.");
    setStatus("sent");setMessage("Se o endereço estiver apto a receber mensagens, enviaremos um link de acesso.");
