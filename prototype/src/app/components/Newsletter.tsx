@@ -26,12 +26,12 @@ export default function Newsletter(){
    setMessage("Seu cadastro foi registrado. Enviaremos comunicações somente quando o serviço estiver habilitado e com opção de descadastro.");
   }catch(err){setStatus("error");setMessage(err instanceof Error?err.message:"Erro de conexão.");}
  }
- return <section aria-labelledby="newsletter-title" className="bg-[#102e90] text-white px-6 sm:px-10 py-16 md:py-20">
+ return <section aria-labelledby="newsletter-title" className="bg-[#a54e39] text-white px-6 sm:px-10 py-16 md:py-20">
   <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
    <div>
-    <p className="text-[11px] uppercase tracking-[.21em] text-white/75 mb-5">AGADE / COMUNIDADE</p>
+    <p className="text-[11px] uppercase tracking-[.21em] text-[#fff1e4]/80 mb-5">AGADE / COMUNIDADE</p>
     <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Seu próximo olhar começa aqui.</h2>
-    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-white/85">Receba notícias sobre a primeira seleção e os próximos lançamentos da AGADE. Sem promessas de descontos que ainda não existem.</p>
+    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-[#fff1e4]">Receba notícias sobre a primeira seleção e os próximos lançamentos da AGADE. Sem promessas de descontos que ainda não existem.</p>
    </div>
    <div>
     {enabled?<form onSubmit={submit} className="space-y-4">
@@ -39,7 +39,7 @@ export default function Newsletter(){
       <label htmlFor="newsletter-email" className="sr-only">Seu e-mail</label>
       <input id="newsletter-email" required type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)}
        placeholder="Seu melhor e-mail" className="flex-1 min-w-0 bg-white text-black py-4 px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"/>
-      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#102e90] px-5 disabled:opacity-45">
+      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#a54e39] px-5 disabled:opacity-45">
        <ArrowRight size={22}/>
       </button>
      </div>
