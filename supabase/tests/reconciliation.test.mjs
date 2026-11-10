@@ -10,7 +10,7 @@ test("ordem só é paga após reconsulta coerente (id, referência, valor e test
   assert.equal(verifiedOrderOutcome(sample,expected),"paid");
   assert.equal(verifiedOrderOutcome({...sample,status:"processing"},expected),"pending");
   assert.equal(verifiedOrderOutcome({...sample,status:"canceled"},expected),"cancelled");
-  assert.throws(()=>verifiedOrderOutcome({...sample,total_paid_amount:"0.00"},expected));
+  assert.equal(verifiedOrderOutcome({...sample,total_paid_amount:"0.00"},expected),"pending");
   assert.throws(()=>verifiedOrderOutcome({...sample,external_reference:"outra"},expected));
   assert.throws(()=>verifiedOrderOutcome({...sample,live_mode:true},expected));
 });
