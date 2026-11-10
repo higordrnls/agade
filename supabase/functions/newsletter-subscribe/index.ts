@@ -1,6 +1,6 @@
 // AGADE Newsletter — intentionally disabled until consent policy and unsubscribe channel are ready.
 // Public endpoint; rate limit and strict allowed origin. No secret in browser.
-const configuredOrigin = Deno.env.get("AGADE_NEWSLETTER_ORIGIN") ?? "";
+const allowedOrigins=(Deno.env.get("AGADE_NEWSLETTER_ORIGIN")??"").split(",").map(value=>value.trim()).filter(value=>/^https:\/\//.test(value));
 const cors = (origin: string) => ({
   "Access-Control-Allow-Origin": origin,
   "Access-Control-Allow-Headers": "content-type",
@@ -18,7 +18,7 @@ function getAdminKey() {
 
 Deno.serve(async (request: Request) => {
   const origin = request.headers.get("origin") ?? "";
-  if (!configuredOrigin.startsWith("https://") || origin !== configuredOrigin) {
+  if (!allowedOrigins.includes(origin)) {
     return Response.json({ error: "Origem não autorizada" }, { status: 403 });
   }
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(origin) });
@@ -31,15 +31,16 @@ Deno.serve(async (request: Request) => {
   if (!projectUrl || !admin || secret.length < 32) return json({ error: "Cadastro indisponível" }, 503, origin);
 
   try {
+    if (Number(request.headers.get("content-length")??"0")>4096) return json({ error: "Solicitação inválida" }, 413, origin);
     const body = await request.json();
     if (body?.website) return json({ registered: true }, 200, origin); // honeypot
     if (body?.consent !== true || body?.source !== "footer" || typeof body?.email !== "string" ||
         body.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
       return json({ error: "Dados e consentimento inválidos" }, 400, origin);
     }
-    const ip = request.headers.get("cf-connecting-ip") ??
-      request.headers.get("x-real-ip") ??
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    // Never trust browser-supplied x-forwarded-for or x-real-ip: those can be spoofed.
+    // Unknown IPs share a conservative rate bucket; configure a trusted gateway as needed.
+    const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
     const macKey = await crypto.subtle.importKey(
       "raw", new TextEncoder().encode(secret),
       { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
