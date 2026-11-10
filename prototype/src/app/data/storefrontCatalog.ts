@@ -65,7 +65,11 @@ export async function loadStorefrontCatalog(): Promise<StorefrontState> {
   try {
     const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/rpc/list_storefront_catalog`, {
       method: 'POST',
-      headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}`, 'Content-Type': 'application/json' },
+      headers: {
+        apikey: anonKey,
+        ...(anonKey.startsWith('eyJ') ? { Authorization: `Bearer ${anonKey}` } : {}),
+        'Content-Type': 'application/json',
+      },
       body: '{}',
     });
     if (!response.ok) throw new Error(`Catálogo indisponível (HTTP ${response.status})`);
