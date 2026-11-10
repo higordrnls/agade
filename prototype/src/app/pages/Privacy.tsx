@@ -11,7 +11,7 @@ const paragraphs=[
 ];
 export default function Privacy(){
  return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
-  <header className="bg-[#e5e9dc] text-[#24372d] px-6 sm:px-12 py-20 md:py-28">
+  <header className="bg-[#f0dfcf] text-[#24372d] px-6 sm:px-12 py-20 md:py-28">
    <div className="max-w-[1440px] mx-auto"><p className="text-xs uppercase tracking-[.22em] mb-8">AGADE / PRIVACIDADE</p>
     <h1 className="text-5xl sm:text-7xl max-w-4xl leading-[1.05] tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Sua privacidade faz parte do cuidado.</h1>
     <p className="mt-6 max-w-xl leading-relaxed">Informações sobre como tratamos dados pessoais nesta fase de preparação da loja.</p>
