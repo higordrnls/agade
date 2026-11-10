@@ -97,3 +97,17 @@ test('editorial homepage uses licensed placeholder photography instead of digita
  assert.doesNotMatch(home,/05-horizonte\.png|11-aura\.png|12-marco-zero\.png/);
  assert.doesNotMatch(about,/11-aura\.png/);
 });
+
+test('zero-stock product variant cannot be saved to selection cart',()=>{
+ const page=src('pages/Product.tsx');
+ assert.match(page,/variant\.sellable_stock>0/);
+ assert.match(page,/disabled=\{!available\}/);
+ assert.match(page,/disabled=\{v\.sellable_stock<=0\}/);
+});
+test('cart drawer traps and restores keyboard focus',()=>{
+ const page=src('components/CartDrawer.tsx');
+ assert.match(page,/drawerRef/);
+ assert.match(page,/event\.key!=="Tab"/);
+ assert.match(page,/previousFocus\?\.focus\(\)/);
+ assert.match(page,/aria-modal="true"/);
+});
