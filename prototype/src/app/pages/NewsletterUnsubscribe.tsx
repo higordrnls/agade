@@ -26,7 +26,7 @@ export default function NewsletterUnsubscribe(){
    window.history.replaceState(null,"",window.location.pathname);
   }catch(e){setState("error");setMessage(e instanceof Error?e.message:"Não foi possível confirmar o descadastro.")}
  }
- return <main className="min-h-[65vh] bg-[#fffaf2] text-[#493630] px-6 sm:px-12 py-16 sm:py-24">
+ return <div className="min-h-[65vh] bg-[#fffaf2] text-[#493630] px-6 sm:px-12 py-16 sm:py-24">
   <div className="max-w-xl mx-auto">
    <p className="text-xs uppercase tracking-[.17em] font-semibold text-[#a95e46] mb-6">AGADE / PRIVACIDADE</p>
    <h1 className="text-[clamp(2.9rem,6vw,5rem)] leading-[1.03] tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Você decide o que recebe.</h1>
@@ -48,5 +48,5 @@ export default function NewsletterUnsubscribe(){
    </div>
    <Link to="/" className="mt-8 inline-flex items-center gap-3 min-h-12 text-sm border-b border-[#785254]"><ArrowLeft size={17}/> Voltar à AGADE</Link>
   </div>
- </main>;
+ </div>;
 }
