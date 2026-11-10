@@ -46,7 +46,7 @@ jobs:
         with:
           deno-version: v2.x
       - name: Type-check Edge Functions
-        run: deno check supabase/functions/agade-health/index.ts supabase/functions/checkout-sandbox/index.ts supabase/functions/mp-webhook-sandbox/index.ts supabase/functions/reconcile-sandbox/index.ts
+        run: deno check supabase/functions/agade-integrations-check/index.ts supabase/functions/agade-health/index.ts supabase/functions/checkout-sandbox/index.ts supabase/functions/mp-webhook-sandbox/index.ts supabase/functions/reconcile-sandbox/index.ts
 
   database:
     runs-on: ubuntu-latest
