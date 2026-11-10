@@ -3,14 +3,14 @@
 :root {
   --font-size: 16px;
   --background: #fffaf2;
-  --foreground: #24372d;
+  --foreground: #45322f;
   --card: #ffffff;
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
-  --primary: #24469a;
+  --primary: #102e90;
   --primary-foreground: #ffffff;
-  --secondary: #e5e9dc;
+  --secondary: #f0dfcf;
   --secondary-foreground: #000000;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
@@ -46,7 +46,7 @@
   --agade-cream: #f7f0e5;
   --agade-leaf: #56725b;
   --agade-wine: #785254;
-  --agade-cobalt: #24469a;
+  --agade-blue: #102e90;
 
   /* Brand-specific variables */
   --font-serif: 'Playfair Display', serif;
