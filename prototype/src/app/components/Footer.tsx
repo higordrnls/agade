@@ -1,127 +1,44 @@
 import { Link } from "react-router";
-import { Instagram, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
+const links = [
+  { path: "/loja", label: "Seleção comercial" },
+  { path: "/story", label: "Nossa história" },
+  { path: "/collection", label: "Arquivo conceitual" },
+  { path: "/technology", label: "Pesquisa e tecnologia" },
+  { path: "/sustainability", label: "Circularidade" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <h3 className="text-3xl mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
-              AGADE
-            </h3>
-            <p className="text-sm text-white/60 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-              Luxury sustainable eyewear combining 3D printing precision with Brazilian craftsmanship.
-            </p>
+    <footer className="bg-[#252721] text-[#eee9dc] px-6 md:px-12 pt-20 md:pt-28 pb-8">
+      <div className="max-w-[1500px] mx-auto">
+        <div className="grid md:grid-cols-12 gap-14 border-b border-white/20 pb-20">
+          <div className="md:col-span-7">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-[#c3bfb0] mb-8">AGADE / Curadoria independente</p>
+            <p className="text-[clamp(3.3rem,7.4vw,9rem)] leading-[0.95] tracking-[-0.065em]" style={{ fontFamily: "var(--font-serif)" }}>Ver é uma<br/><em>escolha.</em></p>
           </div>
-
-          {/* Navigation */}
-          <div>
-            <h4 className="text-sm tracking-widest mb-4" style={{ fontFamily: 'var(--font-mono)' }}>
-              EXPLORE
-            </h4>
-            <ul className="space-y-2">
-              {[
-                { path: "/", label: "Home" },
-                { path: "/story", label: "Story" },
-                { path: "/technology", label: "Technology" },
-                { path: "/collection", label: "Collection" },
-                { path: "/sustainability", label: "Sustainability" },
-              ].map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-white/60 hover:text-accent transition-colors text-sm"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm tracking-widest mb-4" style={{ fontFamily: 'var(--font-mono)' }}>
-              CONTACT
-            </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2">
-                <Mail size={16} className="mt-1 text-accent" />
-                <a
-                  href="mailto:hello@agade.com"
-                  className="text-white/60 hover:text-accent transition-colors text-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  hello@agade.com
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-1 text-accent" />
-                <span className="text-white/60 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-                  São Paulo, Brazil
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Instagram size={16} className="mt-1 text-accent" />
-                <a
-                  href="https://instagram.com/agade"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/60 hover:text-accent transition-colors text-sm"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  @agade
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="text-sm tracking-widest mb-4" style={{ fontFamily: 'var(--font-mono)' }}>
-              NEWSLETTER
-            </h4>
-            <p className="text-sm text-white/60 mb-4" style={{ fontFamily: 'var(--font-sans)' }}>
-              Stay updated on new releases and innovations.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-4 py-2 bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:border-accent focus:outline-none text-sm"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              />
-              <button className="px-4 py-2 bg-accent hover:bg-accent/80 transition-colors text-sm">
-                →
-              </button>
+          <div className="md:col-span-3 md:col-start-10 flex flex-col gap-10 md:justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.22em] text-[#bcb8ac] mb-5">Navegue</p>
+              <ul className="space-y-3">
+                {links.map(link => <li key={link.path}>
+                  <Link to={link.path} className="text-sm hover:text-white/60 transition-colors focus-visible:outline-offset-4">{link.label}</Link>
+                </li>)}
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.22em] text-[#bcb8ac] mb-3">Origem</p>
+              <p className="text-sm">Uberlândia, Minas Gerais<br/>Brasil</p>
+              <Link to="/loja" className="inline-flex items-center gap-3 mt-7 text-[11px] uppercase tracking-[0.2em] border-b border-[#eee9dc] pb-2">
+                Explorar seleção <ArrowUpRight size={16} aria-hidden="true"/>
+              </Link>
             </div>
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/40" style={{ fontFamily: 'var(--font-mono)' }}>
-            © 2026 AGADE EYEWEAR. ALL RIGHTS RESERVED.
-          </p>
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="text-xs text-white/40 hover:text-accent transition-colors"
-              style={{ fontFamily: 'var(--font-mono)' }}
-            >
-              PRIVACY POLICY
-            </a>
-            <a
-              href="#"
-              className="text-xs text-white/40 hover:text-accent transition-colors"
-              style={{ fontFamily: 'var(--font-mono)' }}
-            >
-              TERMS OF SERVICE
-            </a>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-between gap-4 pt-8 text-[10px] sm:text-xs tracking-[0.13em] uppercase text-[#bcb8ac]">
+          <span>© {new Date().getFullYear()} AGADE</span>
+          <span>Curadoria em desenvolvimento · Compra online indisponível</span>
         </div>
       </div>
     </footer>
