@@ -157,3 +157,18 @@ test('customer profile has photo, birthday, gender, CPF, address and separate an
  assert.match(account,/VITE_AGADE_PROFILE_ENABLED/);
  assert.doesNotMatch(account,/Entrar com link por e-mail|Acessar sem senha|mode==="magic"/);
 });
+
+test('gender question requires an explicit response and supports diverse identities',()=>{
+ const account=src('pages/Account.tsx');
+ for(const value of ["cis_woman","cis_man","trans_woman","trans_man","travesti",
+  "nonbinary","agender","genderfluid","bigender","genderqueer","self_described","prefer_not"]){
+  assert.ok(account.includes('["'+value+'",'),"Missing gender option "+value);
+ }
+ assert.match(account,/Identidade de gênero \*/);
+ assert.match(account,/<select required/);
+ assert.match(account,/gender_self_description/);
+ assert.match(account,/Selecione uma opção no campo de gênero/);
+ assert.match(account,/demographic_consent/);
+ assert.match(account,/Prefiro não declarar/);
+ assert.doesNotMatch(account,/Nenhuma resposta de gênero é obrigatória/);
+});
