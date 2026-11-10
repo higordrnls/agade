@@ -17,6 +17,7 @@ export default function Footer(){
      <Link to="/guia" className="hover:underline underline-offset-4">Guia de escolha</Link>
      <Link to="/ajuda" className="hover:underline underline-offset-4">Dúvidas e atendimento</Link>
      <Link to="/politicas" className="hover:underline underline-offset-4">Trocas, devoluções e frete</Link>
+     <Link to="/privacidade" className="hover:underline underline-offset-4">Privacidade e dados pessoais</Link>
      <a href="mailto:atendimento@agade.com" className="hover:underline underline-offset-4">atendimento@agade.com</a>
      <a href="https://www.instagram.com/itsagade/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">Instagram · @itsagade</a>
      <p className="mt-5 text-white/60 leading-relaxed">Curadoria de óculos solares com um olhar brasileiro. WhatsApp em preparação — número ainda não divulgado.</p>
