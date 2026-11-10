@@ -11,7 +11,7 @@ const faq=[
 ];
 export default function Policies(){
  return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
-  <section className="px-6 sm:px-12 pt-20 pb-16 bg-[#e5e9dc] text-[#24372d] relative overflow-hidden">
+  <section className="px-6 sm:px-12 pt-20 pb-16 bg-[#f0dfcf] text-[#24372d] relative overflow-hidden">
    <div aria-hidden="true" className="absolute -right-20 -top-24 w-[450px] h-[450px] rounded-full border-[55px] border-[#e9ad76]/40"/>
    <div className="relative max-w-[1440px] mx-auto">
     <p className="text-xs uppercase tracking-[.23em] mb-6">AGADE / TRANSPARÊNCIA</p>
@@ -24,7 +24,7 @@ export default function Policies(){
     {[{Icon:RotateCcw,title:"7 dias",text:"Direito de arrependimento nas compras realizadas à distância."},
     {Icon:ShieldCheck,title:"90 dias",text:"Prazo legal para reclamar de vícios aparentes em produtos duráveis."},
     {Icon:Truck,title:"Frete informado",text:"Entrega paga pelo cliente e valor apresentado antes da compra."}].map(({Icon,title,text})=><div key={title} className="border-t-2 border-[#56725b] pt-6">
-     <Icon size={25} className="mb-6 text-[#24469a]" aria-hidden="true"/>
+     <Icon size={25} className="mb-6 text-[#a95e46]" aria-hidden="true"/>
      <h2 className="text-3xl mb-4" style={{fontFamily:"var(--font-serif)"}}>{title}</h2><p className="text-sm leading-relaxed max-w-sm">{text}</p>
     </div>)}
    </div>
