@@ -54,3 +54,16 @@ test('help clearly describes checkout and shipping not active',()=>{
  assert.match(page,/Não anunciamos frete grátis/);
  assert.match(page,/certificações/);
 });
+
+test('selection cart cannot initiate payment',()=>{
+ const cart=src('components/CartDrawer.tsx');
+ assert.match(cart,/Checkout ainda indisponível/);
+ assert.match(cart,/não reserva estoque/);
+ const context=src('context/CartContext.tsx');
+ assert.match(context,/stockSnapshot/);
+});
+test('public shopping guide is separate from certificate claims',()=>{
+ const guide=src('pages/Guide.tsx');
+ assert.match(guide,/não confunda descrição comercial com laudo independente/);
+ assert.match(src('routes.ts'),/Component: Guide/);
+});
