@@ -1,0 +1,89 @@
+name: Catalog foundation checks
+
+on:
+  pull_request:
+    paths:
+      - 'prototype/**'
+      - 'supabase/**'
+      - '.github/workflows/catalog-checks.yml'
+  workflow_dispatch:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototype
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: prototype/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Run catalog unit tests
+        run: node --experimental-strip-types --test tests/catalog.test.mjs
+      - name: Build frontend
+        run: npm run build
+
+  payment_contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test sandbox payment contract and webhook security
+        run: node --experimental-strip-types --test supabase/tests/checkout.test.mjs supabase/tests/reconciliation.test.mjs
+
+  edge_types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check Edge Functions
+        run: deno check supabase/functions/agade-integrations-check/index.ts supabase/functions/agade-health/index.ts supabase/functions/checkout-sandbox/index.ts supabase/functions/mp-webhook-sandbox/index.ts supabase/functions/reconcile-sandbox/index.ts
+
+  database:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: agade_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d agade_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: agade_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create simulated Supabase roles
+        run: |
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE anon NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE authenticated NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE service_role NOLOGIN;"
+      - name: Apply catalog schema
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261110_catalogo_comercial.sql
+      - name: Apply order reservation migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261111_orders_reservations.sql
+      - name: Verify catalog security and integrity
+        run: psql -v ON_ERROR_STOP=1 -f supabase/tests/catalog_security.sql
+      - name: Apply provider linkage migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261112_provider_reconciliation.sql
+      - name: Verify orders and stock reservations
+        run: psql -v ON_ERROR_STOP=1 -f supabase/tests/order_reservations.sql

@@ -12,6 +12,7 @@ export default function Navigation() {
     { path: "/story", label: "Story" },
     { path: "/technology", label: "Technology" },
     { path: "/collection", label: "Collection" },
+    { path: "/loja", label: "Loja" },
     { path: "/sustainability", label: "Sustainability" },
   ];
 
