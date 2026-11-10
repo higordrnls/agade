@@ -100,7 +100,7 @@ export default function Home(){
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-7">
     <div><p className="text-xs uppercase tracking-[.14em] text-[#f1d8cc] font-semibold mb-3">AGADE / EM BREVE</p>
      <h2 className="text-[clamp(2.8rem,5vw,5.7rem)] leading-[1] tracking-[-.05em]" style={serif}>A seleção está quase tomando forma.</h2></div>
-    <div className="self-start md:self-end"><Action to="/loja" outline>Conheça a AGADE</Action></div>
+    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[#fffaf2] text-[#785254] hover:bg-white transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
    </div>
   </section>
 
