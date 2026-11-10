@@ -65,7 +65,7 @@ const genderOptions=[
 const digits=(s:string)=>s.replace(/\D/g,"");
 function validCpf(value:string){
  const cpf=digits(value);
- if(!/^[0-9]{11}$/.test(cpf)||/^(\d)\\1{10}$/.test(cpf))return false;
+ if(!/^[0-9]{11}$/.test(cpf)||/^(\d)\1{10}$/.test(cpf))return false;
  for(const length of [9,10]){
   const sum=cpf.slice(0,length).split("").reduce((acc,n,i)=>acc+Number(n)*(length+1-i),0);
   const digit=(sum*10)%11%10;
@@ -114,6 +114,7 @@ async function uploadAvatar(file:File):Promise<string>{
  const png=bytes.slice(0,8).join(",")==="137,80,78,71,13,10,26,10";
  const webp=String.fromCharCode(...bytes.slice(0,4))==="RIFF"&&String.fromCharCode(...bytes.slice(8,12))==="WEBP";
  if(!(jpg||png||webp))throw Error("Arquivo de imagem inválido.");
+ if((jpg&&file.type!=="image/jpeg")||(png&&file.type!=="image/png")||(webp&&file.type!=="image/webp"))throw Error("Tipo de imagem inconsistente.");
  const session=await currentSession();const user=await fetchProfile(session);
  const ext=jpg?"jpg":png?"png":"webp";
  const objectPath=`${user.id}/avatar.${ext}`;
