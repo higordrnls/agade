@@ -31,8 +31,8 @@ export default function Newsletter(){
   <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
    <div>
     <p className="text-[11px] uppercase tracking-[.21em] text-[#fff1e4]/80 mb-5">AGADE / COMUNIDADE</p>
-    <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Seu próximo olhar começa aqui.</h2>
-    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-[#fff1e4]">Receba notícias sobre a primeira seleção e os próximos lançamentos da AGADE. Sem promessas de descontos que ainda não existem.</p>
+    <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Quer saber quando chegar?</h2>
+    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-[#fff1e4]">Estamos escolhendo os primeiros óculos da AGADE. Quando a lista estiver pronta, vamos contar por aqui.</p>
    </div>
    <div>
     {enabled?<form onSubmit={submit} className="space-y-4">
@@ -52,7 +52,7 @@ export default function Newsletter(){
      <Link to="/privacidade" className="text-xs underline underline-offset-4 text-white/90 inline-block">Saiba mais sobre privacidade</Link>
      {status!=="idle"&&<p role="status" className="text-sm">{status==="sending"?"Registrando…":message}</p>}
     </form>:<div role="status" className="border border-white/40 rounded-xl px-6 py-5 text-sm leading-relaxed">
-      A lista de novidades está em preparação. O cadastro será aberto quando tivermos armazenamento, política de privacidade e descadastro configurados.
+      Ainda não estamos recebendo inscrições por e-mail. Enquanto isso, acompanhe as novidades no Instagram @itsagade.
     </div>}
    </div>
   </div>
