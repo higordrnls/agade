@@ -1,112 +1,166 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MoveUpRight, Sun } from "lucide-react";
 import { loadStorefrontCatalog, type StorefrontState } from "../data/storefrontCatalog";
 
-const money=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100);
-const root="/imagens/catalog/drop-01/";
-const kicker="text-[10px] sm:text-xs uppercase tracking-[.21em] font-semibold";
+const formatMoney=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100);
+const image=(id:number,width:number)=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+const typeLabel="text-[10px] sm:text-[11px] uppercase tracking-[.18em] font-semibold";
+const display={fontFamily:"var(--font-serif)"};
+
+function EditorialPhoto({id,alt,className="",position="center",priority=false}:{id:number;alt:string;className?:string;position?:string;priority?:boolean}){
+ return <img src={image(id,priority?1600:1100)} alt={alt} loading={priority?"eager":"lazy"} fetchPriority={priority?"high":"auto"} decoding="async" style={{objectPosition:position}} className={`h-full w-full object-cover ${className}`}/>;
+}
+function TextLink({to,children,light=false}:{to:string;children:React.ReactNode;light?:boolean}){
+ return <Link to={to} className={`group inline-flex items-center justify-between gap-7 min-h-12 rounded-full px-6 py-3 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 ${light?"bg-[#fff8ed] text-[#6d4045] hover:bg-white":"bg-[#a95e46] text-[#fff9ee] hover:bg-[#884735]"}`}>
+  <span>{children}</span><ArrowUpRight size={18} className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"/>
+ </Link>;
+}
 export default function Home(){
  const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
- useEffect(()=>{let live=true;loadStorefrontCatalog().then(c=>{if(live)setCatalog(c)});return()=>{live=false}},[]);
+ useEffect(()=>{let active=true;loadStorefrontCatalog().then(data=>{if(active)setCatalog(data)});return()=>{active=false}},[]);
  const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
- return <div className="bg-[#fffaf2] text-[#45322f] overflow-hidden">
-  <section className="relative min-h-[540px] sm:min-h-[660px] h-[min(850px,calc(100svh-7rem))] bg-[#4c422e] overflow-hidden">
-   <img src={root+"05-horizonte.png"} fetchPriority="high" alt="Composição conceitual da identidade visual AGADE" className="absolute inset-0 w-full h-full object-cover object-center"/>
-   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#56332f]/80 via-[#56332f]/35 to-transparent"/>
-   <div aria-hidden="true" className="absolute w-[600px] h-[600px] -left-[210px] -bottom-[300px] border-[95px] border-[#f7e9cc]/35 rounded-full rotate-12"/>
-   <div className="relative h-full max-w-[1600px] mx-auto px-6 sm:px-12 flex flex-col justify-between text-white py-12 md:py-16">
-    <div className="flex justify-between items-start gap-5">
-     <p className={kicker+" text-[#ffdbac]"}>AGADE / EDITORIAL 001</p>
-     <p className={kicker+" max-w-[170px] text-right"}>DO SOL PARA O SEU OLHAR</p>
+ return <div className="overflow-x-hidden bg-[#fffaf2] text-[#493630]">
+  {/* A imagem conduz a página: tipografia e fotografia editorial com respiro, como nas referências. */}
+  <section aria-labelledby="agade-hero" className="relative bg-[#f5eadb]">
+   <div className="grid lg:grid-cols-[44%_56%] min-h-[690px] lg:min-h-[min(800px,calc(100svh-7rem))]">
+    <div className="relative z-10 flex flex-col justify-between px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] pt-9 sm:pt-12 pb-12 sm:pb-16 min-h-[460px] lg:min-h-0">
+     <div className="flex items-center gap-3">
+      <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#a95e46]"/>
+      <span className={typeLabel+" text-[#886253]"}>AGADE · EDIÇÃO SOLAR</span>
+     </div>
+     <div className="relative mt-14 lg:mt-8">
+      <p className={typeLabel+" text-[#a95e46] mb-6"}>O OLHAR É TODO SEU</p>
+      <h1 id="agade-hero" className="text-[clamp(4.6rem,9vw,10.5rem)] tracking-[-.075em] leading-[.81] max-w-[800px]" style={display}>
+       <span className="block">Sol.</span>
+       <span className="block italic text-[#a95e46]">Corpo.</span>
+       <span className="block">Olhar.</span>
+      </h1>
+      <p className="mt-9 max-w-[390px] text-base sm:text-lg leading-[1.55] text-[#65524b]">Um jeito brasileiro de vestir os olhos. Curadoria solar com presença, liberdade e personalidade.</p>
+      <div className="mt-8"><TextLink to="/loja">Conheça a seleção</TextLink></div>
+     </div>
+     <p className={typeLabel+" mt-12 text-[#846e62]"}>INDIVIDUAL POR NATUREZA · BRASIL POR EXPRESSÃO</p>
     </div>
-    <div className="max-w-[900px]">
-     <p className={kicker+" mb-5 text-[#ffcfaa]"}>UMA NOVA FORMA DE ESTAR</p>
-     <h1 className="font-normal text-[clamp(3.5rem,9.5vw,10.5rem)] leading-[.88] tracking-[-.065em]" style={{fontFamily:"var(--font-serif)"}}>Tem sol<br/>no nosso <em>jeito.</em></h1>
-     <p className="text-base sm:text-xl leading-relaxed max-w-lg mt-8 mb-10 text-[#fff2df]">Óculos solares para quem carrega sua própria luz. Uma curadoria com personalidade, presença e vontade de viver.</p>
-     <Link to="/loja" className="inline-flex gap-10 items-center justify-between bg-[#f8f1e4] text-[#102e90] px-6 sm:px-7 py-4 sm:py-5 rounded-xl min-h-12 uppercase text-xs tracking-[.17em] font-semibold hover:bg-white transition-colors">
-      Explore a seleção <ArrowUpRight size={19} aria-hidden="true"/>
-     </Link>
-    </div>
-    <div className="flex justify-between gap-4 text-[10px] tracking-[.15em] uppercase text-[#ffe0be]">
-     <span>Imagem de estudo / Não representa produtos comerciais</span><span className="hidden sm:inline">01 / 03</span>
+    <div className="relative min-h-[450px] sm:min-h-[540px] lg:min-h-0 overflow-hidden bg-[#60714e]">
+     <EditorialPhoto id={9485735} priority alt="Fotografia editorial ilustrativa: pessoa com óculos de sol entre folhagens tropicais" position="center 35%"/>
+     <div className="absolute inset-0 bg-gradient-to-t from-[#203521]/35 via-transparent to-transparent" aria-hidden="true"/>
+     <div className="absolute top-5 right-5 sm:top-10 sm:right-10 w-[104px] h-[104px] sm:w-[142px] sm:h-[142px] rounded-full bg-[#fff5e5] text-[#9a5946] flex flex-col items-center justify-center text-center rotate-[11deg] shadow-md">
+      <Sun size={24} strokeWidth={1.5} aria-hidden="true"/>
+      <span className="mt-1 text-[10px] sm:text-xs tracking-[.15em] uppercase font-bold">Feito<br/>de sol*</span>
+     </div>
+     <div className="absolute bottom-5 left-5 right-5 flex flex-wrap justify-between items-end gap-3 text-white">
+      <p className={typeLabel+" max-w-[230px] drop-shadow-md"}>*Expressão editorial, não alegação de fabricação ou origem</p>
+      <p className={typeLabel+" drop-shadow-md"}>Imagem de referência · Pexels</p>
+     </div>
     </div>
    </div>
   </section>
 
-  <div className="bg-[#a95e46] text-[#fffaf2] overflow-hidden" aria-label="Manifesto AGADE">
-   <div className="flex whitespace-nowrap gap-8 items-center px-5 py-4 uppercase text-sm sm:text-base font-medium tracking-[.14em]">
-    <Star size={16} fill="currentColor" aria-hidden="true"/> O BRASIL É SOL <Star size={16} fill="currentColor" aria-hidden="true"/> A GENTE É MOVIMENTO <Star size={16} fill="currentColor" aria-hidden="true"/> SEU OLHAR TEM HISTÓRIA <Star size={16} fill="currentColor" aria-hidden="true"/> AGADE
-   </div>
-  </div>
-
-  <section className="max-w-[1500px] mx-auto px-6 sm:px-12 py-20 md:py-28" aria-labelledby="selection-title">
-   <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-7 mb-10">
-    <div>
-     <p className={kicker+" text-[#a95e46] mb-4"}>01 / OBJETOS DO OLHAR</p>
-     <h2 id="selection-title" className="text-[clamp(3.2rem,6vw,6.6rem)] leading-[.97] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Pra ver de <em>perto.</em></h2>
-    </div>
-    <p className="max-w-md leading-relaxed text-[#68514b] lg:mb-2">Peças escolhidas para viver o cotidiano com estilo, da luz da manhã à última volta pela cidade.</p>
-   </div>
-   {featured.length>0?<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-    {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} key={p.product_id} className="group">
-     <div className="aspect-[3/4] bg-[#f7f0e5] rounded-xl overflow-hidden flex items-center justify-center relative">
-      {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:<span className="text-xs text-[#765e4d]">Foto em preparação</span>}
-     </div><div className="flex justify-between gap-3 pt-4 text-sm"><span className="font-semibold">{p.name}</span><span>{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span></div>
-    </Link>)}
-   </div>:<div className="grid md:grid-cols-12 bg-[#f5eee1] rounded-2xl overflow-hidden min-h-[470px]">
-    <div className="md:col-span-5 px-8 sm:px-12 py-16 flex flex-col justify-center items-start">
-     <p className={kicker+" text-[#a64e39] mb-7"}>PRIMEIRA SELEÇÃO / EM CONSTRUÇÃO</p>
-     <h3 className="text-4xl md:text-5xl leading-[1.05] tracking-[-.04em]" style={{fontFamily:"var(--font-serif)"}}>A forma certa ainda vai encontrar você.</h3>
-     <p className="mt-7 max-w-sm leading-relaxed text-[#465a4d]">Estamos escolhendo os óculos da primeira edição. Por aqui, nada de estoque ou características inventadas.</p>
-     <Link to="/loja" className="mt-9 inline-flex gap-4 items-center border-b border-[#a95e46] pb-2 text-xs font-semibold uppercase tracking-[.15em]">Conheça a seleção <ArrowRight size={17}/></Link>
-    </div>
-    <div className="md:col-span-7 relative overflow-hidden bg-[#bb8d73] min-h-[380px]">
-     <img src={root+"11-aura.png"} alt="Imagem do acervo conceitual de campanhas AGADE" className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-     <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#3e2016]/40 to-transparent"/>
-     <span className="absolute bottom-6 right-6 text-white text-[10px] uppercase tracking-wider">Estudo visual</span>
-    </div>
-   </div>}
-  </section>
-
-  <section className="grid lg:grid-cols-2 bg-[#f0dfcf] text-[#45322f]">
-   <div className="relative min-h-[430px] lg:min-h-[690px] overflow-hidden bg-[#494c34]">
-    <img src={root+"12-marco-zero.png"} alt="Estudo de direção de arte para a identidade AGADE" loading="lazy" className="absolute inset-0 w-full h-full object-cover"/>
-    <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" aria-hidden="true"/>
-    <span className={kicker+" absolute bottom-7 left-8"}>EDITORIAL / IMAGEM CONCEITUAL</span>
-   </div>
-   <div className="px-8 sm:px-12 xl:px-24 py-16 lg:py-28 flex flex-col justify-center items-start relative overflow-hidden">
-    <div aria-hidden="true" className="absolute -right-36 -top-36 border-[75px] border-[#9aae91]/20 rounded-full w-[420px] h-[420px]"/>
-    <p className={kicker+" relative text-[#a95e46] mb-8"}>02 / BRASIL EM TODOS OS SENTIDOS</p>
-    <h2 className="relative text-[clamp(3rem,5.8vw,6.3rem)] leading-[1.04] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>O nosso <em>natural</em> é ter personalidade.</h2>
-    <p className="relative mt-8 mb-10 leading-relaxed max-w-md text-[#68514b]">A AGADE celebra a expressão de cada pessoa. Nossa referência está na moda, nas cores, na cidade, na natureza e na maneira brasileira de viver o sol.</p>
-    <Link to="/sobre" className="relative border-b border-[#a95e46] pb-3 uppercase text-xs tracking-[.17em] flex items-center gap-4">Nossa história <ArrowUpRight size={18}/></Link>
+  <section aria-label="Manifesto AGADE" className="bg-[#a95e46] text-[#fff8ee] py-4 sm:py-5 px-6">
+   <div className="max-w-[1450px] mx-auto flex items-center justify-between gap-4">
+    <span className={typeLabel+" leading-relaxed"}>O SOL MUDA TUDO. SEU JEITO DE VER TAMBÉM.</span>
+    <span className="hidden sm:flex items-center gap-3"><Sun size={19} aria-hidden="true"/><span className={typeLabel}>AGADE 001</span></span>
    </div>
   </section>
 
-  <section className="bg-[#fffaf2] px-6 sm:px-12 py-20 md:py-28 text-[#24372d]">
+  {/* Foto de moda, textura arquitetônica e produto: uma direção de arte, não faixas de cor aleatórias. */}
+  <section aria-labelledby="editorial-title" className="max-w-[1500px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-32">
+   <div className="grid lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-16 items-center">
+    <div className="max-w-[610px]">
+     <p className={typeLabel+" text-[#a95e46] mb-5"}>01 / A ESTÉTICA DO SOL</p>
+     <h2 id="editorial-title" className="text-[clamp(3.2rem,6vw,6.6rem)] leading-[.98] tracking-[-.065em]" style={display}>Um olhar que<br/><em className="text-[#785254]">não pede licença.</em></h2>
+     <p className="text-[#6e5b52] mt-7 text-base leading-relaxed max-w-md">Somos feitos de muitos lugares, cores e maneiras de existir. A AGADE nasce dessa mistura — e da vontade de olhar o mundo com personalidade.</p>
+     <div className="mt-9"><TextLink to="/sobre">Conheça a AGADE</TextLink></div>
+    </div>
+    <div className="grid grid-cols-[1.1fr_.8fr] gap-3 sm:gap-5 items-end">
+     <figure className="relative aspect-[3/4] overflow-hidden rounded-[18px] sm:rounded-[28px] bg-[#af7a67]">
+      <EditorialPhoto id={36409245} alt="Estudo de styling: modelo em roupa clara e óculos de sol sob luz quente, junto a parede de tijolos"/>
+      <figcaption className="absolute bottom-3 left-3 right-3 text-[10px] text-white drop-shadow-md">Moda e textura · imagem ilustrativa</figcaption>
+     </figure>
+     <div className="pb-5 sm:pb-9">
+      <figure className="aspect-[3/4.5] overflow-hidden rounded-[18px] sm:rounded-[28px] bg-[#bd8e6a]">
+       <EditorialPhoto id={37428896} alt="Sombras de vegetação sobre parede terracota, referência de materialidade"/>
+      </figure>
+      <p className={typeLabel+" mt-4 text-[#9b6553]"}>TERRA · LUZ · MATÉRIA</p>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section aria-labelledby="collection-title" className="bg-[#f4ebdd] px-5 sm:px-10 py-16 sm:py-20 lg:py-24">
    <div className="max-w-[1450px] mx-auto">
-    <div className="flex flex-col md:flex-row justify-between md:items-end gap-8 mb-12">
-     <div><p className={kicker+" mb-5"}>03 / GUIA DE OLHAR</p><h2 className="text-[clamp(3.3rem,6.5vw,7rem)] leading-[1.02] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Olho nos <em>detalhes.</em></h2></div>
-     <Link to="/guia" className="inline-flex gap-3 items-center uppercase text-xs tracking-wider font-semibold border-b border-[#102e90] pb-3 self-start">Explore nosso guia <ArrowRight size={17}/></Link>
+    <div className="flex flex-col md:flex-row justify-between gap-7 md:items-end mb-9 sm:mb-11">
+     <div><p className={typeLabel+" text-[#a95e46] mb-4"}>02 / A PRIMEIRA SELEÇÃO</p>
+      <h2 id="collection-title" className="text-[clamp(3.5rem,6.5vw,7rem)] leading-[.96] tracking-[-.065em]" style={display}>Objetos do <em>olhar.</em></h2></div>
+     <Link to="/loja" className="group self-start md:self-end inline-flex gap-3 items-center min-h-12 text-sm border-b border-[#a95e46] text-[#785254] hover:text-[#a95e46]">Explorar óculos de sol <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" aria-hidden="true"/></Link>
     </div>
-    <div className="grid sm:grid-cols-3 gap-5">
-     {[{n:"01",title:"A forma",text:"Uma armação que acompanha seu jeito de ocupar o mundo."},
-       {n:"02",title:"O conforto",text:"Medidas, peso e ajuste importam tanto quanto o estilo."},
-       {n:"03",title:"A lente",text:"Informação clara de polarização e proteção UV, quando verificável."}].map(x=><article key={x.n} className="bg-[#f7f0e5] border border-[#e7d5c6] rounded-2xl px-7 py-9 min-h-[230px] flex flex-col justify-between">
-      <p className={kicker+" text-[#a95e46]"}>{x.n} / AGADE</p>
-      <div><h3 className="text-3xl mb-3" style={{fontFamily:"var(--font-serif)"}}>{x.title}</h3><p className="text-sm leading-relaxed">{x.text}</p></div>
-     </article>)}
+    {featured.length>0?<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+     {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} key={p.product_id} className="group">
+      <div className="aspect-[3/4] bg-[#fffaf2] rounded-[18px] sm:rounded-3xl overflow-hidden flex items-center justify-center">
+       {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:<span className="text-xs text-[#75655c]">Foto em preparação</span>}</div>
+      <div className="flex flex-col sm:flex-row justify-between gap-1 sm:gap-3 pt-4 text-sm"><span className="font-semibold">{p.name}</span><span>{formatMoney(Math.min(...p.variants.map(v=>v.price_cents)))}</span></div>
+     </Link>)}
+    </div>:<div className="grid md:grid-cols-2 bg-[#fffaf2] rounded-[20px] sm:rounded-[30px] overflow-hidden">
+     <div className="relative min-h-[350px] sm:min-h-[460px]">
+      <EditorialPhoto id={10388460} alt="Estudo de fotografia de produto: óculos de sol sobre mesa com luz e sombras"/>
+      <span className={typeLabel+" absolute bottom-4 left-4 text-white bg-black/50 backdrop-blur-sm rounded-full px-4 py-2"}>Foto ilustrativa · não é produto da AGADE</span>
+     </div>
+     <div className="flex flex-col justify-center items-start p-8 sm:p-12 lg:p-16">
+      <span className={typeLabel+" text-[#a95e46] mb-5"}>CURADORIA EM ANDAMENTO</span>
+      <h3 className="text-[clamp(2.7rem,4.5vw,5rem)] leading-[1.05] tracking-[-.05em]" style={display}>O encontro certo ainda está por vir.</h3>
+      <p className="text-[#6e5b52] leading-relaxed mt-6 mb-8 max-w-sm">Estamos escolhendo cada armação da nossa primeira seleção. As fotografias editoriais mostram o universo visual da marca — não o estoque disponível.</p>
+      <TextLink to="/loja">Acompanhar a seleção</TextLink>
+     </div>
+    </div>}
+   </div>
+  </section>
+
+  <section aria-labelledby="world-title" className="px-5 sm:px-10 py-16 sm:py-24 lg:py-32">
+   <div className="max-w-[1450px] mx-auto">
+    <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-8 sm:gap-12 lg:gap-20 items-center">
+     <div className="lg:order-2 relative">
+      <figure className="aspect-[4/4.4] sm:aspect-[5/4] lg:aspect-[5/4.3] overflow-hidden rounded-[22px] sm:rounded-[32px] bg-[#60724d]">
+       <EditorialPhoto id={40688632} alt="Modelo usando óculos de sol entre folhas tropicais, estudo de campanha editorial"/>
+      </figure>
+      <div className="absolute -bottom-6 right-4 sm:right-8 bg-[#102e90] text-white rounded-full px-6 py-5 sm:px-8 sm:py-6 rotate-[-8deg] shadow-lg">
+       <span className="block text-2xl sm:text-4xl leading-none" style={display}>Ver é</span>
+       <span className="block text-xl sm:text-3xl italic leading-none" style={display}>sentir.</span>
+      </div>
+     </div>
+     <div className="lg:order-1 pt-8 sm:pt-0 max-w-lg">
+      <p className={typeLabel+" text-[#56725b] mb-5"}>03 / UM BRASIL DE MUITOS OLHARES</p>
+      <h2 id="world-title" className="text-[clamp(3.2rem,6vw,6rem)] tracking-[-.06em] leading-[1.01]" style={display}>Cor de terra.<br/>Sombra de folha.<br/><em className="text-[#a95e46]">Luz de gente.</em></h2>
+      <p className="mt-7 mb-9 leading-relaxed text-[#6e5b52]">A gente gosta do Brasil que mistura referências, inventa combinações e não cabe numa estética só. É esse espírito que guia nossa seleção.</p>
+      <Link to="/guia" className="inline-flex items-center gap-3 min-h-12 text-sm font-semibold border-b border-[#785254] text-[#785254]">Encontre seu formato <MoveUpRight size={17} aria-hidden="true"/></Link>
+     </div>
     </div>
    </div>
   </section>
 
-  <section className="bg-[#785254] text-[#fffaf2] px-6 sm:px-12 py-20 md:py-24">
-   <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
-    <div><p className={kicker+" mb-5 text-[#f7d8c6]"}>AGADE / SUA PRÓXIMA DESCOBERTA</p>
-     <h2 className="text-4xl sm:text-6xl lg:text-7xl tracking-[-.045em] leading-[1.05]" style={{fontFamily:"var(--font-serif)"}}>O sol é de todo mundo.<br/><em>O olhar é seu.</em></h2></div>
-    <Link to="/loja" className="bg-[#fffaf2] text-[#785254] py-4 px-7 rounded-xl min-h-12 hover:bg-white transition-colors uppercase text-xs tracking-wider font-semibold inline-flex items-center gap-6 self-start md:self-end">Explorar a seleção <ArrowDownRight size={19}/></Link>
+  <section className="bg-[#f2e3d1] px-5 sm:px-10 py-16 sm:py-20">
+   <div className="max-w-[1450px] mx-auto grid md:grid-cols-[1.25fr_.75fr] gap-8 md:gap-16 items-center">
+    <div>
+     <p className={typeLabel+" text-[#9f5b47] mb-6"}>04 / MAIS QUE ESTILO</p>
+     <h2 className="text-[clamp(3rem,6vw,6.5rem)] tracking-[-.06em] leading-[1]" style={display}>Seu estilo é livre.<br/><em>Informação também.</em></h2>
+    </div>
+    <div className="md:justify-self-end max-w-md">
+     <p className="text-[#6e5b52] leading-relaxed mb-7">Medidas, ajuste, tipos de lente e proteção UV são assuntos sérios. Nossa curadoria combina expressão pessoal com informação técnica verificável.</p>
+     <TextLink to="/guia">Guia de escolha</TextLink>
+    </div>
    </div>
   </section>
+
+  <section aria-label="Convite para conhecer a seleção" className="relative bg-[#785254] text-[#fffaf2] px-5 sm:px-10 py-16 sm:py-20 lg:py-24 overflow-hidden">
+   <div className="absolute -right-12 -top-20 h-[270px] w-[270px] rounded-full border-[45px] border-[#fffaf2]/10" aria-hidden="true"/>
+   <div className="relative max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+    <div><p className={typeLabel+" text-[#f7dace] mb-5"}>AGADE / EM BREVE</p>
+     <h2 className="text-[clamp(3.4rem,6.4vw,7rem)] leading-[.95] tracking-[-.06em]" style={display}>O sol é de todo mundo.<br/><em>O olhar é seu.</em></h2></div>
+    <div className="self-start md:self-end"><TextLink to="/loja" light>Explore a AGADE</TextLink></div>
+   </div>
+  </section>
+
+  <aside className="px-5 sm:px-10 py-4 bg-[#fffaf2] border-t border-[#e8d9c9] text-[#775d53] text-[11px] leading-relaxed">
+   <p className="max-w-[1450px] mx-auto">Imagens editoriais ilustrativas licenciadas via Pexels, sem vínculo dos retratados com a AGADE. Os óculos da primeira seleção ainda serão definidos; as fotos não representam mercadorias disponíveis.</p>
+  </aside>
  </div>;
 }
