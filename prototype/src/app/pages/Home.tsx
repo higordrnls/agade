@@ -36,10 +36,10 @@ export default function Home(){
        <span className="block italic text-[#a95e46]">Corpo.</span>
        <span className="block">Olhar.</span>
       </h1>
-      <p className="mt-9 max-w-[390px] text-base sm:text-lg leading-[1.55] text-[#65524b]">Um jeito brasileiro de vestir os olhos. Curadoria solar com presença, liberdade e personalidade.</p>
+      <p className="mt-9 max-w-[390px] text-base sm:text-lg leading-[1.55] text-[#65524b]">Óculos de sol pra usar muito. Estamos escolhendo os primeiros modelos com calma — olhando forma, conforto e aqueles detalhes que fazem diferença.</p>
       <div className="mt-8"><TextLink to="/loja">Conheça a seleção</TextLink></div>
      </div>
-     <p className={typeLabel+" mt-12 text-[#846e62]"}>INDIVIDUAL POR NATUREZA · BRASIL POR EXPRESSÃO</p>
+     <p className={typeLabel+" mt-12 text-[#846e62]"}>NOSSA PRIMEIRA SELEÇÃO ESTÁ GANHANDO FORMA</p>
     </div>
     <div className="relative min-h-[450px] sm:min-h-[540px] lg:min-h-0 overflow-hidden bg-[#60714e]">
      <EditorialPhoto id={9485735} priority alt="Fotografia editorial ilustrativa: pessoa com óculos de sol entre folhagens tropicais" position="center 35%"/>
@@ -58,7 +58,7 @@ export default function Home(){
 
   <section aria-label="Manifesto AGADE" className="bg-[#a95e46] text-[#fff8ee] py-4 sm:py-5 px-6">
    <div className="max-w-[1450px] mx-auto flex items-center justify-between gap-4">
-    <span className={typeLabel+" leading-relaxed"}>O SOL MUDA TUDO. SEU JEITO DE VER TAMBÉM.</span>
+    <span className={typeLabel+" leading-relaxed"}>UM POUCO DE SOL, UM MONTE DE JEITOS DE SER.</span>
     <span className="hidden sm:flex items-center gap-3"><Sun size={19} aria-hidden="true"/><span className={typeLabel}>AGADE 001</span></span>
    </div>
   </section>
@@ -67,9 +67,9 @@ export default function Home(){
   <section aria-labelledby="editorial-title" className="max-w-[1500px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-32">
    <div className="grid lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-16 items-center">
     <div className="max-w-[610px]">
-     <p className={typeLabel+" text-[#a95e46] mb-5"}>01 / A ESTÉTICA DO SOL</p>
-     <h2 id="editorial-title" className="text-[clamp(3.2rem,6vw,6.6rem)] leading-[.98] tracking-[-.065em]" style={display}>Um olhar que<br/><em className="text-[#785254]">não pede licença.</em></h2>
-     <p className="text-[#6e5b52] mt-7 text-base leading-relaxed max-w-md">Somos feitos de muitos lugares, cores e maneiras de existir. A AGADE nasce dessa mistura — e da vontade de olhar o mundo com personalidade.</p>
+     <p className={typeLabel+" text-[#a95e46] mb-5"}>01 / DO NOSSO JEITO</p>
+     <h2 id="editorial-title" className="text-[clamp(3.2rem,6vw,6.6rem)] leading-[.98] tracking-[-.065em]" style={display}>Tem coisa que<br/><em className="text-[#785254]">é a nossa cara.</em></h2>
+     <p className="text-[#6e5b52] mt-7 text-base leading-relaxed max-w-md">Uma roupa boa, uma rua bonita, uma luz que muda tudo. A gente gosta de prestar atenção nessas coisas. E acredita que um par de óculos pode fazer parte disso.</p>
      <div className="mt-9"><TextLink to="/sobre">Conheça a AGADE</TextLink></div>
     </div>
     <div className="grid grid-cols-[1.1fr_.8fr] gap-3 sm:gap-5 items-end">
@@ -81,7 +81,7 @@ export default function Home(){
       <figure className="aspect-[3/4.5] overflow-hidden rounded-[18px] sm:rounded-[28px] bg-[#bd8e6a]">
        <EditorialPhoto id={37428896} alt="Sombras de vegetação sobre parede terracota, referência de materialidade"/>
       </figure>
-      <p className={typeLabel+" mt-4 text-[#9b6553]"}>TERRA · LUZ · MATÉRIA</p>
+      <p className={typeLabel+" mt-4 text-[#9b6553]"}>LUZ DO DIA · PAREDE QUENTE</p>
      </div>
     </div>
    </div>
@@ -91,7 +91,7 @@ export default function Home(){
    <div className="max-w-[1450px] mx-auto">
     <div className="flex flex-col md:flex-row justify-between gap-7 md:items-end mb-9 sm:mb-11">
      <div><p className={typeLabel+" text-[#a95e46] mb-4"}>02 / A PRIMEIRA SELEÇÃO</p>
-      <h2 id="collection-title" className="text-[clamp(3.5rem,6.5vw,7rem)] leading-[.96] tracking-[-.065em]" style={display}>Objetos do <em>olhar.</em></h2></div>
+      <h2 id="collection-title" className="text-[clamp(3.5rem,6.5vw,7rem)] leading-[.96] tracking-[-.065em]" style={display}>Os primeiros <em>óculos.</em></h2></div>
      <Link to="/loja" className="group self-start md:self-end inline-flex gap-3 items-center min-h-12 text-sm border-b border-[#a95e46] text-[#785254] hover:text-[#a95e46]">Explorar óculos de sol <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" aria-hidden="true"/></Link>
     </div>
     {featured.length>0?<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -107,8 +107,8 @@ export default function Home(){
      </div>
      <div className="flex flex-col justify-center items-start p-8 sm:p-12 lg:p-16">
       <span className={typeLabel+" text-[#a95e46] mb-5"}>CURADORIA EM ANDAMENTO</span>
-      <h3 className="text-[clamp(2.7rem,4.5vw,5rem)] leading-[1.05] tracking-[-.05em]" style={display}>O encontro certo ainda está por vir.</h3>
-      <p className="text-[#6e5b52] leading-relaxed mt-6 mb-8 max-w-sm">Estamos escolhendo cada armação da nossa primeira seleção. As fotografias editoriais mostram o universo visual da marca — não o estoque disponível.</p>
+      <h3 className="text-[clamp(2.7rem,4.5vw,5rem)] leading-[1.05] tracking-[-.05em]" style={display}>Ainda estamos escolhendo.</h3>
+      <p className="text-[#6e5b52] leading-relaxed mt-6 mb-8 max-w-sm">A primeira seleção ainda não está pronta. Enquanto procuramos as armações certas, reunimos aqui imagens que mostram o clima que imaginamos para a AGADE. Os óculos da foto não estão à venda.</p>
       <TextLink to="/loja">Acompanhar a seleção</TextLink>
      </div>
     </div>}
@@ -128,9 +128,9 @@ export default function Home(){
       </div>
      </div>
      <div className="lg:order-1 pt-8 sm:pt-0 max-w-lg">
-      <p className={typeLabel+" text-[#56725b] mb-5"}>03 / UM BRASIL DE MUITOS OLHARES</p>
-      <h2 id="world-title" className="text-[clamp(3.2rem,6vw,6rem)] tracking-[-.06em] leading-[1.01]" style={display}>Cor de terra.<br/>Sombra de folha.<br/><em className="text-[#a95e46]">Luz de gente.</em></h2>
-      <p className="mt-7 mb-9 leading-relaxed text-[#6e5b52]">A gente gosta do Brasil que mistura referências, inventa combinações e não cabe numa estética só. É esse espírito que guia nossa seleção.</p>
+      <p className={typeLabel+" text-[#56725b] mb-5"}>03 / DE ONDE VEM A INSPIRAÇÃO</p>
+      <h2 id="world-title" className="text-[clamp(3.2rem,6vw,6rem)] tracking-[-.06em] leading-[1.01]" style={display}>Tem sombra,<br/>tem sol,<br/><em className="text-[#a95e46]">tem vida lá fora.</em></h2>
+      <p className="mt-7 mb-9 leading-relaxed text-[#6e5b52]">A referência pode vir de uma fachada antiga, de um jardim no meio da cidade ou de alguém passando na rua. É dessas cenas comuns que vem boa parte da nossa vontade de criar.</p>
       <Link to="/guia" className="inline-flex items-center gap-3 min-h-12 text-sm font-semibold border-b border-[#785254] text-[#785254]">Encontre seu formato <MoveUpRight size={17} aria-hidden="true"/></Link>
      </div>
     </div>
