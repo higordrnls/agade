@@ -67,3 +67,17 @@ test('public shopping guide is separate from certificate claims',()=>{
  assert.match(guide,/não confunda descrição comercial com laudo independente/);
  assert.match(src('routes.ts'),/Component: Guide/);
 });
+
+test('public pages do not advertise city or imagined shipping offers',()=>{
+ for(const name of ['pages/Home.tsx','pages/About.tsx','pages/Help.tsx','components/Footer.tsx','components/Navigation.tsx','pages/Storefront.tsx']){
+  assert.doesNotMatch(src(name),/Uberlândia|Minas Gerais|frete grátis nas compras/i,name);
+ }
+});
+test('commerce policy provides statutory consumer rights and contact',()=>{
+ const p=src('pages/Policies.tsx');
+ assert.match(p,/7 dias corridos/);
+ assert.match(p,/90 dias/);
+ assert.match(p,/atendimento@agade.com/);
+ assert.match(p,/frete de entrega será pago pelo cliente/i);
+ assert.match(src('routes.ts'),/Component: Policies/);
+});
