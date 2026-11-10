@@ -31,7 +31,7 @@ begin
 end $$;
 select public.register_newsletter_interest('pessoa1@exemplo.com','footer',repeat('a',64));
 select public.register_newsletter_interest('pessoa2@exemplo.com','footer',repeat('a',64));
-do $
+do $$
 declare blocked boolean := false;
 begin
  begin
@@ -39,5 +39,5 @@ begin
  exception when raise_exception then blocked := true;
  end;
  if not blocked then raise exception 'Rate limit não bloqueou quinta tentativa'; end if;
-end $;
+end $$;
 select 'PASS: consentimento privado, validação e rate limit' as result;
