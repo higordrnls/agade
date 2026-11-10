@@ -60,8 +60,8 @@ export function groupCatalog(rows: CatalogRow[]): StorefrontProduct[] {
 /** Não retorna produtos fictícios caso a operação comercial ainda não esteja configurada. */
 export async function loadStorefrontCatalog(): Promise<StorefrontState> {
   const url = import.meta.env.VITE_SUPABASE_URL;
-  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return { status: 'unconfigured', products: [] };
+  const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !anonKey || !/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(url)) return { status: 'unconfigured', products: [] };
   try {
     const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/rpc/list_storefront_catalog`, {
       method: 'POST',
