@@ -81,3 +81,19 @@ test('commerce policy provides statutory consumer rights and contact',()=>{
  assert.match(p,/frete de entrega será pago pelo cliente/i);
  assert.match(src('routes.ts'),/Component: Policies/);
 });
+
+test('editorial homepage uses licensed placeholder photography instead of digital eyewear mockups',()=>{
+ const home=src('pages/Home.tsx');
+ const about=src('pages/About.tsx');
+ const store=src('pages/Storefront.tsx');
+ assert.match(home,/id=\{9485735\}/);
+ assert.match(home,/id=\{36409245\}/);
+ assert.match(home,/id=\{37428896\}/);
+ assert.match(home,/id=\{10388460\}/);
+ assert.match(home,/id=\{40688632\}/);
+ assert.match(home,/Imagens editoriais ilustrativas licenciadas via Pexels/);
+ assert.match(about,/Pexels/);
+ assert.match(store,/não é produto AGADE/);
+ assert.doesNotMatch(home,/05-horizonte\.png|11-aura\.png|12-marco-zero\.png/);
+ assert.doesNotMatch(about,/11-aura\.png/);
+});
