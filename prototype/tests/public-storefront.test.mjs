@@ -27,3 +27,29 @@ test('checkout is not exposed as operational',()=>{
  assert.match(src('pages/Storefront.tsx'),/Compra online em preparação/);
  assert.match(src('pages/Home.tsx'),/loadStorefrontCatalog/);
 });
+
+test('product details use live catalog and per-variant technical claims',()=>{
+ const page=src('pages/Product.tsx');
+ assert.match(page,/loadStorefrontCatalog/);
+ assert.match(page,/variant\.uv_claim/);
+ assert.match(page,/variant\.polarized_claim/);
+ assert.match(page,/Compra online em preparação/);
+ assert.doesNotMatch(page,/certificado UV400|100% de proteção|frete grátis garantido/i);
+});
+test('account does not pretend to show orders',()=>{
+ const page=src('pages/Account.tsx');
+ assert.match(page,/auth\/v1\/otp/);
+ assert.match(page,/histórico de pedidos ainda não está integrado/i);
+});
+test('newsletter never pretends to capture emails when backend is absent',()=>{
+ const page=src('components/Newsletter.tsx');
+ assert.match(page,/VITE_AGADE_NEWSLETTER_ENABLED/);
+ assert.match(page,/consent/);
+ assert.match(page,/A lista de novidades está em preparação/);
+});
+test('help clearly describes checkout and shipping not active',()=>{
+ const page=src('pages/Help.tsx');
+ assert.match(page,/Ainda não/);
+ assert.match(page,/Não anunciamos frete grátis/);
+ assert.match(page,/certificações/);
+});
