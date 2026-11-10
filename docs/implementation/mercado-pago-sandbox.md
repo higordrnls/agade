@@ -8,7 +8,9 @@
 - `supabase/tests/reconciliation.test.mjs`: teste de HMAC, status, referência e integridade monetária.
 
 ## Cuidados importantes
-**Não publicado, não comercial e não integrado à conta Mercado Pago**. Os testes de contrato são locais, sem credenciais do provedor. O modo sandbox exige `ENABLE_SANDBOX_CHECKOUT=true` e `MP_TEST_ACCESS_TOKEN` iniciado por `TEST-`. Nenhum segredo pode ser incluído em código, frontend ou variáveis `VITE_`.
+**Não publicado, não comercial e não integrado à conta Mercado Pago**. Os testes de contrato são locais, sem credenciais do provedor. O modo sandbox exige `ENABLE_SANDBOX_CHECKOUT=true` e `MP_TEST_ACCESS_TOKEN` iniciado por `APP_USR-` (inclusive em teste; não usar prefixo para identificar ambiente). Nenhum segredo pode ser incluído em código, frontend ou variáveis `VITE_`.
+
+**Separação de ambientes:** a variável `MP_ACCOUNT_ENV=test` é exigida junto com `ENABLE_SANDBOX_CHECKOUT=true`. Mesmo assim, somente o ambiente **Teste** selecionado no painel do Mercado Pago comprova a origem correta do token. Ambas ficam DESATIVADAS/ausentes até a verificação da implantação. A resposta da Order deve conter ID `ORDTST...` antes de redirecionar. Não configurar produção neste projeto.
 
 Credenciais privadas necessárias no futuro:
 - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`;
