@@ -29,3 +29,11 @@ A comparação foi feita com as referências fornecidas pelo projeto: Misci, Ecr
 - https://bocarosa.com.br/account/login
 - https://bocarosa.com.br/collections/produtos
 - https://www.goldko.com.br/duvidas
+
+## Newsletter — implementação de servidor (ainda desativada)
+- Migração: `supabase/migrations/20261110_newsletter_interest.sql`, tabela privada de consentimentos e controle de tentativas.
+- Edge Function: `supabase/functions/newsletter-subscribe/index.ts`, valida origem, consentimento e uso excessivo por fingerprint HMAC.
+- Publicar somente depois de definir `AGADE_NEWSLETTER_ORIGIN=https://agade.vercel.app`, segredo `AGADE_NEWSLETTER_RATE_SALT` com mais de 32 caracteres e `ENABLE_NEWSLETTER_SIGNUP=true`.
+- Frontend requer `VITE_AGADE_NEWSLETTER_ENABLED=true` e `VITE_AGADE_NEWSLETTER_ENDPOINT=https://<project>.supabase.co/functions/v1/newsletter-subscribe`.
+- **Não ativar até haver política de privacidade publicada, contato real para solicitações e descadastro automático ou operacional.** O envio de campanhas não está implementado.
+- A versão inicial não é verificação dupla de e-mail (double opt-in). Não declarar o e-mail como confirmado.
