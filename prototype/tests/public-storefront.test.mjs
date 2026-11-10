@@ -86,12 +86,12 @@ test('editorial homepage uses licensed placeholder photography instead of digita
  const home=src('pages/Home.tsx');
  const about=src('pages/About.tsx');
  const store=src('pages/Storefront.tsx');
- assert.match(home,/id=\{9485735\}/);
- assert.match(home,/id=\{36409245\}/);
- assert.match(home,/id=\{37428896\}/);
- assert.match(home,/id=\{10388460\}/);
- assert.match(home,/id=\{40688632\}/);
- assert.match(home,/Imagens editoriais ilustrativas licenciadas via Pexels/);
+ assert.match(home,/photo\(9485735,1600\)/);
+ assert.match(home,/photo\(36409245,1100\)/);
+ assert.match(home,/photo\(37428896,850\)/);
+ assert.match(home,/photo\(10388460,1250\)/);
+ assert.match(home,/min-h-\[320px\] h-\[47svh\]/);
+ assert.match(home,/Imagens ilustrativas licenciadas via Pexels/);
  assert.match(about,/Pexels/);
  assert.match(store,/não é produto AGADE/);
  assert.doesNotMatch(home,/05-horizonte\.png|11-aura\.png|12-marco-zero\.png/);
