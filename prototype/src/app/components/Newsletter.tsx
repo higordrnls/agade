@@ -27,7 +27,7 @@ export default function Newsletter(){
    setMessage("Seu cadastro foi registrado. Enviaremos comunicações somente quando o serviço estiver habilitado e com opção de descadastro.");
   }catch(err){setStatus("error");setMessage(err instanceof Error?err.message:"Erro de conexão.");}
  }
- return <section aria-labelledby="newsletter-title" className="bg-[#a54e39] text-white px-6 sm:px-10 py-16 md:py-20">
+ return <section aria-labelledby="newsletter-title" className="bg-[#24469a] text-white px-6 sm:px-10 py-16 md:py-20">
   <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
    <div>
     <p className="text-[11px] uppercase tracking-[.21em] text-[#fff1e4]/80 mb-5">AGADE / COMUNIDADE</p>
@@ -39,8 +39,8 @@ export default function Newsletter(){
      <div className="flex gap-2">
       <label htmlFor="newsletter-email" className="sr-only">Seu e-mail</label>
       <input id="newsletter-email" required type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)}
-       placeholder="Seu melhor e-mail" className="flex-1 min-w-0 bg-white text-black py-4 px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"/>
-      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#a54e39] px-5 disabled:opacity-45">
+       placeholder="Seu melhor e-mail" className="flex-1 min-w-0 bg-white text-[#24372d] rounded-xl py-4 px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"/>
+      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#24469a] rounded-xl px-5 disabled:opacity-45">
        <ArrowRight size={22}/>
       </button>
      </div>
@@ -51,7 +51,7 @@ export default function Newsletter(){
      </label>
      <Link to="/privacidade" className="text-xs underline underline-offset-4 text-white/90 inline-block">Saiba mais sobre privacidade</Link>
      {status!=="idle"&&<p role="status" className="text-sm">{status==="sending"?"Registrando…":message}</p>}
-    </form>:<div role="status" className="border border-white/40 px-6 py-5 text-sm leading-relaxed">
+    </form>:<div role="status" className="border border-white/40 rounded-xl px-6 py-5 text-sm leading-relaxed">
       A lista de novidades está em preparação. O cadastro será aberto quando tivermos armazenamento, política de privacidade e descadastro configurados.
     </div>}
    </div>
