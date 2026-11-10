@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
 
 const endpoint=import.meta.env.VITE_AGADE_NEWSLETTER_ENDPOINT as string|undefined;
 const enabled=import.meta.env.VITE_AGADE_NEWSLETTER_ENABLED==="true"
@@ -26,20 +27,20 @@ export default function Newsletter(){
    setMessage("Seu cadastro foi registrado. Enviaremos comunicações somente quando o serviço estiver habilitado e com opção de descadastro.");
   }catch(err){setStatus("error");setMessage(err instanceof Error?err.message:"Erro de conexão.");}
  }
- return <section aria-labelledby="newsletter-title" className="bg-[#102e90] text-white px-6 sm:px-10 py-16 md:py-20">
+ return <section aria-labelledby="newsletter-title" className="bg-[#785254] text-white px-6 sm:px-10 py-16 md:py-20">
   <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
    <div>
-    <p className="text-[11px] uppercase tracking-[.21em] text-white/75 mb-5">AGADE / COMUNIDADE</p>
-    <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Seu próximo olhar começa aqui.</h2>
-    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-white/85">Receba notícias sobre a primeira seleção e os próximos lançamentos da AGADE. Sem promessas de descontos que ainda não existem.</p>
+    <p className="text-[11px] uppercase tracking-[.21em] text-[#fff1e4]/80 mb-5">AGADE / COMUNIDADE</p>
+    <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Quer saber quando chegar?</h2>
+    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-[#fff1e4]">Estamos escolhendo os primeiros óculos da AGADE. Quando a lista estiver pronta, vamos contar por aqui.</p>
    </div>
    <div>
     {enabled?<form onSubmit={submit} className="space-y-4">
      <div className="flex gap-2">
       <label htmlFor="newsletter-email" className="sr-only">Seu e-mail</label>
       <input id="newsletter-email" required type="email" autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)}
-       placeholder="Seu melhor e-mail" className="flex-1 min-w-0 bg-white text-black py-4 px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"/>
-      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#102e90] px-5 disabled:opacity-45">
+       placeholder="Seu melhor e-mail" className="flex-1 min-w-0 bg-white text-[#24372d] rounded-xl py-4 px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"/>
+      <button type="submit" disabled={!consent||status==="sending"} aria-label="Assinar novidades da AGADE" className="bg-white text-[#785254] rounded-xl px-5 disabled:opacity-45">
        <ArrowRight size={22}/>
       </button>
      </div>
@@ -48,9 +49,10 @@ export default function Newsletter(){
       <input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)} required className="mt-1 accent-white"/>
       Aceito receber comunicações da AGADE por e-mail. Posso revogar meu consentimento a qualquer momento.
      </label>
+     <Link to="/privacidade" className="text-xs underline underline-offset-4 text-white/90 inline-block">Saiba mais sobre privacidade</Link>
      {status!=="idle"&&<p role="status" className="text-sm">{status==="sending"?"Registrando…":message}</p>}
-    </form>:<div role="status" className="border border-white/40 px-6 py-5 text-sm leading-relaxed">
-      A lista de novidades está em preparação. O cadastro será aberto quando tivermos armazenamento, política de privacidade e descadastro configurados.
+    </form>:<div role="status" className="border border-white/40 rounded-xl px-6 py-5 text-sm leading-relaxed">
+      Ainda não estamos recebendo inscrições por e-mail. Enquanto isso, acompanhe as novidades no Instagram @itsagade.
     </div>}
    </div>
   </div>

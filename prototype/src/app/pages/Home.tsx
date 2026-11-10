@@ -1,107 +1,111 @@
 import { Link } from "react-router";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
 import { loadStorefrontCatalog, type StorefrontState } from "../data/storefrontCatalog";
 
 const money=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100);
-const imgRoot="/imagens/catalog/drop-01/";
-const eyebrow="text-[10px] sm:text-[11px] uppercase tracking-[.22em] font-medium";
-
+const photo=(id:number,w:number)=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+const serif={fontFamily:"var(--font-serif)"};
+function Action({to,children,outline=false}:{to:string;children:ReactNode;outline?:boolean}){
+ return <Link to={to} className={`inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${outline?"border border-[#785254] text-[#785254] hover:bg-[#f1e6da]":"bg-[#a95e46] text-white hover:bg-[#884735]"}`}>
+  {children}<ArrowUpRight size={18} aria-hidden="true"/>
+ </Link>;
+}
 export default function Home(){
  const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
- useEffect(()=>{let mounted=true;loadStorefrontCatalog().then(x=>{if(mounted)setCatalog(x)});return()=>{mounted=false}},[]);
+ useEffect(()=>{let alive=true;loadStorefrontCatalog().then(data=>{if(alive)setCatalog(data)});return()=>{alive=false}},[]);
  const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
- return <div className="bg-white text-[#171717]">
-  <section className="relative min-h-[min(760px,calc(100svh-7rem))] h-[75svh] max-h-[940px] overflow-hidden bg-[#202524]">
-   <img src={imgRoot+"05-horizonte.png"} alt="Composição visual editorial da AGADE, apresentada como estudo de campanha"
-     className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high"/>
-   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-black/5"/>
-   <div className="relative h-full max-w-[1600px] mx-auto px-6 sm:px-10 flex flex-col justify-center items-start text-white">
-    <p className={eyebrow+" mb-7 text-white/80"}>AGADE EYEWEAR · PRIMEIRA EDIÇÃO</p>
-    <h1 className="font-normal text-[clamp(3.9rem,8vw,8.8rem)] leading-[.98] tracking-[-.045em] max-w-[900px]" style={{fontFamily:"var(--font-serif)"}}>
-     Vista o seu<br/>ponto de vista.
-    </h1>
-    <p className="text-base sm:text-lg leading-relaxed max-w-[460px] mt-7 mb-9 text-white/90">
-      Óculos solares selecionados para quem encontra estilo no próprio olhar.
-    </p>
-    <Link to="/loja" className="inline-flex items-center justify-between gap-12 min-w-[230px] bg-white text-black px-6 py-[17px] text-xs tracking-[.17em] font-semibold uppercase hover:bg-[#102e90] hover:text-white transition-colors">
-      Conheça a seleção <ArrowUpRight size={18} aria-hidden="true"/>
-    </Link>
+ return <div className="overflow-x-hidden bg-[#fffaf2] text-[#493630]">
+  {/* No celular, o produto no rosto aparece ANTES do texto — e dentro da primeira dobra. */}
+  <section className="bg-[#f5eadb] lg:grid lg:grid-cols-[47%_53%]" aria-labelledby="home-hero">
+   <div className="relative min-h-[320px] h-[47svh] max-h-[540px] sm:h-[55svh] lg:h-auto lg:min-h-[650px] lg:order-2 bg-[#556748] overflow-hidden">
+    <img src={photo(9485735,1600)} alt="Referência editorial: pessoa usando óculos de sol entre folhas tropicais" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[center_35%]"/>
+    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent" aria-hidden="true"/>
+    <p className="absolute left-5 bottom-4 sm:left-9 text-white text-[10px] tracking-wide leading-relaxed max-w-[270px]">Fotografia de referência · os óculos retratados não são produtos da AGADE</p>
    </div>
-   <p className="absolute bottom-5 right-6 sm:right-10 text-[10px] tracking-[.12em] uppercase text-white/75">Imagem de estudo visual · Produtos em preparação</p>
+   <div className="flex flex-col justify-center lg:order-1 px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] py-10 sm:py-16 lg:py-24">
+    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[#a95e46] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
+    <h1 id="home-hero" className="text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[#a95e46]">Do seu jeito.</span></h1>
+    <p className="mt-5 sm:mt-8 text-[15px] sm:text-lg text-[#68554d] leading-relaxed max-w-md">Estamos preparando a primeira seleção da AGADE. Armações para experimentar, sair de casa e usar de verdade.</p>
+    <div className="mt-7 sm:mt-9"><Action to="/loja">Conhecer a seleção</Action></div>
+    <p className="mt-8 lg:mt-20 text-xs text-[#816c62]">Uma curadoria independente, ainda em construção.</p>
+   </div>
   </section>
 
-  <section className="border-b border-black/10 px-6 sm:px-10 py-5" aria-label="Características da AGADE">
-    <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-[11px] uppercase tracking-[.17em] text-[#444]">
-     <span>Curadoria independente</span><span>Olhar autoral</span><span>De Uberlândia para o Brasil</span>
+  <section aria-labelledby="home-inspiration" className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28">
+   <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-10 lg:gap-20 items-center">
+    <div className="grid grid-cols-[1.15fr_.8fr] gap-3 sm:gap-5 items-end">
+     <figure className="min-w-0">
+      <div className="aspect-[3/4] overflow-hidden rounded-[16px] sm:rounded-[26px] bg-[#bb937b]">
+       <img src={photo(36409245,1100)} alt="Referência de styling: modelo de óculos de sol junto a parede com textura" loading="lazy" decoding="async" className="w-full h-full object-cover"/>
+      </div>
+      <figcaption className="mt-3 text-xs text-[#856a60]">Roupa, textura, luz.</figcaption>
+     </figure>
+     <figure className="min-w-0 pb-5 sm:pb-12">
+      <div className="aspect-[3/4] overflow-hidden rounded-[16px] sm:rounded-[26px] bg-[#cc9a7d]">
+       <img src={photo(37428896,850)} alt="Sombras de plantas sobre parede terracota" loading="lazy" decoding="async" className="w-full h-full object-cover"/>
+      </div>
+      <figcaption className="mt-3 text-xs text-[#856a60]">Uma sombra no fim da tarde.</figcaption>
+     </figure>
     </div>
+    <div className="lg:pl-4">
+     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[#a95e46] mb-5">De onde vem a inspiração</p>
+     <h2 id="home-inspiration" className="text-[clamp(2.5rem,4.5vw,5.1rem)] leading-[1.02] tracking-[-.05em]" style={serif}>A gente presta atenção nas coisas que encontra por aí.</h2>
+     <p className="text-[#6e5b52] leading-relaxed mt-6 max-w-md">Uma fachada bonita, o sol entrando pela janela, alguém passando na rua com um óculos que combina perfeitamente com a pessoa. São essas imagens que ficam na cabeça.</p>
+     <Link to="/sobre" className="mt-8 inline-flex min-h-12 items-center gap-3 text-sm font-medium border-b border-[#785254] text-[#785254]">Mais sobre a AGADE <ArrowRight size={17}/></Link>
+    </div>
+   </div>
   </section>
 
-  <section className="max-w-[1500px] mx-auto px-6 sm:px-10 py-20 md:py-28" aria-labelledby="home-selection-title">
-   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-    <div><p className={eyebrow+" text-[#102e90] mb-4"}>A NOSSA SELEÇÃO</p>
-     <h2 id="home-selection-title" className="font-normal text-4xl md:text-6xl tracking-[-.04em]" style={{fontFamily:"var(--font-serif)"}}>Peças para um novo olhar.</h2>
+  <section aria-labelledby="home-products" className="bg-[#f3e8d9] px-5 sm:px-10 py-14 sm:py-20 lg:py-24">
+   <div className="max-w-[1450px] mx-auto">
+    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-9">
+     <div><p className="text-xs tracking-[.14em] uppercase text-[#a95e46] mb-4 font-semibold">Primeira edição</p>
+      <h2 id="home-products" className="text-[clamp(2.9rem,5vw,5.5rem)] leading-[1] tracking-[-.055em]" style={serif}>Os óculos.</h2></div>
+     <Link to="/loja" className="inline-flex items-center gap-3 min-h-12 self-start text-sm text-[#785254] border-b border-[#785254]">Ver seleção <ArrowRight size={17}/></Link>
     </div>
-    <Link to="/loja" className="text-[11px] uppercase tracking-[.15em] font-semibold border-b border-black pb-2 inline-flex gap-3 items-center self-start sm:self-auto">
-      Ver todos os óculos <ArrowRight size={17} aria-hidden="true"/>
-    </Link>
-   </div>
-   {featured.length>0 ? <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
-    {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} className="group" key={p.product_id}>
-     <div className="aspect-[3/4] bg-[#f3f3f1] overflow-hidden flex justify-center items-center">
-      {p.hero_image_url ? <img src={p.hero_image_url} alt={`Óculos ${p.name}`} className="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500" loading="lazy"/> :
-       <span className="text-xs text-[#888]">Imagem em preparação</span>}
+    {featured.length>0?<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-7">
+     {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} key={p.product_id} className="group">
+      <div className="aspect-[3/4] bg-[#fffaf2] rounded-2xl overflow-hidden flex items-center justify-center">
+       {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:<span className="text-xs text-[#75655c]">Foto em preparação</span>}
+      </div><div className="flex flex-col sm:flex-row justify-between gap-1 sm:gap-3 pt-4 text-sm"><span className="font-semibold">{p.name}</span><span>{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span></div>
+     </Link>)}
+    </div>:<div className="grid md:grid-cols-[1fr_1.05fr] bg-[#fffaf2] rounded-[20px] sm:rounded-[28px] overflow-hidden">
+     <div className="relative min-h-[280px] sm:min-h-[380px] md:min-h-[470px]">
+      <img src={photo(10388460,1250)} loading="lazy" decoding="async" alt="Fotografia ilustrativa de óculos sobre uma mesa iluminada" className="absolute inset-0 w-full h-full object-cover"/>
      </div>
-     <div className="pt-4 flex justify-between gap-2 text-sm">
-      <div><h3 className="font-medium">{p.name}</h3><p className="text-[#777] text-xs mt-1">{p.variants.length} {p.variants.length===1?"variação":"variações"}</p></div>
-      <span className="shrink-0">{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span>
+     <div className="flex flex-col items-start justify-center p-7 sm:p-12 lg:p-16">
+      <h3 className="text-[clamp(2.2rem,3.7vw,4.2rem)] tracking-[-.05em] leading-[1.05]" style={serif}>Estamos escolhendo as primeiras armações.</h3>
+      <p className="text-[#6e5b52] leading-relaxed mt-6 mb-8 max-w-sm">Por enquanto, esta foto é só uma referência. Os modelos e preços reais vão aparecer aqui quando a seleção estiver pronta.</p>
+      <Action to="/loja">Acompanhar a seleção</Action>
      </div>
-    </Link>)}
-   </div> : <div className="grid md:grid-cols-2 gap-0 bg-[#f2f3f7]">
-    <div className="flex flex-col items-start justify-center px-8 sm:px-12 py-14 md:py-20">
-     <span className={eyebrow+" text-[#102e90] mb-5"}>EM BREVE / EDIÇÃO 01</span>
-     <h3 className="text-3xl sm:text-4xl font-normal leading-tight" style={{fontFamily:"var(--font-serif)"}}>Estamos escolhendo<br/>cada detalhe.</h3>
-     <p className="leading-relaxed text-[#555] max-w-md mt-5 mb-8">A primeira curadoria de óculos solares está sendo preparada. Os modelos só aparecerão aqui com informações e disponibilidade verificadas.</p>
-     <Link to="/loja" className="inline-flex items-center gap-3 text-xs font-medium uppercase tracking-[.15em] border-b border-black pb-2">Explorar a seleção <ArrowRight size={17}/></Link>
-    </div>
-    <div className="relative min-h-[330px] md:min-h-[440px] bg-[#c1c5ce] overflow-hidden">
-     <img src={imgRoot+"11-aura.png"} alt="Estudo visual da identidade AGADE" loading="lazy" className="w-full h-full absolute inset-0 object-cover"/>
-     <span className="absolute bottom-4 right-5 text-white text-[10px] uppercase tracking-wider bg-black/45 px-2 py-1">Estudo visual</span>
-    </div>
-   </div>}
+    </div>}
+   </div>
   </section>
 
-  <section className="grid md:grid-cols-2 bg-[#102e90] text-white">
-    <div className="relative min-h-[370px] md:min-h-[600px] bg-[#1c2853]">
-     <img src={imgRoot+"12-marco-zero.png"} loading="lazy" alt="Estudo visual AGADE" className="absolute inset-0 w-full h-full object-cover"/>
-     <span className="absolute left-6 bottom-5 bg-black/45 px-3 py-2 text-[10px] uppercase tracking-widest">Estudo de campanha</span>
+  <section className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28" aria-labelledby="home-guide">
+   <div className="grid md:grid-cols-[1fr_.8fr] gap-8 md:gap-16 items-center">
+    <div>
+     <p className="text-xs uppercase tracking-[.14em] text-[#a95e46] font-semibold mb-4">Antes de escolher</p>
+     <h2 id="home-guide" className="text-[clamp(2.8rem,5vw,5.8rem)] leading-[1.02] tracking-[-.05em]" style={serif}>Bonito no rosto.<br/>Bom de usar.</h2>
     </div>
-    <div className="flex flex-col justify-center items-start px-8 sm:px-12 lg:px-20 py-16 md:py-24">
-     <span className={eyebrow+" text-white/65 mb-7"}>SOBRE A AGADE</span>
-     <h2 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-[-.04em] font-normal max-w-xl" style={{fontFamily:"var(--font-serif)"}}>Estilo é uma forma de expressão.</h2>
-     <p className="mt-8 mb-10 text-white/85 max-w-md text-base leading-relaxed">A AGADE nasce em Uberlândia com uma proposta simples: transformar a escolha dos óculos em uma experiência de descoberta, identidade e atitude.</p>
-     <Link to="/sobre" className="inline-flex items-center gap-3 border-b border-white pb-2 text-xs tracking-[.16em] uppercase font-semibold">Conheça a AGADE <ArrowRight size={18}/></Link>
-    </div>
-  </section>
-  <section className="px-6 sm:px-10 py-16 md:py-24 bg-[#f1f3f8] text-[#171717]">
-   <div className="max-w-[1450px] mx-auto grid md:grid-cols-12 gap-9">
-    <div className="md:col-span-4"><p className="text-[11px] uppercase tracking-[.2em] text-[#102e90] mb-6">O OLHAR NOS DETALHES</p>
-     <h2 className="text-4xl sm:text-5xl leading-tight" style={{fontFamily:"var(--font-serif)"}}>Escolher também é entender.</h2></div>
-    <div className="md:col-span-8 grid sm:grid-cols-3 gap-8">
-     {[{n:"01",title:"Forma",txt:"Uma silhueta que tenha a ver com você."},
-       {n:"02",title:"Conforto",txt:"Medidas e ajuste fazem toda a diferença."},
-       {n:"03",title:"Lentes",txt:"Proteção UV, polarização e características claras."}].map(x=><div key={x.n} className="border-t border-black/20 pt-5">
-       <span className="text-xs tracking-[.2em] text-[#102e90]">{x.n}</span>
-       <h3 className="text-xl font-semibold mt-6 mb-3">{x.title}</h3><p className="text-sm leading-relaxed text-[#555]">{x.txt}</p>
-      </div>)}
-     <Link to="/guia" className="sm:col-span-3 text-xs tracking-[.16em] uppercase font-semibold inline-flex gap-3 items-center border-b border-black pb-3 justify-self-start">Conheça o guia de escolha <ArrowRight size={16}/></Link>
+    <div className="max-w-lg md:justify-self-end">
+     <p className="text-[#6e5b52] leading-relaxed mb-8">Medidas da armação, caimento e tipo de lente: reunimos informações para ajudar a comparar os modelos. Os dados de proteção UV serão informados individualmente, quando verificados.</p>
+     <Action to="/guia" outline>Guia de escolha</Action>
     </div>
    </div>
   </section>
-  <section className="py-16 px-6 sm:px-10 bg-[#f6f6f5] text-center">
-   <p className={eyebrow+" text-[#102e90] mb-4"}>AGADE EYEWEAR</p>
-   <h2 className="text-3xl sm:text-5xl font-normal tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Seu olhar. Sua escolha.</h2>
-   <Link to="/loja" className="mt-7 inline-flex items-center gap-3 text-sm font-medium underline underline-offset-8">Conheça a seleção <ArrowRight size={18}/></Link>
+
+  <section className="bg-[#785254] text-[#fffaf2] px-5 sm:px-10 py-14 sm:py-20">
+   <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-7">
+    <div><p className="text-xs uppercase tracking-[.14em] text-[#f1d8cc] font-semibold mb-3">AGADE / EM BREVE</p>
+     <h2 className="text-[clamp(2.8rem,5vw,5.7rem)] leading-[1] tracking-[-.05em]" style={serif}>A seleção está quase tomando forma.</h2></div>
+    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[#fffaf2] text-[#785254] hover:bg-white transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
+   </div>
   </section>
+
+  <aside className="bg-[#fffaf2] px-5 sm:px-10 py-4 text-[11px] text-[#775d53] leading-relaxed">
+   <p className="max-w-[1450px] mx-auto">Imagens ilustrativas licenciadas via Pexels. Pessoas retratadas não têm vínculo com a AGADE e os óculos mostrados não representam itens disponíveis para compra.</p>
+  </aside>
  </div>;
 }

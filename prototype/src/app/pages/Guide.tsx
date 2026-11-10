@@ -9,7 +9,7 @@ const topics=[
 ];
 export default function Guide(){
  return <div className="bg-white text-[#171717] min-h-screen">
-  <section className="bg-[#102e90] text-white px-6 sm:px-10 py-20 md:py-28">
+  <section className="bg-[#56725b] text-white px-6 sm:px-10 py-20 md:py-28">
    <div className="max-w-[1450px] mx-auto">
     <p className="text-xs uppercase tracking-[.22em] text-white/75 mb-8">AGADE / GUIA DE ESCOLHA</p>
     <h1 className="text-[clamp(3.5rem,8vw,8rem)] max-w-5xl leading-[1] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Olhe para os detalhes.</h1>
@@ -19,13 +19,13 @@ export default function Guide(){
   <section className="max-w-[1450px] mx-auto px-6 sm:px-10 py-20 md:py-24" aria-label="O que observar ao escolher um óculos">
    <div className="grid md:grid-cols-2 gap-x-10 gap-y-12">
     {topics.map(({Icon,number,title,detail})=><article key={number} className="border-t border-black/20 pt-7">
-     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[#102e90]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
+     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[#a95e46]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
      <h2 className="text-3xl sm:text-4xl mb-5 tracking-tight" style={{fontFamily:"var(--font-serif)"}}>{title}</h2>
      <p className="text-[#555] leading-relaxed max-w-md">{detail}</p>
     </article>)}
    </div>
   </section>
-  <section className="bg-[#f3f4f8] px-6 sm:px-10 py-20">
+  <section className="bg-[#f6e4d4] px-6 sm:px-10 py-20">
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
     <div><p className="uppercase text-xs tracking-[.2em] text-[#102e90] mb-5">DA INFORMAÇÃO À ESCOLHA</p>
      <h2 className="text-3xl sm:text-5xl" style={{fontFamily:"var(--font-serif)"}}>Tudo começa pelo seu olhar.</h2>

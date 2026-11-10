@@ -46,7 +46,7 @@ test('newsletter never pretends to capture emails when backend is absent',()=>{
  const page=src('components/Newsletter.tsx');
  assert.match(page,/VITE_AGADE_NEWSLETTER_ENABLED/);
  assert.match(page,/consent/);
- assert.match(page,/A lista de novidades está em preparação/);
+ assert.match(page,/Ainda não estamos recebendo inscrições por e-mail/);
 });
 test('help clearly describes checkout and shipping not active',()=>{
  const page=src('pages/Help.tsx');
@@ -66,4 +66,34 @@ test('public shopping guide is separate from certificate claims',()=>{
  const guide=src('pages/Guide.tsx');
  assert.match(guide,/não confunda descrição comercial com laudo independente/);
  assert.match(src('routes.ts'),/Component: Guide/);
+});
+
+test('public pages do not advertise city or imagined shipping offers',()=>{
+ for(const name of ['pages/Home.tsx','pages/About.tsx','pages/Help.tsx','components/Footer.tsx','components/Navigation.tsx','pages/Storefront.tsx']){
+  assert.doesNotMatch(src(name),/Uberlândia|Minas Gerais|frete grátis nas compras/i,name);
+ }
+});
+test('commerce policy provides statutory consumer rights and contact',()=>{
+ const p=src('pages/Policies.tsx');
+ assert.match(p,/7 dias corridos/);
+ assert.match(p,/90 dias/);
+ assert.match(p,/atendimento@agade.com/);
+ assert.match(p,/frete de entrega será pago pelo cliente/i);
+ assert.match(src('routes.ts'),/Component: Policies/);
+});
+
+test('editorial homepage uses licensed placeholder photography instead of digital eyewear mockups',()=>{
+ const home=src('pages/Home.tsx');
+ const about=src('pages/About.tsx');
+ const store=src('pages/Storefront.tsx');
+ assert.match(home,/photo\(9485735,1600\)/);
+ assert.match(home,/photo\(36409245,1100\)/);
+ assert.match(home,/photo\(37428896,850\)/);
+ assert.match(home,/photo\(10388460,1250\)/);
+ assert.match(home,/min-h-\[320px\] h-\[47svh\]/);
+ assert.match(home,/Imagens ilustrativas licenciadas via Pexels/);
+ assert.match(about,/Pexels/);
+ assert.match(store,/não é produto AGADE/);
+ assert.doesNotMatch(home,/05-horizonte\.png|11-aura\.png|12-marco-zero\.png/);
+ assert.doesNotMatch(about,/11-aura\.png/);
 });
