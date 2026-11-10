@@ -10,8 +10,8 @@ const faq=[
  {title:"Pagamento parcelado",text:"A AGADE pretende oferecer parcelamento por meio do provedor de pagamentos. Número de parcelas, eventuais juros e valor total serão mostrados antes da finalização. Nenhuma condição de parcelamento está ativa neste momento."},
 ];
 export default function Policies(){
- return <div className="min-h-screen bg-[#f8f0e6] text-[#38261e]">
-  <section className="px-6 sm:px-12 pt-20 pb-16 bg-[#ad5b45] text-[#fff8ec] relative overflow-hidden">
+ return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
+  <section className="px-6 sm:px-12 pt-20 pb-16 bg-[#e5e9dc] text-[#24372d] relative overflow-hidden">
    <div aria-hidden="true" className="absolute -right-20 -top-24 w-[450px] h-[450px] rounded-full border-[55px] border-[#e9ad76]/40"/>
    <div className="relative max-w-[1440px] mx-auto">
     <p className="text-xs uppercase tracking-[.23em] mb-6">AGADE / TRANSPARÊNCIA</p>
@@ -23,8 +23,8 @@ export default function Policies(){
    <div className="grid md:grid-cols-3 gap-5 mb-20">
     {[{Icon:RotateCcw,title:"7 dias",text:"Direito de arrependimento nas compras realizadas à distância."},
     {Icon:ShieldCheck,title:"90 dias",text:"Prazo legal para reclamar de vícios aparentes em produtos duráveis."},
-    {Icon:Truck,title:"Frete informado",text:"Entrega paga pelo cliente e valor apresentado antes da compra."}].map(({Icon,title,text})=><div key={title} className="border-t-2 border-[#ad5b45] pt-6">
-     <Icon size={25} className="mb-6 text-[#a34d34]" aria-hidden="true"/>
+    {Icon:Truck,title:"Frete informado",text:"Entrega paga pelo cliente e valor apresentado antes da compra."}].map(({Icon,title,text})=><div key={title} className="border-t-2 border-[#56725b] pt-6">
+     <Icon size={25} className="mb-6 text-[#24469a]" aria-hidden="true"/>
      <h2 className="text-3xl mb-4" style={{fontFamily:"var(--font-serif)"}}>{title}</h2><p className="text-sm leading-relaxed max-w-sm">{text}</p>
     </div>)}
    </div>
@@ -38,7 +38,7 @@ export default function Policies(){
      <p className="mt-5 leading-relaxed max-w-3xl text-[#654e42]">{item.text}</p>
     </details>)}</div>
    </div>
-   <div className="mt-20 bg-[#f0d3bd] p-8 sm:p-12 flex flex-col sm:flex-row sm:justify-between gap-7">
+   <div className="mt-20 bg-[#eef0e7] p-8 sm:p-12 flex flex-col sm:flex-row sm:justify-between gap-7">
     <div><p className="text-xs uppercase tracking-[.2em] text-[#a34d34] mb-4">FALE COM A GENTE</p>
      <h2 className="text-3xl sm:text-4xl mb-3" style={{fontFamily:"var(--font-serif)"}}>Atendimento humano.</h2>
      <p className="text-sm max-w-xl leading-relaxed">Para dúvidas sobre esta política e futuras compras, escreva para nosso atendimento. O canal de WhatsApp ainda está sendo preparado.</p>
