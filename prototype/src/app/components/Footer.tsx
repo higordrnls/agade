@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Newsletter from "./Newsletter";
 export default function Footer(){
- return <><Newsletter/><footer className="bg-[#385b50] text-[#fffaf2] px-6 sm:px-10 pt-16 sm:pt-20 pb-8">
+ return <><Newsletter/><footer className="bg-[#785254] text-[#fffaf2] px-6 sm:px-10 pt-16 sm:pt-20 pb-8">
   <div className="max-w-[1440px] mx-auto">
    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 pb-20 border-b border-white/25">
     <div className="lg:col-span-2">
