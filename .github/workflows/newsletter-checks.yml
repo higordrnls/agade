@@ -1,0 +1,54 @@
+name: Newsletter infrastructure checks
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/20261110_newsletter_interest.sql'
+      - 'supabase/tests/newsletter_security.sql'
+      - 'supabase/functions/newsletter-subscribe/**'
+      - '.github/workflows/newsletter-checks.yml'
+  workflow_dispatch:
+
+jobs:
+  edge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno check supabase/functions/newsletter-subscribe/index.ts
+
+  database:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: agade_newsletter_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d agade_newsletter_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: agade_newsletter_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Simulate Supabase roles
+        run: |
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE anon NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE authenticated NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE service_role NOLOGIN;"
+      - name: Apply newsletter migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261110_newsletter_interest.sql
+      - name: Test privacy and rate limiting
+        run: psql -v ON_ERROR_STOP=1 -f supabase/tests/newsletter_security.sql
