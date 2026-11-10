@@ -13,7 +13,7 @@ export default function About(){
    </div>
   </section>
   <section className="max-w-[1450px] mx-auto px-6 sm:px-10 py-20 md:py-32 grid md:grid-cols-12 gap-10">
-    <div className="md:col-span-3 text-[11px] tracking-[.2em] uppercase text-[#a8543c]">AGADE / Sobre</div>
+    <div className="md:col-span-3 text-[11px] tracking-[.2em] uppercase text-[#24469a]">AGADE / Sobre</div>
     <div className="md:col-span-9">
       <h2 className="text-3xl sm:text-5xl leading-tight font-normal max-w-4xl" style={{fontFamily:"var(--font-serif)"}}>Acessórios são mais do que detalhes. Eles revelam escolhas, movimentos e formas de expressão.</h2>
       <div className="grid sm:grid-cols-2 gap-10 text-base leading-relaxed text-[#505050] mt-12 max-w-4xl">
@@ -23,7 +23,7 @@ export default function About(){
       <Link to="/loja" className="mt-12 inline-flex gap-5 items-center border-b border-black pb-3 text-xs uppercase tracking-[.16em] font-semibold">Explorar a seleção <ArrowRight size={18}/></Link>
     </div>
   </section>
-  <section className="bg-[#a8543c] text-white py-20 md:py-28 px-6 sm:px-10">
+  <section className="bg-[#56725b] text-white py-20 md:py-28 px-6 sm:px-10">
     <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row justify-between md:items-end gap-10">
       <div><p className="text-[11px] uppercase tracking-[.2em] text-white/75 mb-6">AGADE EYEWEAR</p>
        <h2 className="text-4xl sm:text-6xl lg:text-7xl max-w-3xl leading-[1.05] tracking-[-.04em]" style={{fontFamily:"var(--font-serif)"}}>Sua perspectiva merece espaço.</h2></div>
