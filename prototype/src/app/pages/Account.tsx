@@ -7,6 +7,7 @@ const publicKey=(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY||import.meta.env.
 const enabled=import.meta.env.VITE_AGADE_AUTH_ENABLED==="true"
  && !!projectUrl && !!publicKey && /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(projectUrl);
 const tokenStore="agade-auth-v2";
+const customerProfileEnabled=import.meta.env.VITE_AGADE_PROFILE_ENABLED==="true";
 type Session={access_token:string;refresh_token:string;expires_at:number};
 type Profile={id:string;email?:string};
 const headers=()=>({apikey:publicKey||"", "Content-Type":"application/json", ...(publicKey?.startsWith("eyJ")?{Authorization:`Bearer ${publicKey}`}:{})});
@@ -107,7 +108,7 @@ export default function Account(){
   return()=>{active=false};
  },[]);
  useEffect(()=>{
-  if(!profile)return;
+  if(!profile||!customerProfileEnabled)return;
   let active=true;
   setProfileState("loading");
   fetchCustomer().then(record=>{if(active){setFullName(record?.full_name??"");setPhone(record?.phone_mobile??"");setProfileState("idle")}})
@@ -199,14 +200,14 @@ export default function Account(){
       <button disabled={busy} className="rounded-xl bg-[#a95e46] text-white px-5 min-h-12 disabled:opacity-50">Salvar senha</button>
      </form>:null}
      {message&&<p className="mt-4 text-sm" role="status">{message}</p>}
-     <form onSubmit={submitCustomer} className="mt-8 space-y-5 border-t border-[#d4bfb1] pt-7">
+     {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-5 border-t border-[#d4bfb1] pt-7">
       <h3 className="text-xl font-semibold">Dados do cliente</h3>
       <p className="text-xs leading-relaxed text-[#69564e]">Nome completo e celular são opcionais agora. Dados fiscais e endereço serão solicitados somente quando forem necessários para uma compra.</p>
       <label className="block text-sm font-medium">Nome completo<input type="text" autoComplete="name" maxLength={120} required value={fullName} onChange={e=>setFullName(e.target.value)} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
       <label className="block text-sm font-medium">Celular com DDD (opcional)<input type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} placeholder="(34) 99999-9999" value={phone} onChange={e=>setPhone(e.target.value)} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
       <button type="submit" disabled={profileState==="saving"||profileState==="loading"} className="rounded-xl bg-[#a95e46] text-white px-6 min-h-12 disabled:opacity-50">{profileState==="saving"?"Salvando…":"Salvar meus dados"}</button>
       {profileMessage&&<p role="status" className="text-sm leading-relaxed">{profileMessage}</p>}
-     </form>
+     </form>:<p className="mt-8 border-t border-[#d4bfb1] pt-7 text-sm text-[#69564e]">Seus dados de cliente poderão ser preenchidos aqui quando a área de compras estiver pronta.</p>}
      <p className="text-xs text-[#69564e] leading-relaxed mt-7">O histórico de pedidos ainda não está integrado e nenhuma compra pode ser realizada nesta etapa.</p>
      <button type="button" className="mt-7 min-h-12 inline-flex gap-3 items-center rounded-xl border border-[#785254] px-5" onClick={logout}><LogOut size={17}/> Sair da conta</button>
     </div>:<>
