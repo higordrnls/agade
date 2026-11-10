@@ -48,20 +48,26 @@ async function fetchProfile(session:Session):Promise<Profile>{
 
 
 type CustomerProfile={
- full_name:string;phone_mobile:string|null;birth_date:string|null;gender_identity:string|null;
+ full_name:string;phone_mobile:string|null;birth_date:string|null;gender_identity:string|null;gender_self_description:string|null;
  cpf:string|null;postal_code:string|null;address_line:string|null;address_number:string|null;
  address_complement:string|null;neighborhood:string|null;city:string|null;state_code:string|null;
  demographic_consent:boolean;avatar_path:string|null;
 };
 const blankProfile:CustomerProfile={
- full_name:"",phone_mobile:null,birth_date:null,gender_identity:null,cpf:null,postal_code:null,
+ full_name:"",phone_mobile:null,birth_date:null,gender_identity:null,gender_self_description:null,cpf:null,postal_code:null,
  address_line:null,address_number:null,address_complement:null,neighborhood:null,city:null,state_code:null,
  demographic_consent:false,avatar_path:null
 };
 const genderOptions=[
- ["woman","Mulher"],["man","Homem"],["nonbinary","Pessoa não binária"],
- ["self_described","Outra identidade"],["prefer_not","Prefiro não informar"]
+ ["cis_woman","Mulher cisgênero"],["cis_man","Homem cisgênero"],
+ ["trans_woman","Mulher transgênero"],["trans_man","Homem transgênero"],
+ ["travesti","Travesti"],["nonbinary","Pessoa não binária"],
+ ["agender","Pessoa agênero"],["genderfluid","Pessoa de gênero fluido"],
+ ["bigender","Pessoa bigênero"],["genderqueer","Pessoa genderqueer"],
+ ["self_described","Outra identidade (quero descrever)"],
+ ["prefer_not","Prefiro não declarar"]
 ] as const;
+const genderValues=new Set<string>(genderOptions.map(([value])=>value));
 const digits=(s:string)=>s.replace(/\D/g,"");
 function validCpf(value:string){
  const cpf=digits(value);
@@ -239,6 +245,9 @@ export default function Account(){
   if(customer.full_name.trim().length<3||customer.full_name.trim().length>120){setProfileState("error");setProfileMessage("Informe seu nome completo.");return}
   if(customer.phone_mobile&&!validPhone(customer.phone_mobile)){setProfileState("error");setProfileMessage("Informe um celular com DDD válido.");return}
   if(customer.birth_date&&!validDateOfBirth(customer.birth_date)){setProfileState("error");setProfileMessage("Confira a data de nascimento.");return}
+  if(!customer.gender_identity||!genderValues.has(customer.gender_identity)){setProfileState("error");setProfileMessage("Selecione uma opção no campo de gênero para salvar sua ficha.");return}
+  if(customer.gender_identity==="self_described"&&!(customer.gender_self_description||"").trim()){setProfileState("error");setProfileMessage("Descreva como você se identifica.");return}
+  if((customer.gender_self_description||"").length>120){setProfileState("error");setProfileMessage("A descrição de gênero deve ter até 120 caracteres.");return}
   if(customer.cpf&&!validCpf(customer.cpf)){setProfileState("error");setProfileMessage("CPF inválido.");return}
   if(customer.postal_code&&!/^\d{8}$/.test(digits(customer.postal_code))){setProfileState("error");setProfileMessage("Informe um CEP com 8 dígitos.");return}
   if(customer.state_code&&!/^[A-Z]{2}$/.test(customer.state_code)){setProfileState("error");setProfileMessage("Informe uma UF válida.");return}
@@ -290,7 +299,7 @@ export default function Account(){
      {message&&<p className="mt-4 text-sm" role="status">{message}</p>}
      {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-6 border-t border-[#d4bfb1] pt-7">
       <h3 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>Minha ficha</h3>
-      <p className="text-xs leading-relaxed text-[#69564e]">Seus dados ficam em uma área privada. Data de nascimento e identidade de gênero ajudam a compreender nosso público somente se você autorizar a análise estatística. Nenhuma resposta de gênero é obrigatória.</p>
+      <p className="text-xs leading-relaxed text-[#69564e]">Seus dados ficam em uma área privada. A seleção de uma opção no campo de gênero é necessária para completar esta ficha, inclusive “Prefiro não declarar”. O uso de dados demográficos para pesquisa é separado e depende da sua autorização.</p>
       <div className="flex items-center gap-4">
        {avatar?<img src={avatar} alt="Minha foto de perfil" className="h-20 w-20 rounded-full object-cover"/>:<div aria-hidden="true" className="h-20 w-20 rounded-full bg-[#e5d0c0] flex items-center justify-center"><Camera size={27}/></div>}
        <label className="text-sm underline underline-offset-4 cursor-pointer"> {avatarBusy?"Enviando foto…":"Adicionar foto (opcional)"}
@@ -301,7 +310,8 @@ export default function Account(){
        <label className="block text-sm font-medium">Nome completo *<input type="text" autoComplete="name" maxLength={120} required value={customer.full_name} onChange={e=>setCustomer(v=>({...v,full_name:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
        <label className="block text-sm font-medium">Celular com DDD<input type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} placeholder="(34) 99999-9999" value={customer.phone_mobile||""} onChange={e=>setCustomer(v=>({...v,phone_mobile:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
        <label className="block text-sm font-medium">Data de nascimento<input type="date" autoComplete="bday" min="1900-01-01" max={new Date().toISOString().slice(0,10)} value={customer.birth_date||""} onChange={e=>setCustomer(v=>({...v,birth_date:e.target.value||null}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-       <label className="block text-sm font-medium">Como você se identifica?<select value={customer.gender_identity||""} onChange={e=>setCustomer(v=>({...v,gender_identity:e.target.value||null}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"><option value="">Selecionar (opcional)</option>{genderOptions.map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
+       <label className="block text-sm font-medium">Identidade de gênero *<select required value={customer.gender_identity||""} onChange={e=>setCustomer(v=>({...v,gender_identity:e.target.value||null,gender_self_description:e.target.value==="self_described"?v.gender_self_description:null}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"><option value="" disabled>Selecione uma opção</option>{genderOptions.map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
+       {customer.gender_identity==="self_described"&&<label className="block text-sm font-medium">Como você descreve sua identidade? *<input required type="text" maxLength={120} value={customer.gender_self_description||""} onChange={e=>setCustomer(v=>({...v,gender_self_description:e.target.value}))} placeholder="Descreva com suas palavras" className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>}
        <label className="flex items-start gap-3 text-xs leading-relaxed text-[#69564e]"><input type="checkbox" checked={customer.demographic_consent} onChange={e=>setCustomer(v=>({...v,demographic_consent:e.target.checked}))} className="mt-1 accent-[#a95e46]"/>Autorizo o uso da minha faixa etária e identidade de gênero em análises estatísticas internas da AGADE, de forma agregada. Posso retirar esta autorização nesta ficha.</label>
       </fieldset>
       <fieldset className="space-y-4 border-t border-[#d4bfb1] pt-5"><legend className="text-sm font-bold mb-3">Dados para futuras compras</legend>
