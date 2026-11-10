@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
 
 const endpoint=import.meta.env.VITE_AGADE_NEWSLETTER_ENDPOINT as string|undefined;
 const enabled=import.meta.env.VITE_AGADE_NEWSLETTER_ENABLED==="true"
@@ -48,6 +49,7 @@ export default function Newsletter(){
       <input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)} required className="mt-1 accent-white"/>
       Aceito receber comunicações da AGADE por e-mail. Posso revogar meu consentimento a qualquer momento.
      </label>
+     <Link to="/privacidade" className="text-xs underline underline-offset-4 text-white/90 inline-block">Saiba mais sobre privacidade</Link>
      {status!=="idle"&&<p role="status" className="text-sm">{status==="sending"?"Registrando…":message}</p>}
     </form>:<div role="status" className="border border-white/40 px-6 py-5 text-sm leading-relaxed">
       A lista de novidades está em preparação. O cadastro será aberto quando tivermos armazenamento, política de privacidade e descadastro configurados.
