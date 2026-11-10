@@ -5,18 +5,11 @@ import Footer from "../components/Footer";
 
 export default function Root() {
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, [pathname]);
-
-  return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-      <main className="pt-20">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-  );
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [pathname]);
+  return <div className="min-h-screen bg-white">
+    <a href="#conteudo-principal" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:p-3">Ir para o conteúdo</a>
+    <Navigation />
+    <main id="conteudo-principal" className="pt-28"><Outlet /></main>
+    <Footer />
+  </div>;
 }
