@@ -32,7 +32,7 @@ export default function Navigation() {
         <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="p-2.5 min-w-11 min-h-11 focus-visible:outline-2">
           <Search size={21} strokeWidth={1.6}/></button>
         <button type="button" aria-label={`Abrir sacola com ${cart.quantity} itens`} onClick={()=>cart.setOpen(true)} className="p-2.5 min-w-11 min-h-11 relative hover:text-[#a34e3a]"><ShoppingBag size={21} strokeWidth={1.6}/>{cart.quantity>0&&<span className="absolute -top-1 -right-1 bg-[#24469a] text-white text-[9px] min-w-4 h-4 rounded-full flex items-center justify-center">{cart.quantity}</span>}</button>
-        <Link to="/conta" aria-label="Minha conta" className="p-2.5 min-w-11 min-h-11 hover:text-[#a34e3a]"><UserRound size={21} strokeWidth={1.6}/></Link>
+        <Link to="/conta" aria-label="Minha conta" className="hidden sm:inline-flex items-center justify-center p-2.5 min-w-11 min-h-11 hover:text-[#a34e3a]"><UserRound size={21} strokeWidth={1.6}/></Link>
         <Link to="/ajuda" aria-label="Ajuda" className="hidden sm:inline-flex p-2 hover:text-[#a34e3a]"><CircleHelp size={20} strokeWidth={1.6}/></Link>
         <Link to="/loja" className="hidden sm:inline-flex items-center gap-1 text-[11px] uppercase tracking-[.15em] hover:text-[#a34e3a]">
           Ver seleção <ArrowUpRight size={14}/></Link>
@@ -46,6 +46,7 @@ export default function Navigation() {
     </nav>
     {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-[#fff7ed] flex flex-col gap-5 shadow-sm">
       {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
+      <Link to="/conta" className="text-lg tracking-wide" onClick={()=>setOpen(false)}>MINHA CONTA</Link>
     </div>}
   </header>;
 }
