@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'prototype/**'
-      - 'supabase/migrations/**'
+      - 'supabase/**'
       - '.github/workflows/catalog-checks.yml'
   workflow_dispatch:
 
@@ -27,3 +27,36 @@ jobs:
         run: node --experimental-strip-types --test tests/catalog.test.mjs
       - name: Build frontend
         run: npm run build
+
+  database:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: agade_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d agade_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: agade_test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create simulated Supabase roles
+        run: |
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE anon NOLOGIN;"
+          psql -v ON_ERROR_STOP=1 -c "CREATE ROLE authenticated NOLOGIN;"
+      - name: Apply catalog schema
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261110_catalogo_comercial.sql
+      - name: Verify catalog security and integrity
+        run: psql -v ON_ERROR_STOP=1 -f supabase/tests/catalog_security.sql
