@@ -46,7 +46,7 @@ test('newsletter never pretends to capture emails when backend is absent',()=>{
  const page=src('components/Newsletter.tsx');
  assert.match(page,/VITE_AGADE_NEWSLETTER_ENABLED/);
  assert.match(page,/consent/);
- assert.match(page,/A lista de novidades está em preparação/);
+ assert.match(page,/Ainda não estamos recebendo inscrições por e-mail/);
 });
 test('help clearly describes checkout and shipping not active',()=>{
  const page=src('pages/Help.tsx');
