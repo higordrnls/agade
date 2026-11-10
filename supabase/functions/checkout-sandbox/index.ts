@@ -11,12 +11,12 @@ const restHeaders = (key: string) => ({
 
 Deno.serve(async (request: Request) => {
   if (request.method !== "POST") return json({ error: "Método não permitido" }, 405);
-  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true") return json({ error: "Checkout desativado" }, 503);
+  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true" || Deno.env.get("MP_ACCOUNT_ENV") !== "test") return json({ error: "Checkout desativado" }, 503);
   const secret = Deno.env.get("ADMIN_SANDBOX_KEY");
   const token = Deno.env.get("MP_TEST_ACCESS_TOKEN");
   const projectUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!secret || secret.length < 32 || !token?.startsWith("TEST-") || !projectUrl || !serviceKey) {
+  if (!secret || secret.length < 32 || !token?.startsWith("APP_USR-") || !projectUrl || !serviceKey) {
     return json({ error: "Ambiente de teste não configurado" }, 503);
   }
   // Chave privada não pode aparecer em frontend, URLs nem logs.
@@ -61,7 +61,7 @@ Deno.serve(async (request: Request) => {
     if (!checkout.ok) return json({ error: "Pedido em análise; repetir com mesma referência" }, 502);
     const order = await checkout.json();
     if (order.external_reference !== input.reference || order.total_amount !== payload.total_amount ||
-        order.live_mode === true || typeof order.id !== "string" || typeof order.checkout_url !== "string") {
+        (order.live_mode === true || typeof order.id !== "string" || !order.id.startsWith("ORDTST")) || typeof order.checkout_url !== "string") {
       return json({ error: "Resposta do provedor inconsistente" }, 502);
     }
 
