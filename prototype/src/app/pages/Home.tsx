@@ -47,7 +47,7 @@ export default function Home(){
     </Link>
    </div>
    {featured.length>0 ? <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
-    {featured.map(p=><Link to={`/loja?busca=${encodeURIComponent(p.name)}`} className="group" key={p.product_id}>
+    {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} className="group" key={p.product_id}>
      <div className="aspect-[3/4] bg-[#f3f3f1] overflow-hidden flex justify-center items-center">
       {p.hero_image_url ? <img src={p.hero_image_url} alt={`Óculos ${p.name}`} className="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500" loading="lazy"/> :
        <span className="text-xs text-[#888]">Imagem em preparação</span>}
