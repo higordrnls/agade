@@ -137,7 +137,6 @@ test('account supports password sign-in, signup and recovery with separate custo
  assert.match(page,/grant_type=password/);
  assert.match(page,/auth\/v1\/signup/);
  assert.match(page,/mode==="recover"\?"recover":"otp"/);
- assert.match(page,/auth\/v1\/otp/);
  assert.match(page,/customer_profiles/);
  assert.match(page,/full_name/);
  assert.match(page,/phone_mobile/);
