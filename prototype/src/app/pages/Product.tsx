@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { ArrowLeft, ArrowRight, Check, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Info, ShoppingBag } from "lucide-react";
 import { loadStorefrontCatalog, type StorefrontProduct, type StorefrontState } from "../data/storefrontCatalog";
+import { useCart } from "../context/CartContext";
 
 const money=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100);
 
@@ -12,6 +13,7 @@ function TechnicalItem({label,value}:{label:string,value:string}){
 }
 export default function Product(){
  const {slug}=useParams();
+ const cart=useCart();
  const [data,setData]=useState<StorefrontState>({status:"unconfigured",products:[]});
  const [loading,setLoading]=useState(true);
  const [selected,setSelected]=useState<string>("");
@@ -57,6 +59,11 @@ export default function Product(){
      </div>
     </fieldset>
     <div className="mt-8 border-y border-black/15 py-5 flex items-center gap-3 text-sm"><Check size={18} className="text-[#102e90]"/><span>Variação disponível na seleção</span></div>
+    <button type="button" onClick={()=>cart.add({productId:product.product_id,variantId:variant.variant_id,sku:variant.sku,name:product.name,color:variant.color_name,priceCents:variant.price_cents,imageUrl:product.hero_image_url,quantity:1,stockSnapshot:variant.sellable_stock})}
+      className="mt-8 w-full flex items-center justify-center gap-3 bg-[#102e90] hover:bg-[#0b216b] text-white py-4 px-6 text-xs uppercase tracking-[.16em] font-semibold">
+      <ShoppingBag size={18}/> Guardar na sacola de seleção
+    </button>
+    <p className="text-xs text-[#666] mt-3">A sacola é uma lista local de interesse. Não cria pedidos, reservas nem cobranças.</p>
     <div className="mt-8 bg-[#f2f3f7] p-6">
      <p className="uppercase text-xs tracking-[.17em] font-semibold">Compra online em preparação</p>
      <p className="text-sm text-[#555] leading-relaxed mt-3">Estamos concluindo a integração de pagamentos e entrega. Ainda não é possível finalizar pedidos pela loja.</p>
