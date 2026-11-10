@@ -39,7 +39,7 @@ test('product details use live catalog and per-variant technical claims',()=>{
 });
 test('account does not pretend to show orders',()=>{
  const page=src('pages/Account.tsx');
- assert.match(page,/mode==="recover"\?"recover":"otp"/);
+ assert.match(page,/const path="recover"/);
  assert.match(page,/histórico de pedidos ainda não está integrado/i);
 });
 test('newsletter never pretends to capture emails when backend is absent',()=>{
@@ -136,10 +136,24 @@ test('account supports password sign-in, signup and recovery with separate custo
  const page=src('pages/Account.tsx');
  assert.match(page,/grant_type=password/);
  assert.match(page,/auth\/v1\/signup/);
- assert.match(page,/mode==="recover"\?"recover":"otp"/);
+ assert.match(page,/const path="recover"/);
  assert.match(page,/customer_profiles/);
  assert.match(page,/full_name/);
  assert.match(page,/phone_mobile/);
  assert.match(page,/histórico de pedidos ainda não está integrado/i);
  assert.doesNotMatch(page,/service_role|sb_secret_|localStorage\.setItem\(["']password/i);
+});
+
+test('customer profile has photo, birthday, gender, CPF, address and separate analytics consent',()=>{
+ const account=src('pages/Account.tsx');
+ assert.match(account,/birth_date/);
+ assert.match(account,/gender_identity/);
+ assert.match(account,/demographic_consent/);
+ assert.match(account,/cpf/);
+ assert.match(account,/postal_code/);
+ assert.match(account,/address_line/);
+ assert.match(account,/avatar_path/);
+ assert.match(account,/customer-avatars/);
+ assert.match(account,/VITE_AGADE_PROFILE_ENABLED/);
+ assert.doesNotMatch(account,/Entrar com link por e-mail|Acessar sem senha|mode==="magic"/);
 });
