@@ -33,7 +33,7 @@ export default function Storefront() {
         </div>
       </header>
 
-      <main className="px-6 py-20 max-w-7xl mx-auto" aria-busy={loading}>
+      <section className="px-6 py-20 max-w-7xl mx-auto" aria-busy={loading}>
         {loading && <p role="status" className="text-muted-foreground">Carregando seleção…</p>}
         {!loading && state.status === "unconfigured" && (
           <section className="max-w-2xl" role="status">
@@ -89,7 +89,7 @@ export default function Storefront() {
             })}
           </section>
         )}
-      </main>
+      </section>
     </div>
   );
 }
