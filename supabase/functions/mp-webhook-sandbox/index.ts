@@ -12,12 +12,12 @@ const restHeaders = (key: string) => ({
 
 Deno.serve(async (request: Request) => {
   if (request.method !== "POST") return json({ error: "Método não permitido" }, 405);
-  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true") return json({ error: "Inativo" }, 503);
+  if (Deno.env.get("ENABLE_SANDBOX_CHECKOUT") !== "true" || Deno.env.get("MP_ACCOUNT_ENV") !== "test") return json({ error: "Inativo" }, 503);
   const token = Deno.env.get("MP_TEST_ACCESS_TOKEN");
   const secret = Deno.env.get("MP_WEBHOOK_TEST_SECRET");
   const projectUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!token?.startsWith("TEST-") || !secret || !projectUrl || !serviceKey) return json({ error: "Inativo" }, 503);
+  if (!token?.startsWith("APP_USR-") || !secret || !projectUrl || !serviceKey) return json({ error: "Inativo" }, 503);
 
   const url = new URL(request.url);
   const dataId = url.searchParams.get("data.id") ?? url.searchParams.get("data_id");
