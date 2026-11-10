@@ -62,10 +62,10 @@ const genderOptions=[
  ["woman","Mulher"],["man","Homem"],["nonbinary","Pessoa não binária"],
  ["self_described","Outra identidade"],["prefer_not","Prefiro não informar"]
 ] as const;
-const digits=(s:string)=>s.replace(/\\D/g,"");
+const digits=(s:string)=>s.replace(/\D/g,"");
 function validCpf(value:string){
  const cpf=digits(value);
- if(!/^[0-9]{11}$/.test(cpf)||/^(\\d)\\1{10}$/.test(cpf))return false;
+ if(!/^[0-9]{11}$/.test(cpf)||/^(\d)\\1{10}$/.test(cpf))return false;
  for(const length of [9,10]){
   const sum=cpf.slice(0,length).split("").reduce((acc,n,i)=>acc+Number(n)*(length+1-i),0);
   const digit=(sum*10)%11%10;
@@ -75,7 +75,7 @@ function validCpf(value:string){
 }
 function validDateOfBirth(date:string){
  const d=new Date(date+"T12:00:00Z");
- return /^\\d{4}-\\d{2}-\\d{2}$/.test(date)&&!Number.isNaN(d.valueOf())
+ return /^\d{4}-\d{2}-\d{2}$/.test(date)&&!Number.isNaN(d.valueOf())
   &&d.toISOString().slice(0,10)===date&&d.getUTCFullYear()>=1900&&d.getTime()<=Date.now();
 }
 const cleanPhone=(value:string)=>value.replace(/\D/g,"");
@@ -239,7 +239,7 @@ export default function Account(){
   if(customer.phone_mobile&&!validPhone(customer.phone_mobile)){setProfileState("error");setProfileMessage("Informe um celular com DDD válido.");return}
   if(customer.birth_date&&!validDateOfBirth(customer.birth_date)){setProfileState("error");setProfileMessage("Confira a data de nascimento.");return}
   if(customer.cpf&&!validCpf(customer.cpf)){setProfileState("error");setProfileMessage("CPF inválido.");return}
-  if(customer.postal_code&&!/^\\d{8}$/.test(digits(customer.postal_code))){setProfileState("error");setProfileMessage("Informe um CEP com 8 dígitos.");return}
+  if(customer.postal_code&&!/^\d{8}$/.test(digits(customer.postal_code))){setProfileState("error");setProfileMessage("Informe um CEP com 8 dígitos.");return}
   if(customer.state_code&&!/^[A-Z]{2}$/.test(customer.state_code)){setProfileState("error");setProfileMessage("Informe uma UF válida.");return}
   setProfileState("saving");
   try{await saveCustomer(customer);setProfileState("saved");setProfileMessage("Dados salvos com sucesso.")}
@@ -247,15 +247,16 @@ export default function Account(){
  }
  async function chooseAvatar(file:File|undefined){
   if(!file||!customerProfileEnabled)return;
+  if(customer.full_name.trim().length<3){setProfileMessage("Preencha o nome completo e salve sua ficha antes de enviar a foto.");return;}
   setAvatarBusy(true);setProfileMessage("");
   try{
    const newPath=await uploadAvatar(file);
    const updated={...customer,avatar_path:newPath};
-   // Photo is stored privately; the record is updated when a valid profile exists.
+   // Photo is private; persist a valid profile before revealing the new avatar.
+   await saveCustomer(updated);
    setCustomer(updated);
-   if(updated.full_name.trim().length>=3)await saveCustomer(updated);
    const imageUrl=await fetchAvatar(newPath);
-   setAvatar(imageUrl);setProfileMessage(updated.full_name.trim().length>=3?"Foto salva.":"Foto enviada. Salve o cadastro para associá-la ao seu perfil.");
+   setAvatar(imageUrl);setProfileMessage("Foto salva.");
   }catch(e){setProfileMessage(e instanceof Error?e.message:"Erro ao enviar foto.")}
   finally{setAvatarBusy(false)}
  }
