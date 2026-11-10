@@ -29,7 +29,7 @@ export default function Navigation() {
         className="lg:hidden p-2.5 min-w-11 min-h-11 -ml-2 focus-visible:outline-2 focus-visible:outline-offset-2">{open?<X size={22}/>:<Menu size={22}/>}</button>
       <Link to="/" aria-label="AGADE, página inicial" className="absolute left-1/2 -translate-x-1/2 text-3xl sm:text-[38px] tracking-[.12em] font-black leading-none" style={{fontFamily:"var(--font-sans)"}}>AGADE</Link>
       <div className="flex items-center justify-end gap-0 sm:gap-3 lg:w-[35%]">
-        <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="p-2.5 min-w-11 min-h-11 focus-visible:outline-2">
+        <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="hidden sm:inline-flex items-center justify-center p-2.5 min-w-11 min-h-11 focus-visible:outline-2">
           <Search size={21} strokeWidth={1.6}/></button>
         <button type="button" aria-label={`Abrir sacola com ${cart.quantity} itens`} onClick={()=>cart.setOpen(true)} className="p-2.5 min-w-11 min-h-11 relative hover:text-[#a34e3a]"><ShoppingBag size={21} strokeWidth={1.6}/>{cart.quantity>0&&<span className="absolute -top-1 -right-1 bg-[#102e90] text-white text-[9px] min-w-4 h-4 rounded-full flex items-center justify-center">{cart.quantity}</span>}</button>
         <Link to="/conta" aria-label="Minha conta" className="hidden sm:inline-flex items-center justify-center p-2.5 min-w-11 min-h-11 hover:text-[#a34e3a]"><UserRound size={21} strokeWidth={1.6}/></Link>
@@ -45,7 +45,7 @@ export default function Navigation() {
       </form>}
     </nav>
     {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-[#fff7ed] flex flex-col gap-5 shadow-sm">
-      {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
+      <form action="/loja" role="search" className="flex items-center gap-2 border border-[#e6d3c5] bg-white rounded-2xl p-2 mb-2"><label htmlFor="mobile-catalog-search" className="sr-only">Buscar óculos</label><input id="mobile-catalog-search" name="busca" type="search" placeholder="Buscar óculos" className="min-w-0 flex-1 px-2 py-2 text-sm bg-transparent"/><button type="submit" aria-label="Pesquisar" className="min-w-11 min-h-11 flex items-center justify-center rounded-xl bg-[#a95e46] text-white"><Search size={18}/></button></form>\n      {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
       <Link to="/conta" className="text-lg tracking-wide" onClick={()=>setOpen(false)}>MINHA CONTA</Link>
     </div>}
   </header>;
