@@ -21,12 +21,12 @@ export default function Storefront(){
   if(sort==="name")entries.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
   return entries;
  },[search,sort,state.products]);
- return <div className="min-h-screen bg-[#fff9ef] text-[#38251e]">
-  <header className="bg-[#efd5bd] px-6 sm:px-10 pt-16 pb-20">
+ return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
+  <header className="bg-[#e5e9dc] px-6 sm:px-10 pt-16 pb-20">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#a54f39] mb-6">AGADE / EDIÇÃO 01</p>
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#24469a] mb-6">AGADE / EDIÇÃO 01</p>
     <h1 className="text-[clamp(3.7rem,8vw,8rem)] leading-[.95] tracking-[-.055em] font-normal" style={{fontFamily:"var(--font-serif)"}}>Óculos para sentir o sol.</h1>
-    <p className="mt-7 max-w-2xl text-base sm:text-lg text-[#655043] leading-relaxed">Curadoria solar com personalidade. Formas, cores e histórias para quem vive de olhar aberto.</p>
+    <p className="mt-7 max-w-2xl text-base sm:text-lg text-[#41584a] leading-relaxed">Curadoria solar com personalidade. Formas, cores e histórias para quem vive de olhar aberto.</p>
    </div>
   </header>
   <section className="max-w-[1500px] mx-auto px-6 sm:px-10 py-12 md:py-20" aria-busy={loading}>
@@ -71,7 +71,7 @@ export default function Storefront(){
    {!loading && state.status==="ready" && state.products.length>0 && products.length===0 && <p role="status" className="py-16 text-[#555]">Nenhum modelo encontrado para “{search}”. Tente outra busca.</p>}
    {!loading && state.status==="ready" && products.length>0 && <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-7 gap-y-14">
     {products.map(p=><article key={p.product_id} className="group">
-     <Link to={`/produto/${encodeURIComponent(p.slug)}`} aria-label={`Ver detalhes de ${p.name}`} className="relative block aspect-[3/4] bg-[#f1dfce] overflow-hidden flex items-center justify-center">
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} aria-label={`Ver detalhes de ${p.name}`} className="relative block aspect-[3/4] bg-[#f4eddf] overflow-hidden flex items-center justify-center">
       {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" decoding="async" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:
         <span className="text-[#777] text-xs">Fotografia em preparação</span>}
       {p.collection_name&&<span className="absolute top-4 left-4 text-[10px] tracking-[.12em] uppercase bg-white px-3 py-2">{p.collection_name}</span>}
