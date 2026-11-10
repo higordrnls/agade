@@ -1,205 +1,93 @@
-import { motion } from "motion/react";
 import { Link } from "react-router";
-import { ArrowRight, Sparkles, Recycle, LineChart } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { loadStorefrontCatalog, type StorefrontState } from "../data/storefrontCatalog";
 
-export default function Home() {
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/imagens/catalog/drop-01/05-horizonte.png"
-            alt="AGADE Eyewear"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-white" />
-        </div>
+const money=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(cents/100);
+const imgRoot="/imagens/catalog/drop-01/";
+const eyebrow="text-[10px] sm:text-[11px] uppercase tracking-[.22em] font-medium";
 
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-6xl md:text-8xl mb-6 text-white" style={{ fontFamily: 'var(--font-serif)' }}>
-              Vision Reimagined
-            </h1>
-            <p className="text-xl md:text-2xl mb-4 text-white/90" style={{ fontFamily: 'var(--font-sans)' }}>
-              Where 3D Precision Meets Brazilian Luxury
-            </p>
-            <p className="text-sm md:text-base mb-12 text-white/70 tracking-widest uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
-              CONCEPT PROJECT • DROP 01
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/collection"
-                className="px-8 py-4 bg-white text-black hover:bg-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <span style={{ fontFamily: 'var(--font-mono)' }}>Explore Collection</span>
-                <ArrowRight size={20} />
-              </Link>
-              <Link
-                to="/story"
-                className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
-              >
-                <span style={{ fontFamily: 'var(--font-mono)' }}>Our Story</span>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
+export default function Home(){
+ const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
+ useEffect(()=>{let mounted=true;loadStorefrontCatalog().then(x=>{if(mounted)setCatalog(x)});return()=>{mounted=false}},[]);
+ const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
+ return <div className="bg-white text-[#171717]">
+  {/* Fotografia na primeira dobra; nenhum texto fabril aparece no front. */}
+  <section className="relative min-h-[min(760px,calc(100svh-7rem))] h-[75svh] max-h-[940px] overflow-hidden bg-[#202524]">
+   <img src={imgRoot+"05-horizonte.png"} alt="Composição visual editorial da AGADE, apresentada como estudo de campanha"
+     className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high"/>
+   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-black/5"/>
+   <div className="relative h-full max-w-[1600px] mx-auto px-6 sm:px-10 flex flex-col justify-center items-start text-white">
+    <p className={eyebrow+" mb-7 text-white/80"}>AGADE EYEWEAR · PRIMEIRA EDIÇÃO</p>
+    <h1 className="font-normal text-[clamp(3.9rem,8vw,8.8rem)] leading-[.98] tracking-[-.045em] max-w-[900px]" style={{fontFamily:"var(--font-serif)"}}>
+     Vista o seu<br/>ponto de vista.
+    </h1>
+    <p className="text-base sm:text-lg leading-relaxed max-w-[460px] mt-7 mb-9 text-white/90">
+      Óculos solares selecionados para quem encontra estilo no próprio olhar.
+    </p>
+    <Link to="/loja" className="inline-flex items-center justify-between gap-12 min-w-[230px] bg-white text-black px-6 py-[17px] text-xs tracking-[.17em] font-semibold uppercase hover:bg-[#102e90] hover:text-white transition-colors">
+      Conheça a seleção <ArrowUpRight size={18} aria-hidden="true"/>
+    </Link>
+   </div>
+   <p className="absolute bottom-5 right-6 sm:right-10 text-[10px] tracking-[.12em] uppercase text-white/75">Imagem de estudo visual · Produtos em preparação</p>
+  </section>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-px h-16 bg-white/50"
-          />
-        </motion.div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl md:text-6xl mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
-              Our Pillars
-            </h2>
-            <p className="text-sm tracking-widest text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-              INNOVATION • SUSTAINABILITY • IDENTITY
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                icon: <Sparkles size={40} />,
-                title: "Innovation",
-                description: "3D-printed eyewear explored through form, digital fabrication and material experimentation.",
-                link: "/technology",
-              },
-              {
-                icon: <Recycle size={40} />,
-                title: "Sustainability",
-                description: "A conceptual circular model connecting recycled material, digital fabrication and product design.",
-                link: "/sustainability",
-              },
-              {
-                icon: <LineChart size={40} />,
-                title: "Identity",
-                description: "A Brazilian design language built around architecture, identity and contemporary eyewear.",
-                link: "/story",
-              },
-            ].map((pillar, index) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="group cursor-pointer"
-              >
-                <Link to={pillar.link} className="block">
-                  <div className="mb-6 text-accent group-hover:scale-110 transition-transform duration-300">
-                    {pillar.icon}
-                  </div>
-                  <h3 className="text-3xl mb-4 group-hover:text-accent transition-colors" style={{ fontFamily: 'var(--font-serif)' }}>
-                    {pillar.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-sans)' }}>
-                    {pillar.description}
-                  </p>
-                  <span className="text-sm tracking-wide flex items-center gap-2 group-hover:gap-4 transition-all" style={{ fontFamily: 'var(--font-mono)' }}>
-                    Learn More <ArrowRight size={16} />
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Image Section */}
-      <section className="py-24 bg-black text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <img
-                src="/imagens/catalog/drop-01/12-marco-zero.png"
-                alt="AGADE Collection"
-                className="w-full h-[600px] object-cover"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-sm tracking-widest text-accent mb-4 block" style={{ fontFamily: 'var(--font-mono)' }}>
-                HIGH-TECH ENGINEERING
-              </span>
-              <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
-                Crafted with Precision
-              </h2>
-              <p className="text-lg text-white/80 mb-8 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                Each frame is a conceptual exploration of 3D-printed eyewear, combining expressive form, digital fabrication and a circular material narrative.
-              </p>
-              <Link
-                to="/collection"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white hover:bg-accent/80 transition-all"
-              >
-                <span style={{ fontFamily: 'var(--font-mono)' }}>View Collection</span>
-                <ArrowRight size={20} />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-24 px-6 border-t border-black/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-            {[
-              { number: "12", label: "Concept Models", suffix: "" },
-              { number: "48", label: "Concept SKUs", suffix: "" },
-              { number: "3D", label: "Printing Language", suffix: "" },
-              { number: "4", label: "Colorways per Model", suffix: "" },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-5xl md:text-6xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>
-                  {stat.number}{stat.suffix}
-                </div>
-                <div className="text-xs tracking-widest uppercase text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <section className="border-b border-black/10 px-6 sm:px-10 py-5" aria-label="Características da AGADE">
+    <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-[11px] uppercase tracking-[.17em] text-[#444]">
+     <span>Curadoria independente</span><span>Olhar autoral</span><span>De Uberlândia para o Brasil</span>
     </div>
-  );
+  </section>
+
+  <section className="max-w-[1500px] mx-auto px-6 sm:px-10 py-20 md:py-28" aria-labelledby="home-selection-title">
+   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+    <div><p className={eyebrow+" text-[#102e90] mb-4"}>A NOSSA SELEÇÃO</p>
+     <h2 id="home-selection-title" className="font-normal text-4xl md:text-6xl tracking-[-.04em]" style={{fontFamily:"var(--font-serif)"}}>Peças para um novo olhar.</h2>
+    </div>
+    <Link to="/loja" className="text-[11px] uppercase tracking-[.15em] font-semibold border-b border-black pb-2 inline-flex gap-3 items-center self-start sm:self-auto">
+      Ver todos os óculos <ArrowRight size={17} aria-hidden="true"/>
+    </Link>
+   </div>
+   {featured.length>0 ? <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
+    {featured.map(p=><Link to={`/loja?busca=${encodeURIComponent(p.name)}`} className="group" key={p.product_id}>
+     <div className="aspect-[3/4] bg-[#f3f3f1] overflow-hidden flex justify-center items-center">
+      {p.hero_image_url ? <img src={p.hero_image_url} alt={`Óculos ${p.name}`} className="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500" loading="lazy"/> :
+       <span className="text-xs text-[#888]">Imagem em preparação</span>}
+     </div>
+     <div className="pt-4 flex justify-between gap-2 text-sm">
+      <div><h3 className="font-medium">{p.name}</h3><p className="text-[#777] text-xs mt-1">{p.variants.length} {p.variants.length===1?"variação":"variações"}</p></div>
+      <span className="shrink-0">{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span>
+     </div>
+    </Link>)}
+   </div> : <div className="grid md:grid-cols-2 gap-0 bg-[#f2f3f7]">
+    <div className="flex flex-col items-start justify-center px-8 sm:px-12 py-14 md:py-20">
+     <span className={eyebrow+" text-[#102e90] mb-5"}>EM BREVE / EDIÇÃO 01</span>
+     <h3 className="text-3xl sm:text-4xl font-normal leading-tight" style={{fontFamily:"var(--font-serif)"}}>Estamos escolhendo<br/>cada detalhe.</h3>
+     <p className="leading-relaxed text-[#555] max-w-md mt-5 mb-8">A primeira curadoria de óculos solares está sendo preparada. Os modelos só aparecerão aqui com informações e disponibilidade verificadas.</p>
+     <Link to="/loja" className="inline-flex items-center gap-3 text-xs font-medium uppercase tracking-[.15em] border-b border-black pb-2">Explorar a seleção <ArrowRight size={17}/></Link>
+    </div>
+    <div className="relative min-h-[330px] md:min-h-[440px] bg-[#c1c5ce] overflow-hidden">
+     <img src={imgRoot+"11-aura.png"} alt="Estudo visual da identidade AGADE" loading="lazy" className="w-full h-full absolute inset-0 object-cover"/>
+     <span className="absolute bottom-4 right-5 text-white text-[10px] uppercase tracking-wider bg-black/45 px-2 py-1">Estudo visual</span>
+    </div>
+   </div>}
+  </section>
+
+  <section className="grid md:grid-cols-2 bg-[#102e90] text-white">
+    <div className="relative min-h-[370px] md:min-h-[600px] bg-[#1c2853]">
+     <img src={imgRoot+"12-marco-zero.png"} loading="lazy" alt="Estudo visual AGADE" className="absolute inset-0 w-full h-full object-cover"/>
+     <span className="absolute left-6 bottom-5 bg-black/45 px-3 py-2 text-[10px] uppercase tracking-widest">Estudo de campanha</span>
+    </div>
+    <div className="flex flex-col justify-center items-start px-8 sm:px-12 lg:px-20 py-16 md:py-24">
+     <span className={eyebrow+" text-white/65 mb-7"}>SOBRE A AGADE</span>
+     <h2 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-[-.04em] font-normal max-w-xl" style={{fontFamily:"var(--font-serif)"}}>Estilo é uma forma de expressão.</h2>
+     <p className="mt-8 mb-10 text-white/85 max-w-md text-base leading-relaxed">A AGADE nasce em Uberlândia com uma proposta simples: transformar a escolha dos óculos em uma experiência de descoberta, identidade e atitude.</p>
+     <Link to="/sobre" className="inline-flex items-center gap-3 border-b border-white pb-2 text-xs tracking-[.16em] uppercase font-semibold">Conheça a AGADE <ArrowRight size={18}/></Link>
+    </div>
+  </section>
+  <section className="py-16 px-6 sm:px-10 bg-[#f6f6f5] text-center">
+   <p className={eyebrow+" text-[#102e90] mb-4"}>AGADE EYEWEAR</p>
+   <h2 className="text-3xl sm:text-5xl font-normal tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Seu olhar. Sua escolha.</h2>
+   <Link to="/loja" className="mt-7 inline-flex items-center gap-3 text-sm font-medium underline underline-offset-8">Conheça a seleção <ArrowRight size={18}/></Link>
+  </section>
+ </div>;
 }
