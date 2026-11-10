@@ -39,7 +39,7 @@ test('product details use live catalog and per-variant technical claims',()=>{
 });
 test('account does not pretend to show orders',()=>{
  const page=src('pages/Account.tsx');
- assert.match(page,/auth\/v1\/otp/);
+ assert.match(page,/mode==="recover"\?"recover":"otp"/);
  assert.match(page,/histórico de pedidos ainda não está integrado/i);
 });
 test('newsletter never pretends to capture emails when backend is absent',()=>{
@@ -130,4 +130,16 @@ test('newsletter cannot activate until unsubscribe endpoint is configured',()=>{
  assert.match(unsub,/Confirmar descadastro/);
  assert.match(unsub,/newsletter-unsubscribe/);
  assert.match(src('routes.ts'),/cancelar-newsletter/);
+});
+
+test('account supports password sign-in, signup and recovery with separate customer profile',()=>{
+ const page=src('pages/Account.tsx');
+ assert.match(page,/grant_type=password/);
+ assert.match(page,/auth\/v1\/signup/);
+ assert.match(page,/mode==="recover"\?"recover":"otp"/);
+ assert.match(page,/customer_profiles/);
+ assert.match(page,/full_name/);
+ assert.match(page,/phone_mobile/);
+ assert.match(page,/histórico de pedidos ainda não está integrado/i);
+ assert.doesNotMatch(page,/service_role|sb_secret_|localStorage\.setItem\(["']password/i);
 });
