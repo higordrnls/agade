@@ -8,6 +8,9 @@ test("ordem só é paga após reconsulta coerente (id, referência, valor e test
   const sample={id:expected.providerId,external_reference:expected.reference,total_amount:"129.00",
     total_paid_amount:"129.00",status:"processed",status_detail:"accredited",live_mode:false};
   assert.equal(verifiedOrderOutcome(sample,expected),"paid");
+  const { live_mode: _ignored, ...withoutLiveMode } = sample;
+  assert.equal(verifiedOrderOutcome(withoutLiveMode,expected),"paid");
+  assert.throws(() => verifiedOrderOutcome({ ...sample, id: "ORD12345678900" }, { ...expected, providerId: "ORD12345678900" }));
   assert.equal(verifiedOrderOutcome({...sample,status:"processing"},expected),"pending");
   assert.equal(verifiedOrderOutcome({...sample,status:"canceled"},expected),"cancelled");
   assert.equal(verifiedOrderOutcome({...sample,total_paid_amount:"0.00"},expected),"pending");
