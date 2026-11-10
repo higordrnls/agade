@@ -49,7 +49,7 @@ export default function Account(){
  return <div className="bg-[#fbf1e7] min-h-[70vh] text-[#181818] py-16 md:py-24 px-6">
   <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 gap-12 lg:gap-24">
    <div>
-    <p className="text-xs tracking-[.2em] text-[#24469a] uppercase font-semibold mb-7">AGADE / SUA CONTA</p>
+    <p className="text-xs tracking-[.2em] text-[#a95e46] uppercase font-semibold mb-7">AGADE / SUA CONTA</p>
     <h1 className="text-5xl md:text-6xl leading-[1.05]" style={{fontFamily:"var(--font-serif)"}}>Seu espaço, seu olhar.</h1>
     <p className="mt-7 text-[#555] leading-relaxed max-w-md">Entre com seu e-mail para acessar sua conta. Quando a loja começar a operar, você poderá acompanhar seus pedidos por aqui.</p>
     <div className="mt-10 border-t border-black/10 pt-7 flex items-start gap-3 text-sm text-[#666]"><LockKeyhole size={19} className="shrink-0"/> Não pedimos senha nesta etapa. O acesso por link de e-mail depende do Supabase Auth estar configurado.</div>
@@ -66,7 +66,7 @@ export default function Account(){
        <div><label htmlFor="account-email" className="text-xs uppercase tracking-[.14em] font-medium">Seu e-mail</label>
         <input id="account-email" type="email" required autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)}
          className="mt-2 block w-full border border-black/25 px-4 py-4 outline-offset-2 focus:border-[#102e90]" placeholder="voce@exemplo.com"/></div>
-       <button type="submit" disabled={status==="sending"} className="w-full bg-[#24469a] text-white px-6 py-4 uppercase tracking-[.14em] text-xs font-semibold disabled:opacity-50">
+       <button type="submit" disabled={status==="sending"} className="w-full bg-[#a95e46] text-white px-6 py-4 uppercase tracking-[.14em] text-xs font-semibold disabled:opacity-50">
         {status==="sending"?"Solicitando…":"Receber link de acesso"}
        </button>
        {(status==="sent"||status==="error")&&<p role="status" className="text-sm leading-relaxed">{message}</p>}
