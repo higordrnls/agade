@@ -29,7 +29,7 @@ export default function Product(){
   </div>
   {loading && <p className="max-w-[1480px] mx-auto px-6 sm:px-10 py-24" role="status">Carregando detalhes do modelo…</p>}
   {!loading&&!product&&<div className="max-w-[1480px] mx-auto px-6 sm:px-10 py-24">
-    <p className="text-xs uppercase tracking-[.2em] text-[#102e90] mb-5">AGADE / SELEÇÃO</p>
+    <p className="text-xs uppercase tracking-[.2em] text-[#a54e39] mb-5">AGADE / SELEÇÃO</p>
     <h1 className="text-4xl md:text-6xl" style={{fontFamily:"var(--font-serif)"}}>{data.status==="error"?"Seleção indisponível.":"Este modelo não está disponível."}</h1>
     <p className="text-[#666] mt-6">Somente modelos comerciais publicados e disponíveis podem ser consultados nesta página.</p>
     <Link to="/loja" className="mt-10 inline-flex items-center gap-3 border-b border-black pb-2">Voltar à seleção <ArrowLeft size={18}/></Link>
@@ -53,21 +53,21 @@ export default function Product(){
      <div className="flex flex-wrap gap-3">
       {product.variants.map(v=><button type="button" key={v.variant_id} onClick={()=>setSelected(v.variant_id)}
        aria-pressed={variant.variant_id===v.variant_id}
-       className={`border px-4 py-3 text-xs uppercase tracking-wider min-h-12 ${variant.variant_id===v.variant_id?"border-[#102e90] bg-[#eef1ff]":"border-black/20 hover:border-black"}`}>
+       className={`border px-4 py-3 text-xs uppercase tracking-wider min-h-12 ${variant.variant_id===v.variant_id?"border-[#a54e39] bg-[#f8e6d9]":"border-black/20 hover:border-black"}`}>
        {v.color_name}
       </button>)}
      </div>
     </fieldset>
     <div className="mt-8 border-y border-black/15 py-5 flex items-center gap-3 text-sm"><Check size={18} className="text-[#102e90]"/><span>Variação disponível na seleção</span></div>
     <button type="button" onClick={()=>cart.add({productId:product.product_id,variantId:variant.variant_id,sku:variant.sku,name:product.name,color:variant.color_name,priceCents:variant.price_cents,imageUrl:product.hero_image_url,quantity:1,stockSnapshot:variant.sellable_stock})}
-      className="mt-8 w-full flex items-center justify-center gap-3 bg-[#102e90] hover:bg-[#0b216b] text-white py-4 px-6 text-xs uppercase tracking-[.16em] font-semibold">
+      className="mt-8 w-full flex items-center justify-center gap-3 bg-[#a54e39] hover:bg-[#0b216b] text-white py-4 px-6 text-xs uppercase tracking-[.16em] font-semibold">
       <ShoppingBag size={18}/> Guardar na sacola de seleção
     </button>
     <p className="text-xs text-[#666] mt-3">A sacola é uma lista local de interesse. Não cria pedidos, reservas nem cobranças.</p>
-    <div className="mt-8 bg-[#f2f3f7] p-6">
-     <p className="uppercase text-xs tracking-[.17em] font-semibold">Compra online em preparação</p>
-     <p className="text-sm text-[#555] leading-relaxed mt-3">Estamos concluindo a integração de pagamentos e entrega. Ainda não é possível finalizar pedidos pela loja.</p>
-     <Link to="/ajuda" className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-[.13em] underline underline-offset-4">Como funcionará a compra <ArrowRight size={15}/></Link>
+    <div className="mt-8 bg-[#f6e7da] p-6">
+     <p className="uppercase text-xs tracking-[.17em] font-semibold">Compra online em preparação · frete por conta do cliente</p>
+     <p className="text-sm text-[#555] leading-relaxed mt-3">Estamos concluindo a integração de pagamentos e entrega. O frete será calculado e pago pelo cliente. Pretendemos oferecer parcelamento, com condições exibidas antes da compra.</p>
+     <Link to="/ajuda" className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-[.13em] underline underline-offset-4">Trocas, devoluções e direitos <ArrowRight size={15}/></Link>
     </div>
     <div className="mt-12">
      <h2 className="text-2xl font-normal mb-6" style={{fontFamily:"var(--font-serif)"}}>Detalhes do modelo</h2>
