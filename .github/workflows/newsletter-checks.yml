@@ -4,8 +4,11 @@ on:
   pull_request:
     paths:
       - 'supabase/migrations/20261110_newsletter_interest.sql'
+      - 'supabase/migrations/20261113_newsletter_unsubscribe.sql'
+      - 'supabase/config.toml'
       - 'supabase/tests/newsletter_security.sql'
       - 'supabase/functions/newsletter-subscribe/**'
+      - 'supabase/functions/newsletter-unsubscribe/**'
       - '.github/workflows/newsletter-checks.yml'
   workflow_dispatch:
 
@@ -17,7 +20,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: deno check supabase/functions/newsletter-subscribe/index.ts
+      - run: deno check supabase/functions/newsletter-subscribe/index.ts supabase/functions/newsletter-unsubscribe/index.ts
 
   database:
     runs-on: ubuntu-latest
@@ -50,5 +53,7 @@ jobs:
           psql -v ON_ERROR_STOP=1 -c "CREATE ROLE service_role NOLOGIN;"
       - name: Apply newsletter migration
         run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261110_newsletter_interest.sql
-      - name: Test privacy and rate limiting
+      - name: Apply unsubscribe migration
+        run: psql -v ON_ERROR_STOP=1 -f supabase/migrations/20261113_newsletter_unsubscribe.sql
+      - name: Test privacy, unsubscribe and rate limiting
         run: psql -v ON_ERROR_STOP=1 -f supabase/tests/newsletter_security.sql

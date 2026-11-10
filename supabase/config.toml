@@ -1,0 +1,8 @@
+# Authenticated app requests remain protected by Supabase Auth.
+# These two public newsletter entrypoints validate origins and signed payloads.
+# Deploy their code only after applying the SQL migrations and setting secrets.
+[functions.newsletter-subscribe]
+verify_jwt = false
+
+[functions.newsletter-unsubscribe]
+verify_jwt = false

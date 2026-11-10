@@ -40,4 +40,23 @@ begin
  end;
  if not blocked then raise exception 'Rate limit não bloqueou quinta tentativa'; end if;
 end $$;
+-- Unsubscribe RPC is service-only and idempotent. Test on isolated CI database.
+do $$
+begin
+ if has_function_privilege('anon','public.unsubscribe_newsletter_interest(text)','EXECUTE') or
+    has_function_privilege('authenticated','public.unsubscribe_newsletter_interest(text)','EXECUTE') then
+  raise exception 'Descadastro indevidamente acessível ao visitante';
+ end if;
+end $$;
+select public.unsubscribe_newsletter_interest('pessoa.exemplo@exemplo.com');
+select public.unsubscribe_newsletter_interest('pessoa.exemplo@exemplo.com');
+do $$
+begin
+ if exists (select 1 from public.newsletter_interest where email='pessoa.exemplo@exemplo.com' and active) then
+  raise exception 'Descadastro não revogou consentimento';
+ end if;
+ if not exists (select 1 from public.newsletter_interest where email='pessoa.exemplo@exemplo.com' and not active) then
+  raise exception 'Registro deveria continuar guardado como inativo';
+ end if;
+end $$;
 select 'PASS: consentimento privado, validação e rate limit' as result;
