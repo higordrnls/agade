@@ -111,3 +111,23 @@ test('cart drawer traps and restores keyboard focus',()=>{
  assert.match(page,/previousFocus\?\.focus\(\)/);
  assert.match(page,/aria-modal="true"/);
 });
+
+test('login explicitly gates activation and supports refresh/logout without exposing secrets',()=>{
+ const auth=src('pages/Account.tsx');
+ assert.match(auth,/VITE_AGADE_AUTH_ENABLED/);
+ assert.match(auth,/grant_type=refresh_token/);
+ assert.match(auth,/auth\/v1\/logout/);
+ assert.match(auth,/history\.replaceState/);
+ assert.doesNotMatch(auth,/service_role|sb_secret_/i);
+});
+test('newsletter cannot activate until unsubscribe endpoint is configured',()=>{
+ const n=src('components/Newsletter.tsx');
+ assert.match(n,/VITE_AGADE_NEWSLETTER_UNSUBSCRIBE_ENDPOINT/);
+ assert.match(n,/VITE_AGADE_NEWSLETTER_ENABLED/);
+ assert.match(n,/consent/);
+ assert.match(n,/Ainda não estamos recebendo inscrições por e-mail/);
+ const unsub=src('pages/NewsletterUnsubscribe.tsx');
+ assert.match(unsub,/Confirmar descadastro/);
+ assert.match(unsub,/newsletter-unsubscribe/);
+ assert.match(src('routes.ts'),/cancelar-newsletter/);
+});
