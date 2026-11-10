@@ -11,9 +11,9 @@ const faqs=[
 ];
 export default function Help(){
  return <div className="bg-[#fffaf2] min-h-screen text-[#24372d]">
-  <header className="bg-[#e5e9dc] px-6 sm:px-10 py-16 md:py-24">
+  <header className="bg-[#f0dfcf] px-6 sm:px-10 py-16 md:py-24">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs text-[#24469a] tracking-[.2em] uppercase mb-6 font-semibold">AGADE / ATENDIMENTO</p>
+    <p className="text-xs text-[#a95e46] tracking-[.2em] uppercase mb-6 font-semibold">AGADE / ATENDIMENTO</p>
     <h1 className="text-5xl sm:text-7xl tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Tudo às claras.</h1>
     <p className="text-[#555] leading-relaxed mt-6 max-w-2xl">Informação sobre produtos, compras e atendimento. Estamos preparando a abertura da loja — algumas funções ainda não estão disponíveis.</p>
    </div>
@@ -41,7 +41,7 @@ export default function Help(){
     </div>
    </section>
    <div className="mt-14 flex flex-wrap gap-5 text-sm"><Link className="underline underline-offset-4" to="/politicas">Leia a política completa de trocas e devoluções</Link><a className="inline-flex items-center gap-2 underline underline-offset-4" href="mailto:atendimento@agade.com"><Mail size={17}/> atendimento@agade.com</a></div>
-   <div className="mt-20 bg-[#24469a] text-white p-10 sm:p-14 flex flex-col md:flex-row justify-between gap-8 md:items-end">
+   <div className="mt-20 bg-[#a95e46] text-white p-10 sm:p-14 flex flex-col md:flex-row justify-between gap-8 md:items-end">
     <div><p className="text-xs uppercase tracking-[.2em] text-white/70 mb-6">PRECISA EXPLORAR MAIS?</p>
       <h2 className="text-3xl sm:text-5xl" style={{fontFamily:"var(--font-serif)"}}>Conheça a seleção.</h2></div>
     <Link to="/loja" className="inline-flex gap-4 border-b border-white pb-3 self-start md:self-end uppercase tracking-[.16em] text-xs">Óculos de sol <ArrowRight size={17}/></Link>
