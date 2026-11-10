@@ -25,7 +25,7 @@ export default function CartDrawer(){
      {items.length===0?<div className="py-20 text-center">
       <p className="text-2xl mb-4" style={{fontFamily:"var(--font-serif)"}}>Sua sacola está vazia.</p>
       <p className="text-sm text-[#666] mb-7">Escolha seus modelos favoritos para guardar nesta seleção.</p>
-      <Link to="/loja" onClick={()=>setOpen(false)} className="inline-flex bg-[#a54f39] text-white py-3 px-7 uppercase tracking-wider text-xs">Explorar óculos</Link>
+      <Link to="/loja" onClick={()=>setOpen(false)} className="inline-flex bg-[#24469a] text-white py-3 px-7 uppercase tracking-wider text-xs">Explorar óculos</Link>
      </div>:<ul className="divide-y divide-black/10">
       {items.map(item=><li key={item.variantId} className="py-6 flex gap-4">
        <div className="w-24 h-28 shrink-0 bg-[#f2f3f7] flex items-center justify-center overflow-hidden">
@@ -49,7 +49,7 @@ export default function CartDrawer(){
     {items.length>0&&<footer className="border-t border-black/15 px-6 py-6">
      <div className="flex justify-between font-semibold mb-3"><span>Subtotal estimado</span><span>{money(total)}</span></div>
      <p className="text-xs leading-relaxed text-[#666] mb-5">Estes preços são apenas uma referência da seleção. Valor, estoque e frete serão conferidos no servidor antes de futuras compras.</p>
-     <div className="w-full bg-[#102e90]/15 text-[#a54f39] py-4 px-5 text-center uppercase tracking-[.12em] text-xs font-semibold">Checkout ainda indisponível</div>
+     <div className="w-full bg-[#102e90]/15 text-[#24469a] py-4 px-5 text-center uppercase tracking-[.12em] text-xs font-semibold">Checkout ainda indisponível</div>
      <button onClick={clear} type="button" className="mt-5 text-xs text-[#666] underline underline-offset-4">Limpar sacola</button>
     </footer>}
    </aside>
