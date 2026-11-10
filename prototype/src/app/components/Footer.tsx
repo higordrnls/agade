@@ -1,6 +1,7 @@
 import { Link } from "react-router";
+import Newsletter from "./Newsletter";
 export default function Footer(){
- return <footer className="bg-[#111] text-white px-6 sm:px-10 pt-20 pb-8">
+ return <><Newsletter/><footer className="bg-[#111] text-white px-6 sm:px-10 pt-20 pb-8">
   <div className="max-w-[1440px] mx-auto">
    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 pb-20 border-b border-white/25">
     <div className="lg:col-span-2">
@@ -12,6 +13,9 @@ export default function Footer(){
      <Link to="/loja" className="hover:underline underline-offset-4">Óculos de sol</Link>
      <Link to="/sobre" className="hover:underline underline-offset-4">A AGADE</Link>
      <Link to="/" className="hover:underline underline-offset-4">Página inicial</Link>
+     <Link to="/conta" className="hover:underline underline-offset-4">Minha conta</Link>
+     <Link to="/guia" className="hover:underline underline-offset-4">Guia de escolha</Link>
+     <Link to="/ajuda" className="hover:underline underline-offset-4">Dúvidas e atendimento</Link>
      <p className="mt-5 text-white/60 leading-relaxed">Uma marca independente de curadoria de óculos solares. Primeira seleção em preparação.</p>
     </div>
    </div>
@@ -20,5 +24,5 @@ export default function Footer(){
     <p>Compra online ainda não habilitada · Uberlândia, MG</p>
    </div>
   </div>
- </footer>;
+ </footer></>;
 }

@@ -71,17 +71,17 @@ export default function Storefront(){
    {!loading && state.status==="ready" && state.products.length>0 && products.length===0 && <p role="status" className="py-16 text-[#555]">Nenhum modelo encontrado para “{search}”. Tente outra busca.</p>}
    {!loading && state.status==="ready" && products.length>0 && <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-7 gap-y-14">
     {products.map(p=><article key={p.product_id} className="group">
-     <div className="relative aspect-[3/4] bg-[#f3f3f2] overflow-hidden flex items-center justify-center">
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} aria-label={`Ver detalhes de ${p.name}`} className="relative block aspect-[3/4] bg-[#f3f3f2] overflow-hidden flex items-center justify-center">
       {p.hero_image_url?<img src={p.hero_image_url} alt={`Óculos ${p.name}`} loading="lazy" decoding="async" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"/>:
         <span className="text-[#777] text-xs">Fotografia em preparação</span>}
       {p.collection_name&&<span className="absolute top-4 left-4 text-[10px] tracking-[.12em] uppercase bg-white px-3 py-2">{p.collection_name}</span>}
-     </div>
+     </Link>
      <div className="flex justify-between items-start gap-3 pt-4">
-      <div><h3 className="font-semibold text-sm sm:text-base">{p.name}</h3><p className="text-xs text-[#666] mt-1">{p.variants.map(v=>v.color_name).join(" · ")}</p></div>
+      <div><h3 className="font-semibold text-sm sm:text-base"><Link to={`/produto/${encodeURIComponent(p.slug)}`} className="hover:underline underline-offset-4">{p.name}</Link></h3><p className="text-xs text-[#666] mt-1">{p.variants.map(v=>v.color_name).join(" · ")}</p></div>
       <span className="text-sm font-medium whitespace-nowrap">{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span>
      </div>
      {p.editorial_description&&<p className="text-sm text-[#555] leading-relaxed mt-3">{p.editorial_description}</p>}
-     <p className="mt-4 text-[11px] uppercase tracking-[.12em] text-[#777]">Compra online em preparação</p>
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} className="mt-4 inline-flex text-[11px] uppercase tracking-[.12em] text-[#102e90] border-b border-[#102e90] pb-1">Ver detalhes e variações <ArrowRight size={14} className="ml-2"/></Link>
     </article>)}
    </div>}
   </section>

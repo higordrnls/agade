@@ -1,13 +1,17 @@
 import { Link, useLocation } from "react-router";
-import { Menu, Search, X, ArrowUpRight } from "lucide-react";
+import { Menu, Search, X, ArrowUpRight, UserRound, CircleHelp, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const links = [
   {to:"/loja",label:"ÓCULOS DE SOL"},
   {to:"/sobre",label:"A AGADE"},
+  {to:"/guia",label:"GUIA DE ESCOLHA"},
+  {to:"/ajuda",label:"AJUDA"},
 ];
 export default function Navigation() {
   const {pathname}=useLocation();
+  const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
   const [searchOpen,setSearchOpen]=useState(false);
@@ -27,6 +31,9 @@ export default function Navigation() {
       <div className="flex items-center justify-end gap-3 sm:gap-5 lg:w-[35%]">
         <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="p-2 focus-visible:outline-2">
           <Search size={21} strokeWidth={1.6}/></button>
+        <button type="button" aria-label={`Abrir sacola com ${cart.quantity} itens`} onClick={()=>cart.setOpen(true)} className="p-2 relative hover:text-[#102e90]"><ShoppingBag size={21} strokeWidth={1.6}/>{cart.quantity>0&&<span className="absolute -top-1 -right-1 bg-[#102e90] text-white text-[9px] min-w-4 h-4 rounded-full flex items-center justify-center">{cart.quantity}</span>}</button>
+        <Link to="/conta" aria-label="Minha conta" className="p-2 hover:text-[#102e90]"><UserRound size={21} strokeWidth={1.6}/></Link>
+        <Link to="/ajuda" aria-label="Ajuda" className="hidden sm:inline-flex p-2 hover:text-[#102e90]"><CircleHelp size={20} strokeWidth={1.6}/></Link>
         <Link to="/loja" className="hidden sm:inline-flex items-center gap-1 text-[11px] uppercase tracking-[.15em] hover:text-[#102e90]">
           Ver seleção <ArrowUpRight size={14}/></Link>
       </div>

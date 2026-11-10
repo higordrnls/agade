@@ -47,7 +47,7 @@ export default function Home(){
     </Link>
    </div>
    {featured.length>0 ? <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
-    {featured.map(p=><Link to={`/loja?busca=${encodeURIComponent(p.name)}`} className="group" key={p.product_id}>
+    {featured.map(p=><Link to={`/produto/${encodeURIComponent(p.slug)}`} className="group" key={p.product_id}>
      <div className="aspect-[3/4] bg-[#f3f3f1] overflow-hidden flex justify-center items-center">
       {p.hero_image_url ? <img src={p.hero_image_url} alt={`Óculos ${p.name}`} className="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500" loading="lazy"/> :
        <span className="text-xs text-[#888]">Imagem em preparação</span>}
@@ -82,6 +82,21 @@ export default function Home(){
      <p className="mt-8 mb-10 text-white/85 max-w-md text-base leading-relaxed">A AGADE nasce em Uberlândia com uma proposta simples: transformar a escolha dos óculos em uma experiência de descoberta, identidade e atitude.</p>
      <Link to="/sobre" className="inline-flex items-center gap-3 border-b border-white pb-2 text-xs tracking-[.16em] uppercase font-semibold">Conheça a AGADE <ArrowRight size={18}/></Link>
     </div>
+  </section>
+  <section className="px-6 sm:px-10 py-16 md:py-24 bg-[#f1f3f8] text-[#171717]">
+   <div className="max-w-[1450px] mx-auto grid md:grid-cols-12 gap-9">
+    <div className="md:col-span-4"><p className="text-[11px] uppercase tracking-[.2em] text-[#102e90] mb-6">O OLHAR NOS DETALHES</p>
+     <h2 className="text-4xl sm:text-5xl leading-tight" style={{fontFamily:"var(--font-serif)"}}>Escolher também é entender.</h2></div>
+    <div className="md:col-span-8 grid sm:grid-cols-3 gap-8">
+     {[{n:"01",title:"Forma",txt:"Uma silhueta que tenha a ver com você."},
+       {n:"02",title:"Conforto",txt:"Medidas e ajuste fazem toda a diferença."},
+       {n:"03",title:"Lentes",txt:"Proteção UV, polarização e características claras."}].map(x=><div key={x.n} className="border-t border-black/20 pt-5">
+       <span className="text-xs tracking-[.2em] text-[#102e90]">{x.n}</span>
+       <h3 className="text-xl font-semibold mt-6 mb-3">{x.title}</h3><p className="text-sm leading-relaxed text-[#555]">{x.txt}</p>
+      </div>)}
+     <Link to="/guia" className="sm:col-span-3 text-xs tracking-[.16em] uppercase font-semibold inline-flex gap-3 items-center border-b border-black pb-3 justify-self-start">Conheça o guia de escolha <ArrowRight size={16}/></Link>
+    </div>
+   </div>
   </section>
   <section className="py-16 px-6 sm:px-10 bg-[#f6f6f5] text-center">
    <p className={eyebrow+" text-[#102e90] mb-4"}>AGADE EYEWEAR</p>
