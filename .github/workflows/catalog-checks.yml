@@ -38,6 +38,16 @@ jobs:
       - name: Test sandbox payment contract and webhook security
         run: node --experimental-strip-types --test supabase/tests/checkout.test.mjs supabase/tests/reconciliation.test.mjs
 
+  edge_types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check Edge Functions
+        run: deno check supabase/functions/checkout-sandbox/index.ts supabase/functions/mp-webhook-sandbox/index.ts supabase/functions/reconcile-sandbox/index.ts
+
   database:
     runs-on: ubuntu-latest
     services:
