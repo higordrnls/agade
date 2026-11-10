@@ -10,9 +10,9 @@ export default function About(){
     <p className="text-xs tracking-[.2em] uppercase font-semibold text-[#a95e46]">AGADE / A MARCA</p>
     <div className="my-14 lg:my-10">
      <h1 className="text-[clamp(4.2rem,8vw,9rem)] tracking-[-.07em] leading-[.89]" style={serif}>O olhar<br/><em className="text-[#a95e46]">é seu.</em></h1>
-     <p className="max-w-md mt-8 text-lg leading-relaxed text-[#6c574e]">A AGADE nasce da vontade de transformar um acessório em expressão: com curadoria, liberdade e personalidade brasileira.</p>
+     <p className="max-w-md mt-8 text-lg leading-relaxed text-[#6c574e]">Estamos montando uma marca de óculos de sol do nosso jeito. Ainda no começo, com muitas referências na cabeça e a primeira seleção sendo escolhida.</p>
     </div>
-    <p className="text-[11px] tracking-[.18em] uppercase text-[#775f54]">PERSPECTIVAS, NÃO PADRÕES</p>
+    <p className="text-[11px] tracking-[.18em] uppercase text-[#775f54]">POR ENQUANTO, TUDO COMEÇA COM UMA BOA ESCOLHA</p>
    </div>
    <div className="relative min-h-[470px] lg:min-h-[700px] overflow-hidden bg-[#647357]">
     <img src={photo(9485735,1500)} alt="Fotografia editorial ilustrativa de pessoa com óculos e roupas coloridas cercada por vegetação" className="absolute inset-0 w-full h-full object-cover" />
@@ -26,10 +26,10 @@ export default function About(){
    </figure>
    <div>
     <p className="text-xs tracking-[.2em] uppercase text-[#a95e46] font-semibold mb-6">UM JEITO BRASILEIRO DE VER</p>
-    <h2 className="text-[clamp(3rem,5.5vw,6rem)] leading-[1.02] tracking-[-.055em]" style={serif}>O que nos move não cabe numa única <em>cor.</em></h2>
+    <h2 className="text-[clamp(3rem,5.5vw,6rem)] leading-[1.02] tracking-[-.055em]" style={serif}>A gente repara nas <em>pequenas coisas.</em></h2>
     <div className="grid sm:grid-cols-2 gap-7 mt-10 leading-relaxed text-[#6c574e]">
      <p>A AGADE é uma marca independente de curadoria de óculos solares, com uma perspectiva brasileira. Estamos construindo nossa primeira seleção de peças para acompanhar diferentes estilos e rotinas.</p>
-     <p>Nosso compromisso é unir olhar atento ao design e informação verificável. Quando a seleção estiver pronta, cada modelo será apresentado com suas próprias fotografias e características técnicas confirmadas.</p>
+     <p>Ainda temos muito para construir. O que já sabemos é que queremos mostrar os produtos como eles realmente são, com boas fotos, medidas e informações sobre as lentes — sem promessas vazias.</p>
     </div>
     <Link to="/loja" className="mt-10 inline-flex min-h-12 items-center justify-between gap-7 px-6 py-3 rounded-full bg-[#a95e46] text-white text-sm hover:bg-[#8d4d39] transition-colors">Conheça a seleção <ArrowUpRight size={19}/></Link>
    </div>
@@ -40,8 +40,8 @@ export default function About(){
    </div>
    <div className="px-8 sm:px-12 lg:px-20 py-16 md:py-24 flex flex-col justify-center items-start">
     <p className="text-xs uppercase tracking-[.2em] text-[#a95e46] mb-6 font-semibold">EXPRESSÃO EM MOVIMENTO</p>
-    <h2 className="text-[clamp(3.1rem,5.6vw,6.2rem)] leading-[1.02] tracking-[-.05em]" style={serif}>Cada rosto.<br/>Seu próprio <em>sol.</em></h2>
-    <p className="text-[#6c574e] leading-relaxed mt-8 mb-9 max-w-md">Uma curadoria não é sobre definir quem você deve ser. É sobre ajudar a encontrar aquilo que combina com o jeito que você já é.</p>
+    <h2 className="text-[clamp(3.1rem,5.6vw,6.2rem)] leading-[1.02] tracking-[-.05em]" style={serif}>Um par de óculos.<br/><em>Muitos jeitos de usar.</em></h2>
+    <p className="text-[#6c574e] leading-relaxed mt-8 mb-9 max-w-md">Não existe uma armação certa para todo mundo. Queremos encontrar modelos que deem vontade de experimentar e levar para a vida real.</p>
     <Link to="/guia" className="inline-flex items-center gap-3 min-h-12 text-sm border-b border-[#785254] text-[#785254]">Descubra nosso guia <ArrowUpRight size={18}/></Link>
    </div>
   </section>
