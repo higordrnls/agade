@@ -20,7 +20,8 @@ export default function Product(){
  useEffect(()=>{let active=true;loadStorefrontCatalog().then(r=>{if(active){setData(r);setLoading(false)}});return()=>{active=false}},[]);
  const product:StorefrontProduct|undefined=data.products.find(p=>p.slug===slug);
  const variant=product?.variants.find(v=>v.variant_id===selected)??product?.variants[0];
- return <div className="bg-white text-[#171717] min-h-[65vh]">
+ const available=!!variant&&variant.sellable_stock>0;
+ return <div className="bg-[#fffaf2] text-[#493630] min-h-[65vh]">
   <div className="max-w-[1480px] mx-auto px-6 sm:px-10 py-7">
    <nav aria-label="Caminho de navegação" className="flex gap-2 items-center text-[11px] uppercase tracking-[.12em] text-[#666]">
     <Link to="/" className="hover:underline">Início</Link><span>/</span><Link to="/loja" className="hover:underline">Óculos de sol</Link>
@@ -36,7 +37,7 @@ export default function Product(){
    </div>}
   {!loading&&product&&variant&&<div className="max-w-[1480px] mx-auto px-6 sm:px-10 pb-24 grid lg:grid-cols-2 gap-10 lg:gap-20">
    <div className="lg:sticky lg:top-36 lg:self-start">
-    <div className="relative aspect-[4/5] bg-[#f3f3f3] flex items-center justify-center overflow-hidden">
+    <div className="relative aspect-[4/5] rounded-2xl bg-[#f3e8d9] flex items-center justify-center overflow-hidden">
      {product.hero_image_url?<img src={product.hero_image_url} alt={`Óculos ${product.name}, fotografia do produto`} className="w-full h-full object-contain" />:
      <div className="text-center text-[#777] text-sm">Fotografia do produto em preparação</div>}
      {product.collection_name&&<span className="absolute left-5 top-5 text-[10px] uppercase tracking-[.2em] bg-white px-4 py-2">{product.collection_name}</span>}
@@ -53,18 +54,19 @@ export default function Product(){
      <div className="flex flex-wrap gap-3">
       {product.variants.map(v=><button type="button" key={v.variant_id} onClick={()=>setSelected(v.variant_id)}
        aria-pressed={variant.variant_id===v.variant_id}
-       className={`border px-4 py-3 text-xs uppercase tracking-wider min-h-12 ${variant.variant_id===v.variant_id?"border-[#a54e39] bg-[#f8e6d9]":"border-black/20 hover:border-black"}`}>
+       disabled={v.sellable_stock<=0} title={v.sellable_stock<=0?"Variação indisponível":undefined}
+       className={`rounded-xl border px-4 py-3 text-xs uppercase tracking-wider min-h-12 disabled:opacity-40 disabled:cursor-not-allowed ${variant.variant_id===v.variant_id?"border-[#a95e46] bg-[#f8e6d9]":"border-black/20 hover:border-[#a95e46]"}`}>
        {v.color_name}
       </button>)}
      </div>
     </fieldset>
-    <div className="mt-8 border-y border-black/15 py-5 flex items-center gap-3 text-sm"><Check size={18} className="text-[#102e90]"/><span>Variação disponível na seleção</span></div>
-    <button type="button" onClick={()=>cart.add({productId:product.product_id,variantId:variant.variant_id,sku:variant.sku,name:product.name,color:variant.color_name,priceCents:variant.price_cents,imageUrl:product.hero_image_url,quantity:1,stockSnapshot:variant.sellable_stock})}
-      className="mt-8 w-full flex items-center justify-center gap-3 bg-[#a95e46] hover:bg-[#0b216b] text-white py-4 px-6 text-xs uppercase tracking-[.16em] font-semibold">
-      <ShoppingBag size={18}/> Guardar na sacola de seleção
+    <div className="mt-8 border-y border-black/15 py-5 flex items-center gap-3 text-sm" role="status"><Check size={18} className="text-[#a95e46]"/><span>{available?"Variação disponível para guardar na seleção":"Variação indisponível no momento"}</span></div>
+    <button type="button" disabled={!available} onClick={()=>cart.add({productId:product.product_id,variantId:variant.variant_id,sku:variant.sku,name:product.name,color:variant.color_name,priceCents:variant.price_cents,imageUrl:product.hero_image_url,quantity:1,stockSnapshot:variant.sellable_stock})}
+      className="mt-8 w-full min-h-12 rounded-xl flex items-center justify-center gap-3 bg-[#a95e46] hover:bg-[#884735] disabled:opacity-45 disabled:cursor-not-allowed text-white py-4 px-6 text-xs uppercase tracking-[.12em] font-semibold">
+      <ShoppingBag size={18}/> {available?"Guardar na sacola de seleção":"Variação indisponível"}
     </button>
     <p className="text-xs text-[#666] mt-3">A sacola é uma lista local de interesse. Não cria pedidos, reservas nem cobranças.</p>
-    <div className="mt-8 bg-[#f6e7da] p-6">
+    <div className="mt-8 rounded-xl bg-[#f6e7da] p-6">
      <p className="uppercase text-xs tracking-[.17em] font-semibold">Compra online em preparação · frete por conta do cliente</p>
      <p className="text-sm text-[#555] leading-relaxed mt-3">Estamos concluindo a integração de pagamentos e entrega. O frete será calculado e pago pelo cliente. Pretendemos oferecer parcelamento, com condições exibidas antes da compra.</p>
      <Link to="/ajuda" className="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-[.13em] underline underline-offset-4">Trocas, devoluções e direitos <ArrowRight size={15}/></Link>
