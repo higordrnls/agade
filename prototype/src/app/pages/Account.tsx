@@ -99,6 +99,8 @@ async function fetchCustomer():Promise<CustomerProfile|null>{
  return rows.length?rows[0]:null;
 }
 async function saveCustomer(customer:CustomerProfile):Promise<void>{
+ if(!customer.gender_identity||!genderValues.has(customer.gender_identity))throw Error("Selecione uma opção de gênero para salvar a ficha.");
+ if(customer.gender_identity==="self_described"&&!(customer.gender_self_description||"").trim())throw Error("Descreva sua identidade de gênero.");
  const session=await currentSession();
  const user=await fetchProfile(session);
  const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?on_conflict=user_id`,{
@@ -257,7 +259,7 @@ export default function Account(){
  }
  async function chooseAvatar(file:File|undefined){
   if(!file||!customerProfileEnabled)return;
-  if(customer.full_name.trim().length<3){setProfileMessage("Preencha o nome completo e salve sua ficha antes de enviar a foto.");return;}
+  if(customer.full_name.trim().length<3||!customer.gender_identity||!genderValues.has(customer.gender_identity)||(customer.gender_identity==="self_described"&&!(customer.gender_self_description||"").trim())){setProfileMessage("Preencha nome e gênero e salve sua ficha antes de enviar a foto.");return;}
   setAvatarBusy(true);setProfileMessage("");
   try{
    const newPath=await uploadAvatar(file);
