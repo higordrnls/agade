@@ -1,0 +1,34 @@
+name: Main storefront checks
+
+on:
+  pull_request:
+    paths:
+      - 'prototype/**'
+      - '.github/workflows/main-storefront.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'prototype/**'
+      - '.github/workflows/main-storefront.yml'
+  workflow_dispatch:
+
+jobs:
+  storefront:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototype
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: prototype/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Audit public storefront boundaries
+        run: node --test tests/public-storefront.test.mjs
+      - name: Build
+        run: npm run build

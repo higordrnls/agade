@@ -1,87 +1,44 @@
 import { Link, useLocation } from "react-router";
-import { motion } from "motion/react";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, Search, X, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
+const links = [
+  {to:"/loja",label:"ÓCULOS DE SOL"},
+  {to:"/sobre",label:"A AGADE"},
+];
 export default function Navigation() {
-  const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/story", label: "Story" },
-    { path: "/technology", label: "Technology" },
-    { path: "/collection", label: "Collection" },
-    { path: "/sustainability", label: "Sustainability" },
-  ];
-
-  return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-black/10"
-    >
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl tracking-wider" style={{ fontFamily: 'var(--font-serif)' }}>
-              AGADE
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="relative text-sm tracking-wide transition-colors hover:text-accent"
-                style={{ fontFamily: 'var(--font-mono)' }}
-              >
-                {link.label}
-                {location.pathname === link.path && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden pt-6 pb-4 space-y-4"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsMenuOpen(false)}
-                className="block text-sm tracking-wide transition-colors hover:text-accent"
-                style={{ fontFamily: 'var(--font-mono)' }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </motion.div>
-        )}
+  const {pathname}=useLocation();
+  const [open,setOpen]=useState(false);
+  const [query,setQuery]=useState("");
+  const [searchOpen,setSearchOpen]=useState(false);
+  useEffect(()=>{setOpen(false);setSearchOpen(false)},[pathname]);
+  return <header className="fixed top-0 inset-x-0 z-50 bg-white text-[#181818]">
+    <div className="h-8 bg-[#102e90] text-white flex items-center justify-center px-4 text-[10px] sm:text-xs font-medium tracking-[.17em] uppercase">
+      AGADE · Uma nova perspectiva em óculos de sol
+    </div>
+    <nav aria-label="Navegação principal" className="h-20 relative max-w-[1600px] mx-auto border-b border-black/10 px-5 sm:px-10 flex justify-between items-center">
+      <div className="hidden lg:flex items-center gap-9 w-[35%]">
+        {links.map(l=><Link to={l.to} aria-current={pathname===l.to?"page":undefined} key={l.to}
+          className="text-[11px] tracking-[.13em] font-medium hover:text-[#102e90] transition-colors">{l.label}</Link>)}
       </div>
-    </motion.nav>
-  );
+      <button type="button" aria-label={open?"Fechar menu":"Abrir menu"} aria-expanded={open} aria-controls="agade-mobile-nav" onClick={()=>setOpen(!open)}
+        className="lg:hidden p-2 -ml-2 focus-visible:outline-2 focus-visible:outline-offset-2">{open?<X size={22}/>:<Menu size={22}/>}</button>
+      <Link to="/" aria-label="AGADE, página inicial" className="absolute left-1/2 -translate-x-1/2 text-3xl sm:text-[38px] tracking-[.12em] font-black leading-none" style={{fontFamily:"var(--font-sans)"}}>AGADE</Link>
+      <div className="flex items-center justify-end gap-3 sm:gap-5 lg:w-[35%]">
+        <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="p-2 focus-visible:outline-2">
+          <Search size={21} strokeWidth={1.6}/></button>
+        <Link to="/loja" className="hidden sm:inline-flex items-center gap-1 text-[11px] uppercase tracking-[.15em] hover:text-[#102e90]">
+          Ver seleção <ArrowUpRight size={14}/></Link>
+      </div>
+      {searchOpen && <form action="/loja" method="get" role="search" className="absolute top-full left-0 right-0 bg-white px-5 sm:px-10 py-4 border-b border-black/10 shadow-sm flex gap-3">
+        <label htmlFor="header-search" className="sr-only">Buscar por modelo ou cor</label>
+        <input id="header-search" autoFocus value={query} onChange={e=>setQuery(e.target.value)} name="busca"
+          placeholder="Busque por modelo ou cor" className="flex-1 min-w-0 border-b border-black/30 py-2 text-sm focus:outline-none focus:border-[#102e90]"/>
+        <button className="bg-[#102e90] text-white px-5 text-xs uppercase tracking-wider" type="submit">Buscar</button>
+      </form>}
+    </nav>
+    {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-white flex flex-col gap-5 shadow-sm">
+      {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
+    </div>}
+  </header>;
 }
