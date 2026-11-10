@@ -1,134 +1,203 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import { ArrowDownRight, ArrowRight, MoveUpRight } from "lucide-react";
-
-const reveal = {
-  initial: { opacity: 0, y: 22 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.18 },
-  transition: { duration: 0.65, ease: "easeOut" as const },
-};
-
-const eyebrow = "text-[10px] sm:text-xs uppercase tracking-[0.24em] font-medium";
+import { ArrowRight, Sparkles, Recycle, LineChart } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="overflow-hidden bg-[#eeeae2] text-[#24231f]">
-      <section className="relative isolate min-h-[calc(100svh-5rem)] border-b border-[#24231f]/20 flex flex-col">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{
-          background: "radial-gradient(ellipse at 77% 45%, #d5caba 0, transparent 47%), radial-gradient(ellipse at 15% 0%, #f7f3eb 0, transparent 57%)",
-        }} />
-        <div className="relative flex justify-between items-start px-6 md:px-12 pt-9">
-          <span className={eyebrow}>AGADE / EYEWEAR</span>
-          <span className={eyebrow + " text-right"}>Uma perspectiva brasileira<br />Uberlândia · MG</span>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/imagens/catalog/drop-01/05-horizonte.png"
+            alt="AGADE Eyewear"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-white" />
         </div>
 
-        <div className="relative flex-1 flex flex-col justify-center px-6 md:px-12 pt-16 pb-24">
-          <motion.div {...reveal} className="max-w-[1500px] mx-auto w-full">
-            <p className={eyebrow + " mb-7 text-[#716e65]"}>Óculos para quem vê de outro jeito — 001</p>
-            <h1 className="font-normal leading-[0.86] tracking-[-0.065em] text-[clamp(5rem,15.7vw,16rem)]" style={{ fontFamily: "var(--font-serif)" }}>
-              Outra<br /><span className="italic font-normal pl-[8vw]">forma</span> de<br />ver.
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-6xl md:text-8xl mb-6 text-white" style={{ fontFamily: 'var(--font-serif)' }}>
+              Vision Reimagined
             </h1>
-          </motion.div>
-          <div className="max-w-[1500px] mx-auto w-full flex flex-col md:flex-row md:items-end md:justify-between gap-8 mt-12">
-            <p className="text-base sm:text-lg leading-relaxed max-w-[355px]">
-              Curadoria de óculos solares com personalidade. Formas que acompanham sua maneira de estar no mundo.
+            <p className="text-xl md:text-2xl mb-4 text-white/90" style={{ fontFamily: 'var(--font-sans)' }}>
+              Where 3D Precision Meets Brazilian Luxury
             </p>
-            <Link to="/loja" className="group inline-flex items-center justify-between gap-14 bg-[#24231f] text-[#f4efe5] px-6 py-5 w-fit min-w-[230px] hover:bg-[#575042] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#24231f]">
-              <span className={eyebrow}>Explorar a seleção</span>
-              <ArrowDownRight className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" size={22} aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-        <div className="relative border-t border-[#24231f]/20 flex justify-between px-6 md:px-12 py-4">
-          <span className={eyebrow}>Curadoria independente</span>
-          <span className={eyebrow}>Deslize para descobrir ↓</span>
-        </div>
-      </section>
-
-      <section className="px-6 md:px-12 py-24 md:py-36 bg-[#e5dfd4]" aria-labelledby="perspectiva-title">
-        <motion.div {...reveal} className="max-w-[1450px] mx-auto grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-3">
-            <p className={eyebrow}>01 / Manifesto</p>
-          </div>
-          <div className="md:col-span-9">
-            <h2 id="perspectiva-title" className="text-[clamp(2.6rem,6.2vw,7.8rem)] leading-[1.02] tracking-[-0.045em] font-normal" style={{ fontFamily: "var(--font-serif)" }}>
-              O acessório muda.<br />A <em>perspectiva</em> também.
-            </h2>
-            <div className="mt-12 grid sm:grid-cols-2 gap-10 max-w-3xl">
-              <p className="text-base leading-relaxed">Acreditamos que escolher um óculos é escolher como você se apresenta. Sem exagero, sem fórmula pronta — com intenção.</p>
-              <p className="text-base leading-relaxed text-[#625e56]">A AGADE nasce em Uberlândia, Minas Gerais, com um olhar independente para design, identidade e cotidiano.</p>
+            <p className="text-sm md:text-base mb-12 text-white/70 tracking-widest uppercase" style={{ fontFamily: 'var(--font-mono)' }}>
+              CONCEPT PROJECT • DROP 01
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/collection"
+                className="px-8 py-4 bg-white text-black hover:bg-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <span style={{ fontFamily: 'var(--font-mono)' }}>Explore Collection</span>
+                <ArrowRight size={20} />
+              </Link>
+              <Link
+                to="/story"
+                className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300"
+              >
+                <span style={{ fontFamily: 'var(--font-mono)' }}>Our Story</span>
+              </Link>
             </div>
-            <Link to="/story" className="inline-flex items-center gap-3 mt-10 border-b border-[#24231f] pb-2 text-xs tracking-[0.18em] uppercase hover:gap-6 transition-all">
-              Conhecer o projeto <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="w-px h-16 bg-white/50"
+          />
         </motion.div>
       </section>
 
-      <section className="grid lg:grid-cols-2 bg-[#262722] text-[#f0ede4]" aria-labelledby="selecao-title">
-        <div className="min-h-[440px] md:min-h-[640px] flex flex-col justify-between p-8 md:p-14 lg:p-20">
-          <div>
-            <p className={eyebrow + " text-[#bdb8ae]"}>02 / Curadoria</p>
-            <h2 id="selecao-title" className="text-[clamp(3.8rem,7.6vw,8.6rem)] tracking-[-0.06em] leading-[0.98] mt-16" style={{ fontFamily: "var(--font-serif)" }}>
-              A forma<br />tem <em>voz.</em>
+      {/* Core Values Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl md:text-6xl mb-4" style={{ fontFamily: 'var(--font-serif)' }}>
+              Our Pillars
             </h2>
-          </div>
-          <div>
-            <p className="max-w-sm text-[#c6c2b8] leading-relaxed mb-9">Uma seleção em construção. A primeira edição comercial será apresentada com imagens, informações e disponibilidade verificadas.</p>
-            <Link to="/loja" className="inline-flex items-center gap-4 text-xs tracking-[0.2em] uppercase border-b border-[#e6e0d4] pb-3 hover:gap-7 transition-all">
-              Ver seleção <MoveUpRight size={17} aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-        <div className="relative min-h-[430px] md:min-h-[640px] bg-[#a8a396] overflow-hidden">
-          <div className="absolute inset-0 opacity-65" style={{
-            background: "linear-gradient(138deg, #e5ddcf 2%, #7e8576 46%, #3e4943 100%)",
-          }} aria-hidden="true" />
-          <div className="absolute inset-0 flex items-center justify-center px-10 text-center" aria-hidden="true">
-            <span className="text-[clamp(8rem,19vw,21rem)] italic text-[#eae6dc]/70 leading-none tracking-[-0.15em]" style={{ fontFamily: "var(--font-serif)" }}>a.</span>
-          </div>
-          <div className="absolute bottom-8 left-8 right-8 flex justify-between text-[#f7f4eb]">
-            <span className={eyebrow}>Estudo de forma / AGADE</span>
-            <span className={eyebrow}>001</span>
+            <p className="text-sm tracking-widest text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
+              INNOVATION • SUSTAINABILITY • IDENTITY
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                icon: <Sparkles size={40} />,
+                title: "Innovation",
+                description: "3D-printed eyewear explored through form, digital fabrication and material experimentation.",
+                link: "/technology",
+              },
+              {
+                icon: <Recycle size={40} />,
+                title: "Sustainability",
+                description: "A conceptual circular model connecting recycled material, digital fabrication and product design.",
+                link: "/sustainability",
+              },
+              {
+                icon: <LineChart size={40} />,
+                title: "Identity",
+                description: "A Brazilian design language built around architecture, identity and contemporary eyewear.",
+                link: "/story",
+              },
+            ].map((pillar, index) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="group cursor-pointer"
+              >
+                <Link to={pillar.link} className="block">
+                  <div className="mb-6 text-accent group-hover:scale-110 transition-transform duration-300">
+                    {pillar.icon}
+                  </div>
+                  <h3 className="text-3xl mb-4 group-hover:text-accent transition-colors" style={{ fontFamily: 'var(--font-serif)' }}>
+                    {pillar.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6" style={{ fontFamily: 'var(--font-sans)' }}>
+                    {pillar.description}
+                  </p>
+                  <span className="text-sm tracking-wide flex items-center gap-2 group-hover:gap-4 transition-all" style={{ fontFamily: 'var(--font-mono)' }}>
+                    Learn More <ArrowRight size={16} />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="px-6 md:px-12 py-24 md:py-32 bg-[#f3efe7]">
-        <div className="max-w-[1450px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-[#24231f]/20 pb-8">
-            <div>
-              <p className={eyebrow + " mb-5"}>03 / Laboratório de ideias</p>
-              <h2 className="text-[clamp(2.7rem,5.8vw,6.5rem)] leading-[1.02] tracking-[-0.04em]" style={{ fontFamily: "var(--font-serif)" }}>O que estamos <em>imaginando.</em></h2>
-            </div>
-            <p className="max-w-xs text-sm leading-relaxed text-[#6d695e]">Nossa pesquisa em fabricação digital e circularidade segue como projeto conceitual independente da seleção comercial.</p>
+      {/* Featured Image Section */}
+      <section className="py-24 bg-black text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src="/imagens/catalog/drop-01/12-marco-zero.png"
+                alt="AGADE Collection"
+                className="w-full h-[600px] object-cover"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-sm tracking-widest text-accent mb-4 block" style={{ fontFamily: 'var(--font-mono)' }}>
+                HIGH-TECH ENGINEERING
+              </span>
+              <h2 className="text-5xl mb-6" style={{ fontFamily: 'var(--font-serif)' }}>
+                Crafted with Precision
+              </h2>
+              <p className="text-lg text-white/80 mb-8 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
+                Each frame is a conceptual exploration of 3D-printed eyewear, combining expressive form, digital fabrication and a circular material narrative.
+              </p>
+              <Link
+                to="/collection"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white hover:bg-accent/80 transition-all"
+              >
+                <span style={{ fontFamily: 'var(--font-mono)' }}>View Collection</span>
+                <ArrowRight size={20} />
+              </Link>
+            </motion.div>
           </div>
-          <Link to="/collection" className="group block relative min-h-[360px] md:h-[620px] overflow-hidden bg-[#393c37] text-white">
-            <img src="/imagens/catalog/drop-01/05-horizonte.png" alt="Imagem de acervo conceitual da pesquisa AGADE em óculos" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-65 group-hover:scale-[1.025] transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20" aria-hidden="true" />
-            <div className="relative z-10 h-full min-h-[360px] flex flex-col justify-between p-7 md:p-12">
-              <span className={eyebrow}>Arquivo conceitual · Não disponível para compra</span>
-              <div className="flex items-end justify-between gap-5">
-                <div>
-                  <span className={eyebrow + " text-white/70"}>Pesquisa / Forma / Futuro</span>
-                  <h3 className="text-4xl md:text-7xl mt-3 tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>Arquivo AGADE</h3>
-                </div>
-                <ArrowRight size={30} aria-hidden="true" className="shrink-0 group-hover:translate-x-2 transition-transform" />
-              </div>
-            </div>
-          </Link>
         </div>
       </section>
-      <section className="bg-[#d5cfc3] px-6 md:px-12 py-20">
-        <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row justify-between md:items-end gap-8">
-          <div>
-            <p className={eyebrow + " mb-5"}>Próxima página / 004</p>
-            <h2 className="text-[clamp(3rem,7vw,8rem)] leading-none tracking-[-0.05em]" style={{ fontFamily: "var(--font-serif)" }}>Olhe de <em>novo.</em></h2>
+
+      {/* Stats Section */}
+      <section className="py-24 px-6 border-t border-black/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+            {[
+              { number: "12", label: "Concept Models", suffix: "" },
+              { number: "48", label: "Concept SKUs", suffix: "" },
+              { number: "3D", label: "Printing Language", suffix: "" },
+              { number: "4", label: "Colorways per Model", suffix: "" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-5xl md:text-6xl mb-2 text-accent" style={{ fontFamily: 'var(--font-serif)' }}>
+                  {stat.number}{stat.suffix}
+                </div>
+                <div className="text-xs tracking-widest uppercase text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
-          <Link to="/loja" className="inline-flex gap-8 justify-between items-center border-b border-[#24231f] pb-3 uppercase text-xs tracking-[0.2em] min-w-[235px] hover:gap-12 transition-all">
-            Explorar AGADE <ArrowRight size={19} aria-hidden="true" />
-          </Link>
         </div>
       </section>
     </div>
