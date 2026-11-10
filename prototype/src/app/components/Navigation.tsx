@@ -6,6 +6,7 @@ import { useCart } from "../context/CartContext";
 const links = [
   {to:"/loja",label:"ÓCULOS DE SOL"},
   {to:"/sobre",label:"A AGADE"},
+  {to:"/guia",label:"GUIA DE ESCOLHA"},
   {to:"/ajuda",label:"AJUDA"},
 ];
 export default function Navigation() {
