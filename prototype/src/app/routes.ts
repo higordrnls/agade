@@ -9,6 +9,7 @@ import Account from "./pages/Account";
 import Help from "./pages/Help";
 import Guide from "./pages/Guide";
 import Policies from "./pages/Policies";
+import Privacy from "./pages/Privacy";
 
 // Preserva os componentes antigos de pesquisa no código, mas os retira da navegação pública.
 export const router = createBrowserRouter([
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "ajuda", Component: Help },
       { path: "guia", Component: Guide },
       { path: "politicas", Component: Policies },
+      { path: "privacidade", Component: Privacy },
       { path: "sobre", Component: About },
       ...["story", "technology", "collection", "sustainability"].map(path => ({
         path, element: createElement(Navigate, { to: "/sobre", replace: true })
