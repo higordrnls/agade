@@ -25,7 +25,7 @@ alter table public.customer_profiles
  drop constraint if exists customer_state_code_check,
  add constraint customer_state_code_check check(state_code is null or state_code ~ '^[A-Z]{2}$'),
  drop constraint if exists customer_avatar_path_check,
- add constraint customer_avatar_path_check check(avatar_path is null or avatar_path ~ ('^' || user_id::text || '/avatar\\.(jpg|png|webp)$'));
+ add constraint customer_avatar_path_check check(avatar_path is null or avatar_path ~ ('^' || user_id::text || '/avatar\.(jpg|png|webp)$'));
 -- Armazenamento PRIVADO para retratos fornecidos voluntariamente.
 insert into storage.buckets (id,name,public,file_size_limit,allowed_mime_types)
 values ('customer-avatars','customer-avatars',false,2097152,array['image/jpeg','image/png','image/webp'])
