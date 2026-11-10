@@ -39,17 +39,16 @@ export default function Home(){
       <p className="mt-9 max-w-[390px] text-base sm:text-lg leading-[1.55] text-[#65524b]">Óculos de sol pra usar muito. Estamos escolhendo os primeiros modelos com calma — olhando forma, conforto e aqueles detalhes que fazem diferença.</p>
       <div className="mt-8"><TextLink to="/loja">Conheça a seleção</TextLink></div>
      </div>
-     <p className={typeLabel+" mt-12 text-[#846e62]"}>NOSSA PRIMEIRA SELEÇÃO ESTÁ GANHANDO FORMA</p>
+     <p className="mt-12 text-xs sm:text-sm text-[#846e62]">Estamos no começo. E queremos fazer isso com cuidado.</p>
     </div>
     <div className="relative min-h-[450px] sm:min-h-[540px] lg:min-h-0 overflow-hidden bg-[#60714e]">
      <EditorialPhoto id={9485735} priority alt="Fotografia editorial ilustrativa: pessoa com óculos de sol entre folhagens tropicais" position="center 35%"/>
      <div className="absolute inset-0 bg-gradient-to-t from-[#203521]/35 via-transparent to-transparent" aria-hidden="true"/>
-     <div className="absolute top-5 right-5 sm:top-10 sm:right-10 w-[104px] h-[104px] sm:w-[142px] sm:h-[142px] rounded-full bg-[#fff5e5] text-[#9a5946] flex flex-col items-center justify-center text-center rotate-[11deg] shadow-md">
-      <Sun size={24} strokeWidth={1.5} aria-hidden="true"/>
-      <span className="mt-1 text-[10px] sm:text-xs tracking-[.15em] uppercase font-bold">Estudo<br/>solar*</span>
+     <div className="absolute top-5 right-5 sm:top-9 sm:right-9 bg-[#fffaf2]/95 text-[#785254] px-4 py-2 rounded-full text-xs tracking-wide font-medium shadow-sm">
+      Referências da AGADE, por enquanto
      </div>
      <div className="absolute bottom-5 left-5 right-5 flex flex-wrap justify-between items-end gap-3 text-white">
-      <p className={typeLabel+" max-w-[230px] drop-shadow-md"}>*Fotografia editorial ilustrativa, sem relação com os produtos</p>
+      <p className={typeLabel+" max-w-[230px] drop-shadow-md"}>Fotografia ilustrativa, não é campanha oficial</p>
       <p className={typeLabel+" drop-shadow-md"}>Imagem de referência · Pexels</p>
      </div>
     </div>
@@ -81,7 +80,7 @@ export default function Home(){
       <figure className="aspect-[3/4.5] overflow-hidden rounded-[18px] sm:rounded-[28px] bg-[#bd8e6a]">
        <EditorialPhoto id={37428896} alt="Sombras de vegetação sobre parede terracota, referência de materialidade"/>
       </figure>
-      <p className={typeLabel+" mt-4 text-[#9b6553]"}>LUZ DO DIA · PAREDE QUENTE</p>
+      <p className="mt-4 text-xs text-[#9b6553]">Uma das coisas que a gente ama: o sol batendo na parede.</p>
      </div>
     </div>
    </div>
