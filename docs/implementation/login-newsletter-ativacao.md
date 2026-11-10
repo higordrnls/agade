@@ -63,3 +63,7 @@ Quando um provedor de e-mail/campanha estiver disponível, **o backend** precisa
 - E-mail de atendimento informado: `atendimento@agade.com`; confirmar que existe e recebe mensagens.
 - Contatos de clientes não podem ser misturados com login nem vendidos.
 - O backend antigo em Supabase permanece separado da hospedagem Cloudflare.
+
+## Rebuild após configurar variáveis públicas
+
+Em 10/11/2026, as variáveis públicas de Auth foram informadas como salvas na Cloudflare Pages. Este commit dispara uma nova compilação da branch `main` para que o Vite incorpore essas variáveis de build. Confirmar sucesso em Cloudflare → Deployments, e realizar teste controlado do login por e-mail antes de considerar a autenticação validada em produção.
