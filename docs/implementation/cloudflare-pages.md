@@ -54,3 +54,12 @@ Se configurar Auth por link, ajustar Supabase Authentication → URL Configurati
 - https://developers.cloudflare.com/pages/configuration/build-configuration/
 - https://developers.cloudflare.com/pages/configuration/redirects/
 - https://developers.cloudflare.com/pages/configuration/build-configuration/#build-environment-variables
+
+## Política de publicação econômica (Cloudflare Pages)
+- Publicar **somente** quando uma rodada de alterações estiver coesa e revisada.
+- A branch `main` segue como produção em `agade.pages.dev`; `feat/brasil-terracota-editorial` é uma prévia, sem checkout.
+- Para evitar builds em branches de trabalho intermediárias, configurar **Preview branch → Custom branches** e incluir apenas `feat/brasil-terracota-editorial` enquanto a revisão visual estiver aberta. Alternativamente, desativar previews e ligá-los só quando houver versão pronta.
+- O serviço gratuito tem limite de 500 builds por mês e 1 simultâneo, independente da cota de requests mostrada no painel Workers.
+- A opção de pular publicações via prefixo de mensagem `[CF-Pages-Skip]` permite preparar commits que não precisam de prévia. Usar apenas quando intencional.
+- Não confundir compilação GitHub Actions com build Cloudflare: são recursos separados.
+- Depois do deploy inicial, verificar o endereço real da prévia na aba Deployments do projeto e no check do GitHub PR #5; não inferir URL pelo nome da branch sem confirmação.
