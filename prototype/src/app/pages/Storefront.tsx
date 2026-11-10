@@ -22,9 +22,9 @@ export default function Storefront(){
   return entries;
  },[search,sort,state.products]);
  return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
-  <header className="bg-[#e5e9dc] px-6 sm:px-10 pt-16 pb-20">
+  <header className="bg-[#f0dfcf] px-6 sm:px-10 pt-16 pb-20">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#24469a] mb-6">AGADE / EDIÇÃO 01</p>
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[#a95e46] mb-6">AGADE / EDIÇÃO 01</p>
     <h1 className="text-[clamp(3.7rem,8vw,8rem)] leading-[.95] tracking-[-.055em] font-normal" style={{fontFamily:"var(--font-serif)"}}>Óculos para sentir o sol.</h1>
     <p className="mt-7 max-w-2xl text-base sm:text-lg text-[#41584a] leading-relaxed">Curadoria solar com personalidade. Formas, cores e histórias para quem vive de olhar aberto.</p>
    </div>
