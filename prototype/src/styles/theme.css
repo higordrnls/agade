@@ -2,19 +2,19 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #fff9ef;
+  --foreground: #39271e;
   --card: #ffffff;
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
   --primary: #000000;
   --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
+  --secondary: #f0dfcc;
   --secondary-foreground: #000000;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
-  --accent: #173B7A;
+  --accent: #a54f39;
   --accent-foreground: #ffffff;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
@@ -24,7 +24,7 @@
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: rgba(23, 59, 122, 0.3);
+  --ring: rgba(165, 79, 57, 0.32);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -40,6 +40,14 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   
+  /* Paleta editorial AGADE — brasilidade quente. */
+  --agade-terracota: #a54f39;
+  --agade-sand: #fff9ef;
+  --agade-coral: #d99575;
+  --agade-leaf: #6c704c;
+  --agade-wine: #783c3e;
+  --agade-cobalt: #2448a6;
+
   /* Brand-specific variables */
   --font-serif: 'Playfair Display', serif;
   --font-mono: 'Space Mono', monospace;
