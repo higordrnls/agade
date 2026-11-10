@@ -45,9 +45,10 @@ begin
 end
 $$;
 
--- Confirmação baixa estoque uma única vez.
-select public.transition_test_order('order-01','paid','MP-TEST-01');
-select public.transition_test_order('order-01','paid','MP-TEST-01');
+-- Vínculo com o Mercado Pago é obrigatório antes da confirmação.
+select public.attach_test_provider_order('order-01','ORDTST123456789A');
+select public.transition_test_order('order-01','paid','ORDTST123456789A');
+select public.transition_test_order('order-01','paid','ORDTST123456789A');
 do $$
 begin
  if (select available_stock from public.catalog_variants where sku='TEST-ORDER-SKU') <> 1
@@ -56,7 +57,7 @@ begin
  end if;
  if (select count(*) from public.sales_order_events e
      join public.sales_orders o on o.id=e.order_id
-     where o.reference='order-01') <> 2 then
+     where o.reference='order-01') <> 3 then
    raise exception 'Histórico duplicado em repetição idempotente';
  end if;
 end
@@ -97,3 +98,32 @@ end
 $$;
 
 select 'PASS: reserva, idempotência, baixa, cancelamento e permissões' as result;
+
+-- Expiração só de pedidos não associados a cobrança externa.
+select * from public.reserve_test_order('order-04','TEST-ORDER-SKU',1);
+update public.sales_orders set expires_at=now()-interval '1 minute' where reference='order-04';
+do $$
+declare n integer;
+begin
+  n := public.expire_unlinked_test_orders(100);
+  if n <> 1 or (select reserved_stock from public.catalog_variants where sku='TEST-ORDER-SKU') <> 0 then
+    raise exception 'Expiração de reserva sem provedor falhou';
+  end if;
+end
+$$;
+
+-- Vinculados, mesmo vencidos, exigem consulta de status no MP antes da liberação.
+select * from public.reserve_test_order('order-05','TEST-ORDER-SKU',1);
+select public.attach_test_provider_order('order-05','ORDTST123456789B');
+update public.sales_orders set expires_at=now()-interval '1 minute' where reference='order-05';
+do $$
+declare n integer;
+begin
+  n := public.expire_unlinked_test_orders(100);
+  if n <> 0 or (select reserved_stock from public.catalog_variants where sku='TEST-ORDER-SKU') <> 1 then
+    raise exception 'Reserva vinculada foi liberada indevidamente';
+  end if;
+end
+$$;
+select public.transition_test_order('order-05','cancelled','ORDTST123456789B');
+select 'PASS: expiração conservadora e vínculo com provedor' as result;
