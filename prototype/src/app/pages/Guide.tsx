@@ -19,7 +19,7 @@ export default function Guide(){
   <section className="max-w-[1450px] mx-auto px-6 sm:px-10 py-20 md:py-24" aria-label="O que observar ao escolher um óculos">
    <div className="grid md:grid-cols-2 gap-x-10 gap-y-12">
     {topics.map(({Icon,number,title,detail})=><article key={number} className="border-t border-black/20 pt-7">
-     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[#24469a]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
+     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[#a95e46]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
      <h2 className="text-3xl sm:text-4xl mb-5 tracking-tight" style={{fontFamily:"var(--font-serif)"}}>{title}</h2>
      <p className="text-[#555] leading-relaxed max-w-md">{detail}</p>
     </article>)}
