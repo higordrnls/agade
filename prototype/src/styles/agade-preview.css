@@ -5,17 +5,17 @@
  --agade-page:#FFFFFF;
  --agade-ink:#173F70;
  --agade-muted:#3F5667;
- --agade-accent:#B94737;
+ --agade-accent:#B24462;
  --agade-soft:#F5FAFC;
  --agade-feature:#E4F2F8;
- --agade-highlight:#F1B844;
- --agade-leaf:#287A58;
+ --agade-highlight:#F3AEB4;
+ --agade-leaf:#A53F66;
  --agade-deep:#17699D;
  --agade-caption:#476174;
- --agade-footer:#155947;
+ --agade-footer:#223550;
  --agade-footer-text:#FFFFFF;
- --agade-newsletter:#F3CB66;
- --agade-newsletter-text:#173F50;
+ --agade-newsletter:#F4BBC5;
+ --agade-newsletter-text:#20334D;
  --agade-nav:#FFFFFF;
  color:var(--agade-ink);
  background:var(--agade-page);
@@ -31,14 +31,15 @@
  color:var(--agade-newsletter-text);
  position:relative;
 }
+/* Uma área coral suave em vez da faixa tricolor literal. */
 .agade-experiment .agade-newsletter:before {
  content:"";
- position:absolute;top:0;left:0;right:0;height:5px;
- background:linear-gradient(90deg,#287A58 0% 32%,#B94737 32% 59%,#17699D 59% 100%);
+ position:absolute;top:0;left:0;right:0;height:4px;
+ background:#B24462;
 }
 .agade-experiment .agade-newsletter-panel {
  border:1px solid currentColor;
- background:color-mix(in srgb,var(--agade-newsletter) 88%,white);
+ background:color-mix(in srgb,var(--agade-newsletter) 86%,white);
 }
 .agade-experiment .agade-footer {
  background:var(--agade-footer);
@@ -46,29 +47,30 @@
 }
 .agade-experiment .agade-footer-title {max-width:690px;text-wrap:balance;}
 .agade-experiment .agade-footer a {text-underline-offset:4px;}
-.agade-experiment .agade-footer a:hover {color:#F3CB66;}
+.agade-experiment .agade-footer a:hover {color:#F4BBC5;}
 .agade-experiment .agade-home .agade-hero-title {text-wrap:balance;}
 .agade-experiment .agade-home img {filter:none;}
-:root[data-agade-theme="dark"] .agade-experiment .agade-hero-title span {color:#85CEEB;}
-@media(prefers-color-scheme:dark){:root:not([data-agade-theme="light"]) .agade-experiment .agade-hero-title span{color:#85CEEB;}}
+
+:root[data-agade-theme="dark"] .agade-experiment .agade-hero-title span {color:#F5A2BB;}
+@media(prefers-color-scheme:dark){:root:not([data-agade-theme="light"]) .agade-experiment .agade-hero-title span{color:#F5A2BB;}}
 
 /* Dark não é uma inversão do light: superfícies profundas sem preto absoluto,
    acentos claros para manter hierarquia e fotografia em cores naturais. */
 @media (prefers-color-scheme:dark) {
  :root:not([data-agade-theme="light"]) .agade-experiment {
   --agade-page:#101E29;--agade-ink:#F0F5F4;--agade-muted:#C0D5D8;
-  --agade-accent:#B94737;--agade-soft:#193343;--agade-feature:#1D3F50;
-  --agade-highlight:#B78339;--agade-leaf:#9CD2AE;--agade-deep:#17699D;
-  --agade-caption:#CADDE2;--agade-footer:#102B34;--agade-footer-text:#F3F8F6;
-  --agade-newsletter:#214757;--agade-newsletter-text:#F3F8F6;--agade-nav:#102735;
+  --agade-accent:#F5A2BB;--agade-soft:#193343;--agade-feature:#1D3F50;
+  --agade-highlight:#7B465C;--agade-leaf:#F5A2BB;--agade-deep:#17699D;
+  --agade-caption:#CADDE2;--agade-footer:#171F35;--agade-footer-text:#F3F8F6;
+  --agade-newsletter:#653B58;--agade-newsletter-text:#FFF4F5;--agade-nav:#102735;
  }
 }
 :root[data-agade-theme="dark"] .agade-experiment {
  --agade-page:#101E29;--agade-ink:#F0F5F4;--agade-muted:#C0D5D8;
- --agade-accent:#B94737;--agade-soft:#193343;--agade-feature:#1D3F50;
- --agade-highlight:#B78339;--agade-leaf:#9CD2AE;--agade-deep:#17699D;
- --agade-caption:#CADDE2;--agade-footer:#102B34;--agade-footer-text:#F3F8F6;
- --agade-newsletter:#214757;--agade-newsletter-text:#F3F8F6;--agade-nav:#102735;
+ --agade-accent:#F5A2BB;--agade-soft:#193343;--agade-feature:#1D3F50;
+ --agade-highlight:#7B465C;--agade-leaf:#F5A2BB;--agade-deep:#17699D;
+ --agade-caption:#CADDE2;--agade-footer:#171F35;--agade-footer-text:#F3F8F6;
+ --agade-newsletter:#653B58;--agade-newsletter-text:#FFF4F5;--agade-nav:#102735;
 }
 :root[data-agade-theme="dark"] .agade-experiment .agade-newsletter-panel {background:transparent;}
 @media(prefers-color-scheme:dark){:root:not([data-agade-theme="light"]) .agade-experiment .agade-newsletter-panel{background:transparent;}}
