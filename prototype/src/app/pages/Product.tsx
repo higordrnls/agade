@@ -30,7 +30,7 @@ export default function Product(){
   </div>
   {loading && <p className="max-w-[1480px] mx-auto px-6 sm:px-10 py-24" role="status">Carregando detalhes do modelo…</p>}
   {!loading&&!product&&<div className="max-w-[1480px] mx-auto px-6 sm:px-10 py-24">
-    <p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent)] mb-5">AGADE / SELEÇÃO</p>
+    <p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent-text)] mb-5">AGADE / SELEÇÃO</p>
     <h1 className="text-4xl md:text-6xl" style={{fontFamily:"var(--font-serif)"}}>{data.status==="error"?"Seleção indisponível.":"Este modelo não está disponível."}</h1>
     <p className="text-[var(--agade-muted)] mt-6">Somente modelos comerciais publicados e disponíveis podem ser consultados nesta página.</p>
     <Link to="/loja" className="mt-10 inline-flex items-center gap-3 border-b border-black pb-2">Voltar à seleção <ArrowLeft size={18}/></Link>
@@ -45,7 +45,7 @@ export default function Product(){
     <p className="text-[var(--agade-muted)] text-xs mt-3">As informações técnicas correspondem à variação selecionada.</p>
    </div>
    <div className="lg:py-5">
-    <p className="text-xs uppercase tracking-[.2em] text-[var(--agade-deep)] mb-5">AGADE EYEWEAR · ÓCULOS DE SOL</p>
+    <p className="text-xs uppercase tracking-[.2em] text-[var(--agade-deep-text)] mb-5">AGADE EYEWEAR · ÓCULOS DE SOL</p>
     <h1 className="font-normal text-[clamp(3rem,5.5vw,5.8rem)] tracking-[-.045em] leading-tight" style={{fontFamily:"var(--font-serif)"}}>{product.name}</h1>
     <p className="text-2xl mt-5 font-medium">{money(variant.price_cents)}</p>
     {product.editorial_description&&<p className="mt-7 text-[var(--agade-muted)] max-w-xl leading-relaxed">{product.editorial_description}</p>}
@@ -60,7 +60,7 @@ export default function Product(){
       </button>)}
      </div>
     </fieldset>
-    <div className="mt-8 border-y border-[var(--agade-border)] py-5 flex items-center gap-3 text-sm" role="status"><Check size={18} className="text-[var(--agade-accent)]"/><span>{available?"Variação disponível para guardar na seleção":"Variação indisponível no momento"}</span></div>
+    <div className="mt-8 border-y border-[var(--agade-border)] py-5 flex items-center gap-3 text-sm" role="status"><Check size={18} className="text-[var(--agade-accent-text)]"/><span>{available?"Variação disponível para guardar na seleção":"Variação indisponível no momento"}</span></div>
     <button type="button" disabled={!available} onClick={()=>cart.add({productId:product.product_id,variantId:variant.variant_id,sku:variant.sku,name:product.name,color:variant.color_name,priceCents:variant.price_cents,imageUrl:product.hero_image_url,quantity:1,stockSnapshot:variant.sellable_stock})}
       className="mt-8 w-full min-h-12 rounded-xl flex items-center justify-center gap-3 bg-[var(--agade-accent)] hover:bg-[var(--agade-action-hover)] disabled:opacity-45 disabled:cursor-not-allowed text-white py-4 px-6 text-xs uppercase tracking-[.12em] font-semibold">
       <ShoppingBag size={18}/> {available?"Guardar na sacola de seleção":"Variação indisponível"}
