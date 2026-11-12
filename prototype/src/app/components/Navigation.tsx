@@ -14,7 +14,7 @@ export default function Navigation() {
   const solarHome=pathname==="/";
   const brisa=solarHome&&new URLSearchParams(search).get("paleta")==="brisa";
   const accent=brisa?"#397C83":"#D26B67";
-  const ink=brisa?"#163D4B":"#202D37";
+  const ink=brisa?"#173B4B":"#202D37";
   const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
