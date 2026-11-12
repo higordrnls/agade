@@ -26,8 +26,8 @@ export default function Home(){
     <p className="absolute left-5 bottom-4 sm:left-9 text-white text-[10px] tracking-wide leading-relaxed max-w-[270px]">Fotografia de referência · os óculos retratados não são produtos da AGADE</p>
    </div>
    <div className="flex flex-col justify-center lg:order-1 px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] py-10 sm:py-16 lg:py-24">
-    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-accent)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
-    <h1 id="home-hero" className="agade-hero-title text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-accent)]">Do seu jeito.</span></h1>
+    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-accent-text)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
+    <h1 id="home-hero" className="agade-hero-title text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-accent-text)]">Do seu jeito.</span></h1>
     <p className="mt-5 sm:mt-8 text-[15px] sm:text-lg text-[var(--agade-muted)] leading-relaxed max-w-md">Estamos preparando a primeira seleção da AGADE. Armações para experimentar, sair de casa e usar de verdade.</p>
     <div className="mt-7 sm:mt-9"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-deep)] text-white hover:bg-[var(--agade-ink)] transition-colors">Conhecer a seleção <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
     <p className="mt-8 lg:mt-20 text-xs text-[var(--agade-muted)]">Uma curadoria independente, ainda em construção.</p>
@@ -52,7 +52,7 @@ export default function Home(){
      </figure>
     </div>
     <div className="lg:pl-4">
-     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-leaf)] mb-5">De onde vem a inspiração</p>
+     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-leaf-text)] mb-5">De onde vem a inspiração</p>
      <h2 id="home-inspiration" className="text-[clamp(2.5rem,4.5vw,5.1rem)] leading-[1.02] tracking-[-.05em]" style={serif}>A gente presta atenção nas coisas que encontra por aí.</h2>
      <p className="text-[var(--agade-muted)] leading-relaxed mt-6 max-w-md">Uma fachada bonita, o sol entrando pela janela, alguém passando na rua com um óculos que combina perfeitamente com a pessoa. São essas imagens que ficam na cabeça.</p>
      <Link to="/sobre" className="mt-8 inline-flex min-h-12 items-center gap-3 text-sm font-medium border-b border-[var(--agade-accent)] text-[var(--agade-ink)]">Mais sobre a AGADE <ArrowRight size={17}/></Link>
@@ -63,7 +63,7 @@ export default function Home(){
   <section aria-labelledby="home-products" className="bg-[var(--agade-feature)] px-5 sm:px-10 py-14 sm:py-20 lg:py-24">
    <div className="max-w-[1450px] mx-auto">
     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-9">
-     <div><p className="text-xs tracking-[.14em] uppercase text-[var(--agade-accent)] mb-4 font-semibold">Primeira edição</p>
+     <div><p className="text-xs tracking-[.14em] uppercase text-[var(--agade-accent-text)] mb-4 font-semibold">Primeira edição</p>
       <h2 id="home-products" className="text-[clamp(2.9rem,5vw,5.5rem)] leading-[1] tracking-[-.055em]" style={serif}>Os óculos.</h2></div>
      <Link to="/loja" className="inline-flex items-center gap-3 min-h-12 self-start text-sm text-[var(--agade-ink)] border-b border-[var(--agade-accent)]">Ver seleção <ArrowRight size={17}/></Link>
     </div>
@@ -89,7 +89,7 @@ export default function Home(){
   <section className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28" aria-labelledby="home-guide">
    <div className="grid md:grid-cols-[1fr_.8fr] gap-8 md:gap-16 items-center">
     <div>
-     <p className="text-xs uppercase tracking-[.14em] text-[var(--agade-leaf)] font-semibold mb-4">Antes de escolher</p>
+     <p className="text-xs uppercase tracking-[.14em] text-[var(--agade-leaf-text)] font-semibold mb-4">Antes de escolher</p>
      <h2 id="home-guide" className="text-[clamp(2.8rem,5vw,5.8rem)] leading-[1.02] tracking-[-.05em]" style={serif}>Bonito no rosto.<br/>Bom de usar.</h2>
     </div>
     <div className="max-w-lg md:justify-self-end">
@@ -103,7 +103,7 @@ export default function Home(){
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-7">
     <div><p className="text-xs uppercase tracking-[.14em] text-white/90 font-semibold mb-3">AGADE / EM BREVE</p>
      <h2 className="text-[clamp(2.8rem,5vw,5.7rem)] leading-[1] tracking-[-.05em]" style={serif}>A seleção está quase tomando forma.</h2></div>
-    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-page)] text-[var(--agade-deep)] hover:bg-[var(--agade-soft)] transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
+    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-page)] text-[var(--agade-deep-text)] hover:bg-[var(--agade-soft)] transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
    </div>
   </section>
 
