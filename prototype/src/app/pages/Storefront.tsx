@@ -24,7 +24,7 @@ export default function Storefront(){
  return <div className="min-h-screen bg-[var(--agade-page)] text-[var(--agade-ink)]">
   <header className="bg-[var(--agade-feature)] px-6 sm:px-10 pt-16 pb-20">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[var(--agade-accent)] mb-6">AGADE / EDIÇÃO 01</p>
+    <p className="text-xs font-semibold uppercase tracking-[.2em] text-[var(--agade-accent-text)] mb-6">AGADE / EDIÇÃO 01</p>
     <h1 className="text-[clamp(3.7rem,8vw,8rem)] leading-[.95] tracking-[-.055em] font-normal" style={{fontFamily:"var(--font-serif)"}}>Óculos para sentir o sol.</h1>
     <p className="mt-7 max-w-2xl text-base sm:text-lg text-[var(--agade-muted)] leading-relaxed">Curadoria solar com personalidade. Formas, cores e histórias para quem vive de olhar aberto.</p>
    </div>
@@ -58,7 +58,7 @@ export default function Storefront(){
    </div>}
    {!loading && (state.status==="unconfigured"||(state.status==="ready"&&state.products.length===0)) && <div className="grid md:grid-cols-2 bg-[var(--agade-card)] rounded-[24px] overflow-hidden min-h-[400px]">
     <div className="p-9 sm:p-14 flex flex-col justify-center items-start">
-     <p className="text-[var(--agade-accent)] text-[11px] tracking-[.18em] uppercase mb-5">EM BREVE</p>
+     <p className="text-[var(--agade-accent-text)] text-[11px] tracking-[.18em] uppercase mb-5">EM BREVE</p>
      <h3 className="text-3xl sm:text-5xl leading-tight" style={{fontFamily:"var(--font-serif)"}}>A primeira seleção está chegando.</h3>
      <p className="text-[var(--agade-muted)] mt-6 leading-relaxed">Os modelos serão apresentados aqui assim que imagens, características e disponibilidade estiverem confirmadas.</p>
      <Link to="/" className="inline-flex items-center gap-3 mt-8 text-xs tracking-[.15em] uppercase font-medium border-b border-black pb-2">Voltar à página inicial <ArrowRight size={16}/></Link>
@@ -81,7 +81,7 @@ export default function Storefront(){
       <span className="text-sm font-medium whitespace-nowrap">{money(Math.min(...p.variants.map(v=>v.price_cents)))}</span>
      </div>
      {p.editorial_description&&<p className="text-sm text-[var(--agade-muted)] leading-relaxed mt-3">{p.editorial_description}</p>}
-     <Link to={`/produto/${encodeURIComponent(p.slug)}`} className="mt-4 inline-flex text-[11px] uppercase tracking-[.12em] text-[var(--agade-deep)] border-b border-[var(--agade-accent)] pb-1">Ver detalhes e variações <ArrowRight size={14} className="ml-2"/></Link>
+     <Link to={`/produto/${encodeURIComponent(p.slug)}`} className="mt-4 inline-flex text-[11px] uppercase tracking-[.12em] text-[var(--agade-deep-text)] border-b border-[var(--agade-accent)] pb-1">Ver detalhes e variações <ArrowRight size={14} className="ml-2"/></Link>
     </article>)}
    </div>}
   </section>
