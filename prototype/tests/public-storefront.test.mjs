@@ -189,5 +189,5 @@ test('all public pages use shared AGADE surfaces and the global theme selector',
   assert.doesNotMatch(content,/#fffaf2|#f5eadb|#a95e46|#493630/i);
  }
  const drawer=src('components/CartDrawer.tsx');
- assert.match(drawer,/var\(--agade-card\)/);
+ assert.match(drawer,/var\(--agade-page\)/);
 });
