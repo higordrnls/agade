@@ -10,28 +10,28 @@ const paragraphs=[
  {heading:"Atualizações",body:"Esta página descreve a estrutura atual, ainda em preparação. Antes de iniciar vendas, publicaremos a identificação do responsável pelo tratamento, bases legais, prazos de retenção e canais definitivos conforme os processos realmente ativados."}
 ];
 export default function Privacy(){
- return <div className="min-h-screen bg-[#fffaf2] text-[#24372d]">
-  <header className="bg-[#f0dfcf] text-[#24372d] px-6 sm:px-12 py-20 md:py-28">
+ return <div className="min-h-screen bg-[var(--agade-page)] text-[var(--agade-ink)]">
+  <header className="bg-[var(--agade-feature)] text-[var(--agade-ink)] px-6 sm:px-12 py-20 md:py-28">
    <div className="max-w-[1440px] mx-auto"><p className="text-xs uppercase tracking-[.22em] mb-8">AGADE / PRIVACIDADE</p>
     <h1 className="text-5xl sm:text-7xl max-w-4xl leading-[1.05] tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Sua privacidade faz parte do cuidado.</h1>
     <p className="mt-6 max-w-xl leading-relaxed">Informações sobre como tratamos dados pessoais nesta fase de preparação da loja.</p>
    </div>
   </header>
   <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-20 grid lg:grid-cols-12 gap-12">
-   <aside className="lg:col-span-4"><p className="text-xs tracking-[.2em] uppercase text-[#a54f39] mb-5">INFORMAÇÃO TRANSPARENTE</p>
+   <aside className="lg:col-span-4"><p className="text-xs tracking-[.2em] uppercase text-[var(--agade-accent)] mb-5">INFORMAÇÃO TRANSPARENTE</p>
     <h2 className="text-3xl sm:text-4xl" style={{fontFamily:"var(--font-serif)"}}>Clareza em cada etapa.</h2>
-    <p className="text-sm text-[#664f42] mt-6 leading-relaxed">Nossa operação ainda está sendo estruturada. Por isso, os serviços ainda não habilitados são descritos como futuros, sem simular tratamentos de dados que não ocorreram.</p>
+    <p className="text-sm text-[var(--agade-muted)] mt-6 leading-relaxed">Nossa operação ainda está sendo estruturada. Por isso, os serviços ainda não habilitados são descritos como futuros, sem simular tratamentos de dados que não ocorreram.</p>
    </aside>
-   <div className="lg:col-span-8 border-t border-[#a54f39]/25">
-    {paragraphs.map(x=><section key={x.heading} className="py-7 border-b border-[#a54f39]/25">
-     <h2 className="text-2xl sm:text-3xl mb-5" style={{fontFamily:"var(--font-serif)"}}>{x.heading}</h2><p className="text-[#664f42] leading-relaxed">{x.body}</p>
+   <div className="lg:col-span-8 border-t border-[var(--agade-accent)]/25">
+    {paragraphs.map(x=><section key={x.heading} className="py-7 border-b border-[var(--agade-accent)]/25">
+     <h2 className="text-2xl sm:text-3xl mb-5" style={{fontFamily:"var(--font-serif)"}}>{x.heading}</h2><p className="text-[var(--agade-muted)] leading-relaxed">{x.body}</p>
     </section>)}
-    <div className="bg-[#eef0e7] p-7 sm:p-10 mt-12">
-     <p className="text-xs uppercase tracking-[.2em] mb-5 text-[#a54f39]">FALE CONOSCO</p>
+    <div className="bg-[var(--agade-feature)] p-7 sm:p-10 mt-12">
+     <p className="text-xs uppercase tracking-[.2em] mb-5 text-[var(--agade-accent)]">FALE CONOSCO</p>
      <a className="inline-flex items-center gap-2 underline underline-offset-4 break-all" href="mailto:atendimento@agade.com"><Mail size={18}/>atendimento@agade.com</a>
-     <p className="text-xs text-[#664f42] mt-5">Política informativa em elaboração; os dados legais completos serão publicados antes da operação de vendas.</p>
+     <p className="text-xs text-[var(--agade-muted)] mt-5">Política informativa em elaboração; os dados legais completos serão publicados antes da operação de vendas.</p>
     </div>
-    <Link to="/politicas" className="mt-12 inline-flex items-center gap-3 text-xs uppercase tracking-[.15em] border-b border-[#3c271f] pb-2">Trocas e devoluções <ArrowRight size={17}/></Link>
+    <Link to="/politicas" className="mt-12 inline-flex items-center gap-3 text-xs uppercase tracking-[.15em] border-b border-[var(--agade-ink)] pb-2">Trocas e devoluções <ArrowRight size={17}/></Link>
    </div>
   </div>
  </div>;
