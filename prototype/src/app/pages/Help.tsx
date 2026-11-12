@@ -13,7 +13,7 @@ export default function Help(){
  return <div className="bg-[var(--agade-page)] min-h-screen text-[var(--agade-ink)]">
   <header className="bg-[var(--agade-feature)] px-6 sm:px-10 py-16 md:py-24">
    <div className="max-w-[1440px] mx-auto">
-    <p className="text-xs text-[var(--agade-accent)] tracking-[.2em] uppercase mb-6 font-semibold">AGADE / ATENDIMENTO</p>
+    <p className="text-xs text-[var(--agade-accent-text)] tracking-[.2em] uppercase mb-6 font-semibold">AGADE / ATENDIMENTO</p>
     <h1 className="text-5xl sm:text-7xl tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Tudo às claras.</h1>
     <p className="text-[var(--agade-muted)] leading-relaxed mt-6 max-w-2xl">Informação sobre produtos, compras e atendimento. Estamos preparando a abertura da loja — algumas funções ainda não estão disponíveis.</p>
    </div>
@@ -24,18 +24,18 @@ export default function Help(){
       {Icon:Truck,title:"Entrega transparente",body:"Prazos e valores serão apresentados antes de qualquer cobrança."},
       {Icon:Package,title:"Pedido acompanhado",body:"O acesso a pedidos será liberado junto com o checkout."}
      ].map(({Icon,title,body})=><div key={title} className="p-7 bg-[var(--agade-feature)]">
-      <Icon className="text-[var(--agade-deep)] mb-5" size={27}/><h2 className="text-xl font-semibold mb-3">{title}</h2>
+      <Icon className="text-[var(--agade-deep-text)] mb-5" size={27}/><h2 className="text-xl font-semibold mb-3">{title}</h2>
       <p className="text-sm leading-relaxed text-[var(--agade-muted)]">{body}</p></div>)}
    </section>
    <section className="grid lg:grid-cols-12 gap-10" aria-labelledby="faq-title">
-    <div className="lg:col-span-4"><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-deep)] mb-5">DÚVIDAS FREQUENTES</p>
+    <div className="lg:col-span-4"><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-deep-text)] mb-5">DÚVIDAS FREQUENTES</p>
      <h2 id="faq-title" className="text-4xl sm:text-5xl" style={{fontFamily:"var(--font-serif)"}}>Quer saber mais?</h2>
      <p className="text-sm leading-relaxed text-[var(--agade-muted)] mt-6 max-w-xs">Reunimos respostas para ajudar você a conhecer a AGADE enquanto preparamos as primeiras vendas.</p>
     </div>
     <div className="lg:col-span-8 border-t border-[var(--agade-border)]">
      {faqs.map(({q,a})=><details key={q} className="group border-b border-[var(--agade-border)] py-6">
       <summary className="cursor-pointer list-none flex justify-between items-start gap-5 text-lg font-medium focus-visible:outline-2">
-       {q}<HelpCircle size={18} className="shrink-0 mt-1 text-[var(--agade-deep)]"/>
+       {q}<HelpCircle size={18} className="shrink-0 mt-1 text-[var(--agade-deep-text)]"/>
       </summary><p className="text-[var(--agade-muted)] mt-4 max-w-2xl leading-relaxed text-sm">{a}</p>
      </details>)}
     </div>
