@@ -70,7 +70,7 @@
  --agade-caption:#CADDE2;--agade-footer:#102B34;--agade-footer-text:#F3F8F6;
  --agade-newsletter:#214757;--agade-newsletter-text:#F3F8F6;--agade-nav:#102735;
 }
-:root[data-agade-theme="dark"] .agade-experiment .agade-newsletter-panel,
-:root:not([data-agade-theme="light"]) .agade-experiment .agade-newsletter-panel {background:transparent;}
+:root[data-agade-theme="dark"] .agade-experiment .agade-newsletter-panel {background:transparent;}
+@media(prefers-color-scheme:dark){:root:not([data-agade-theme="light"]) .agade-experiment .agade-newsletter-panel{background:transparent;}}
 .agade-experiment .agade-home {transition:background-color .2s,color .2s;}
 @media (prefers-reduced-motion:reduce){.agade-experiment .agade-home{transition:none;}}
