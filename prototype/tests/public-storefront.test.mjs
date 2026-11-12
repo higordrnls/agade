@@ -172,3 +172,22 @@ test('gender question requires an explicit response and supports diverse identit
  assert.match(account,/Prefiro não declarar/);
  assert.doesNotMatch(account,/Nenhuma resposta de gênero é obrigatória/);
 });
+
+test('all public pages use shared AGADE surfaces and the global theme selector',()=>{
+ const root=src('pages/Root.tsx');
+ const nav=src('components/Navigation.tsx');
+ assert.match(root,/agade-experiment min-h-screen/);
+ assert.match(nav,/agade-mode-toggle/);
+ assert.doesNotMatch(nav,/solarHome&&<button/);
+ const css=readFileSync(new URL('../styles/agade-preview.css',import.meta.url),'utf8');
+ assert.match(css,/--agade-page:#121212/);
+ assert.match(css,/--agade-card:#202020/);
+ assert.match(css,/--agade-accent-text:#F4A5A9/);
+ for(const page of ['Storefront','About','Guide','Help','Policies','Privacy','Account','Product','NewsletterUnsubscribe']){
+  const content=src('pages/'+page+'.tsx');
+  assert.match(content,/var\(--agade-/);
+  assert.doesNotMatch(content,/#fffaf2|#f5eadb|#a95e46|#493630/i);
+ }
+ const drawer=src('components/CartDrawer.tsx');
+ assert.match(drawer,/var\(--agade-card\)/);
+});
