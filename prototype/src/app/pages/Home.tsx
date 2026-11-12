@@ -26,15 +26,15 @@ export default function Home(){
     <p className="absolute left-5 bottom-4 sm:left-9 text-white text-[10px] tracking-wide leading-relaxed max-w-[270px]">Fotografia de referência · os óculos retratados não são produtos da AGADE</p>
    </div>
    <div className="flex flex-col justify-center lg:order-1 px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] py-10 sm:py-16 lg:py-24">
-    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-deep)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
-    <h1 id="home-hero" className="agade-hero-title text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-deep)]">Do seu jeito.</span></h1>
+    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-accent)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
+    <h1 id="home-hero" className="agade-hero-title text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-accent)]">Do seu jeito.</span></h1>
     <p className="mt-5 sm:mt-8 text-[15px] sm:text-lg text-[var(--agade-muted)] leading-relaxed max-w-md">Estamos preparando a primeira seleção da AGADE. Armações para experimentar, sair de casa e usar de verdade.</p>
     <div className="mt-7 sm:mt-9"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-deep)] text-white hover:bg-[var(--agade-ink)] transition-colors">Conhecer a seleção <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
     <p className="mt-8 lg:mt-20 text-xs text-[var(--agade-muted)]">Uma curadoria independente, ainda em construção.</p>
    </div>
   </section>
 
-  <div aria-hidden="true" className="h-1.5 w-full bg-[var(--agade-highlight)]"/>
+  <div aria-hidden="true" className="h-1 w-full bg-[var(--agade-highlight)]"/>
   <section aria-labelledby="home-inspiration" className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28">
    <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-10 lg:gap-20 items-center">
     <div className="grid grid-cols-[1.15fr_.8fr] gap-3 sm:gap-5 items-end">
