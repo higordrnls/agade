@@ -3,6 +3,12 @@
    Contrastes são requisitos de interface, não evidência de aumento de conversão. */
 .agade-experiment {
  --agade-page:#FFFFFF;
+ --agade-card:#FFFFFF;
+ --agade-border:#B9CCD4;
+ --agade-action-hover:#833849;
+ --agade-accent-text:#B44F5E;
+ --agade-deep-text:#17699D;
+ --agade-leaf-text:#386B53;
  --agade-ink:#173F70;
  --agade-muted:#3F5667;
  --agade-accent:#B44F5E;
@@ -20,6 +26,17 @@
  color:var(--agade-ink);
  background:var(--agade-page);
 }
+.agade-experiment {color-scheme:light;}
+@media(prefers-color-scheme:dark){:root:not([data-agade-theme="light"]) .agade-experiment{color-scheme:dark;}}
+:root[data-agade-theme="dark"] .agade-experiment{color-scheme:dark;}
+.agade-experiment input:not([type="checkbox"]):not([type="radio"]),
+.agade-experiment select,
+.agade-experiment textarea {
+ background-color:var(--agade-card);
+ color:var(--agade-ink);
+ border-color:var(--agade-border);
+}
+.agade-experiment input::placeholder,.agade-experiment textarea::placeholder{color:var(--agade-muted);}
 .agade-experiment .agade-header { background:var(--agade-nav);color:var(--agade-ink); }
 .agade-experiment .agade-topline {background:var(--agade-deep);}
 .agade-experiment .agade-mainnav {border-color:color-mix(in srgb,var(--agade-ink) 15%,transparent);}
@@ -58,9 +75,9 @@
    acentos claros para manter hierarquia e fotografia em cores naturais. */
 @media (prefers-color-scheme:dark) {
  :root:not([data-agade-theme="light"]) .agade-experiment {
-  --agade-page:#121212;--agade-ink:#F3F3F1;--agade-muted:#CBCBC9;
+  --agade-page:#121212;--agade-card:#202020;--agade-border:#626262;--agade-action-hover:#8F3444;--agade-accent-text:#F4A5A9;--agade-deep-text:#95D4F4;--agade-leaf-text:#B3D6B2;--agade-ink:#F3F3F1;--agade-muted:#CBCBC9;
   --agade-accent:#B34859;--agade-soft:#1B1B1B;--agade-feature:#242424;
-  --agade-highlight:#D8B85C;--agade-leaf:#A4C4A0;--agade-deep:#2F6E9C;
+  --agade-highlight:#D8B85C;--agade-leaf:#386B53;--agade-deep:#2F6E9C;
   --agade-caption:#D1D1CF;--agade-footer:#0E0E0E;--agade-footer-text:#F3F3F1;
   --agade-newsletter:#1A1A1A;--agade-newsletter-text:#F3F3F1;--agade-nav:#171717;
  }
@@ -68,7 +85,7 @@
 :root[data-agade-theme="dark"] .agade-experiment {
  --agade-page:#121212;--agade-ink:#F3F3F1;--agade-muted:#CBCBC9;
  --agade-accent:#B34859;--agade-soft:#1B1B1B;--agade-feature:#242424;
- --agade-highlight:#D8B85C;--agade-leaf:#A4C4A0;--agade-deep:#2F6E9C;
+ --agade-highlight:#D8B85C;--agade-leaf:#386B53;--agade-deep:#2F6E9C;
  --agade-caption:#D1D1CF;--agade-footer:#0E0E0E;--agade-footer-text:#F3F3F1;
  --agade-newsletter:#1A1A1A;--agade-newsletter-text:#F3F3F1;--agade-nav:#171717;
 }

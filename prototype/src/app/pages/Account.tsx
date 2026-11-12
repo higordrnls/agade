@@ -277,84 +277,84 @@ export default function Account(){
   if(current)try{await fetch(`${projectUrl}/auth/v1/logout`,{method:"POST",headers:apiHeaders(current.access_token)})}catch{/* sessão local encerrada */}
  }
  const busy=state==="sending"||state==="loading";
- return <div className="bg-[#fffaf2] min-h-[65vh] text-[#493630] px-6 sm:px-10 py-14 sm:py-20">
+ return <div className="bg-[var(--agade-page)] min-h-[65vh] text-[var(--agade-ink)] px-6 sm:px-10 py-14 sm:py-20">
   <div className="max-w-[1120px] mx-auto grid md:grid-cols-[1fr_.95fr] gap-10 lg:gap-20">
    <div>
-    <p className="text-xs font-semibold tracking-[.17em] text-[#a95e46] uppercase mb-6">AGADE / SUA CONTA</p>
+    <p className="text-xs font-semibold tracking-[.17em] text-[var(--agade-accent-text)] uppercase mb-6">AGADE / SUA CONTA</p>
     <h1 className="text-[clamp(3.4rem,6vw,6.2rem)] leading-[1] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Seu espaço na AGADE.</h1>
-    <p className="mt-7 text-[#69564e] leading-relaxed max-w-md">Crie seu cadastro, entre com senha e mantenha seus dados atualizados. Quando a loja começar a vender, será possível consultar seus pedidos por aqui.</p>
-    <div className="mt-10 border-t border-[#dacabc] pt-7 flex items-start gap-3 text-sm text-[#69564e]">
-     <LockKeyhole size={20} className="shrink-0 text-[#a95e46]"/> O acesso é protegido pelo Supabase Auth. Não armazenamos sua senha no cadastro de clientes.
+    <p className="mt-7 text-[var(--agade-muted)] leading-relaxed max-w-md">Crie seu cadastro, entre com senha e mantenha seus dados atualizados. Quando a loja começar a vender, será possível consultar seus pedidos por aqui.</p>
+    <div className="mt-10 border-t border-[var(--agade-border)] pt-7 flex items-start gap-3 text-sm text-[var(--agade-muted)]">
+     <LockKeyhole size={20} className="shrink-0 text-[var(--agade-accent-text)]"/> O acesso é protegido pelo Supabase Auth. Não armazenamos sua senha no cadastro de clientes.
     </div>
    </div>
-   <div className="bg-[#f5eadb] rounded-2xl p-7 sm:p-10 self-start">
+   <div className="bg-[var(--agade-feature)] rounded-2xl p-7 sm:p-10 self-start">
     {profile?<div>
-     <CheckCircle2 size={28} className="text-[#56725b] mb-4"/>
+     <CheckCircle2 size={28} className="text-[var(--agade-leaf-text)] mb-4"/>
      <h2 className="text-3xl mb-3" style={{fontFamily:"var(--font-serif)"}}>Minha conta</h2>
      <p className="text-sm break-all">{profile.email}</p>
      {recoveryMode?<form className="mt-8 space-y-4" onSubmit={updatePassword}>
       <h3 className="text-xl font-semibold">Definir nova senha</h3>
-      <label className="block text-sm">Nova senha (mínimo de 12 caracteres)<input type="password" autoComplete="new-password" minLength={12} required value={password} onChange={e=>setPassword(e.target.value)} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3"/></label>
-      <label className="block text-sm">Confirmar senha<input type="password" autoComplete="new-password" minLength={12} required value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3"/></label>
-      <button disabled={busy} className="rounded-xl bg-[#a95e46] text-white px-5 min-h-12 disabled:opacity-50">Salvar senha</button>
+      <label className="block text-sm">Nova senha (mínimo de 12 caracteres)<input type="password" autoComplete="new-password" minLength={12} required value={password} onChange={e=>setPassword(e.target.value)} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3"/></label>
+      <label className="block text-sm">Confirmar senha<input type="password" autoComplete="new-password" minLength={12} required value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3"/></label>
+      <button disabled={busy} className="rounded-xl bg-[var(--agade-accent)] text-white px-5 min-h-12 disabled:opacity-50">Salvar senha</button>
      </form>:null}
      {message&&<p className="mt-4 text-sm" role="status">{message}</p>}
-     {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-6 border-t border-[#d4bfb1] pt-7">
+     {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-6 border-t border-[var(--agade-border)] pt-7">
       <h3 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>Minha ficha</h3>
-      <p className="text-xs leading-relaxed text-[#69564e]">Seus dados ficam em uma área privada. A seleção de uma opção no campo de gênero é necessária para completar esta ficha, inclusive “Prefiro não declarar”. O uso de dados demográficos para pesquisa é separado e depende da sua autorização.</p>
+      <p className="text-xs leading-relaxed text-[var(--agade-muted)]">Seus dados ficam em uma área privada. A seleção de uma opção no campo de gênero é necessária para completar esta ficha, inclusive “Prefiro não declarar”. O uso de dados demográficos para pesquisa é separado e depende da sua autorização.</p>
       <div className="flex items-center gap-4">
-       {avatar?<img src={avatar} alt="Minha foto de perfil" className="h-20 w-20 rounded-full object-cover"/>:<div aria-hidden="true" className="h-20 w-20 rounded-full bg-[#e5d0c0] flex items-center justify-center"><Camera size={27}/></div>}
+       {avatar?<img src={avatar} alt="Minha foto de perfil" className="h-20 w-20 rounded-full object-cover"/>:<div aria-hidden="true" className="h-20 w-20 rounded-full bg-[var(--agade-feature)] flex items-center justify-center"><Camera size={27}/></div>}
        <label className="text-sm underline underline-offset-4 cursor-pointer"> {avatarBusy?"Enviando foto…":"Adicionar foto (opcional)"}
         <input type="file" accept="image/jpeg,image/png,image/webp" disabled={avatarBusy} onChange={e=>{void chooseAvatar(e.target.files?.[0]);e.target.value=""}} className="sr-only"/>
        </label>
       </div>
       <fieldset className="space-y-4"><legend className="text-sm font-bold mb-3">Dados pessoais</legend>
-       <label className="block text-sm font-medium">Nome completo *<input type="text" autoComplete="name" maxLength={120} required value={customer.full_name} onChange={e=>setCustomer(v=>({...v,full_name:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-       <label className="block text-sm font-medium">Celular com DDD<input type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} placeholder="(34) 99999-9999" value={customer.phone_mobile||""} onChange={e=>setCustomer(v=>({...v,phone_mobile:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-       <label className="block text-sm font-medium">Data de nascimento<input type="date" autoComplete="bday" min="1900-01-01" max={new Date().toISOString().slice(0,10)} value={customer.birth_date||""} onChange={e=>setCustomer(v=>({...v,birth_date:e.target.value||null}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-       <label className="block text-sm font-medium">Identidade de gênero *<select required value={customer.gender_identity||""} onChange={e=>setCustomer(v=>({...v,gender_identity:e.target.value||null,gender_self_description:e.target.value==="self_described"?v.gender_self_description:null}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"><option value="" disabled>Selecione uma opção</option>{genderOptions.map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
-       {customer.gender_identity==="self_described"&&<label className="block text-sm font-medium">Como você descreve sua identidade? *<input required type="text" maxLength={120} value={customer.gender_self_description||""} onChange={e=>setCustomer(v=>({...v,gender_self_description:e.target.value}))} placeholder="Descreva com suas palavras" className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>}
-       <label className="flex items-start gap-3 text-xs leading-relaxed text-[#69564e]"><input type="checkbox" checked={customer.demographic_consent} onChange={e=>setCustomer(v=>({...v,demographic_consent:e.target.checked}))} className="mt-1 accent-[#a95e46]"/>Autorizo o uso da minha faixa etária e identidade de gênero em análises estatísticas internas da AGADE, de forma agregada. Posso retirar esta autorização nesta ficha.</label>
+       <label className="block text-sm font-medium">Nome completo *<input type="text" autoComplete="name" maxLength={120} required value={customer.full_name} onChange={e=>setCustomer(v=>({...v,full_name:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Celular com DDD<input type="tel" autoComplete="tel-national" inputMode="tel" maxLength={20} placeholder="(34) 99999-9999" value={customer.phone_mobile||""} onChange={e=>setCustomer(v=>({...v,phone_mobile:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Data de nascimento<input type="date" autoComplete="bday" min="1900-01-01" max={new Date().toISOString().slice(0,10)} value={customer.birth_date||""} onChange={e=>setCustomer(v=>({...v,birth_date:e.target.value||null}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Identidade de gênero *<select required value={customer.gender_identity||""} onChange={e=>setCustomer(v=>({...v,gender_identity:e.target.value||null,gender_self_description:e.target.value==="self_described"?v.gender_self_description:null}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"><option value="" disabled>Selecione uma opção</option>{genderOptions.map(([key,label])=><option value={key} key={key}>{label}</option>)}</select></label>
+       {customer.gender_identity==="self_described"&&<label className="block text-sm font-medium">Como você descreve sua identidade? *<input required type="text" maxLength={120} value={customer.gender_self_description||""} onChange={e=>setCustomer(v=>({...v,gender_self_description:e.target.value}))} placeholder="Descreva com suas palavras" className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>}
+       <label className="flex items-start gap-3 text-xs leading-relaxed text-[var(--agade-muted)]"><input type="checkbox" checked={customer.demographic_consent} onChange={e=>setCustomer(v=>({...v,demographic_consent:e.target.checked}))} className="mt-1 accent-[var(--agade-accent)]"/>Autorizo o uso da minha faixa etária e identidade de gênero em análises estatísticas internas da AGADE, de forma agregada. Posso retirar esta autorização nesta ficha.</label>
       </fieldset>
-      <fieldset className="space-y-4 border-t border-[#d4bfb1] pt-5"><legend className="text-sm font-bold mb-3">Dados para futuras compras</legend>
-       <p className="text-xs leading-relaxed text-[#69564e]">Preenchimento opcional por enquanto. CPF não será usado para análises de público.</p>
-       <label className="block text-sm font-medium">CPF<input inputMode="numeric" autoComplete="off" maxLength={14} placeholder="000.000.000-00" value={customer.cpf||""} onChange={e=>setCustomer(v=>({...v,cpf:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
+      <fieldset className="space-y-4 border-t border-[var(--agade-border)] pt-5"><legend className="text-sm font-bold mb-3">Dados para futuras compras</legend>
+       <p className="text-xs leading-relaxed text-[var(--agade-muted)]">Preenchimento opcional por enquanto. CPF não será usado para análises de público.</p>
+       <label className="block text-sm font-medium">CPF<input inputMode="numeric" autoComplete="off" maxLength={14} placeholder="000.000.000-00" value={customer.cpf||""} onChange={e=>setCustomer(v=>({...v,cpf:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
        <div className="grid sm:grid-cols-2 gap-3">
-        <label className="block text-sm font-medium">CEP<input inputMode="numeric" autoComplete="postal-code" maxLength={9} placeholder="00000-000" value={customer.postal_code||""} onChange={e=>setCustomer(v=>({...v,postal_code:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-        <label className="block text-sm font-medium">Estado (UF)<input maxLength={2} placeholder="MG" value={customer.state_code||""} onChange={e=>setCustomer(v=>({...v,state_code:e.target.value.toUpperCase()}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
+        <label className="block text-sm font-medium">CEP<input inputMode="numeric" autoComplete="postal-code" maxLength={9} placeholder="00000-000" value={customer.postal_code||""} onChange={e=>setCustomer(v=>({...v,postal_code:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+        <label className="block text-sm font-medium">Estado (UF)<input maxLength={2} placeholder="MG" value={customer.state_code||""} onChange={e=>setCustomer(v=>({...v,state_code:e.target.value.toUpperCase()}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
        </div>
-       <label className="block text-sm font-medium">Endereço (rua / avenida)<input autoComplete="address-line1" maxLength={160} value={customer.address_line||""} onChange={e=>setCustomer(v=>({...v,address_line:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Endereço (rua / avenida)<input autoComplete="address-line1" maxLength={160} value={customer.address_line||""} onChange={e=>setCustomer(v=>({...v,address_line:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
        <div className="grid grid-cols-2 gap-3">
-        <label className="block text-sm font-medium">Número<input maxLength={20} value={customer.address_number||""} onChange={e=>setCustomer(v=>({...v,address_number:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-        <label className="block text-sm font-medium">Complemento<input maxLength={80} value={customer.address_complement||""} onChange={e=>setCustomer(v=>({...v,address_complement:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
+        <label className="block text-sm font-medium">Número<input maxLength={20} value={customer.address_number||""} onChange={e=>setCustomer(v=>({...v,address_number:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+        <label className="block text-sm font-medium">Complemento<input maxLength={80} value={customer.address_complement||""} onChange={e=>setCustomer(v=>({...v,address_complement:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
        </div>
-       <label className="block text-sm font-medium">Bairro<input maxLength={100} value={customer.neighborhood||""} onChange={e=>setCustomer(v=>({...v,neighborhood:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
-       <label className="block text-sm font-medium">Cidade<input autoComplete="address-level2" maxLength={100} value={customer.city||""} onChange={e=>setCustomer(v=>({...v,city:e.target.value}))} className="block mt-2 w-full bg-white rounded-xl border border-[#b5a094] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Bairro<input maxLength={100} value={customer.neighborhood||""} onChange={e=>setCustomer(v=>({...v,neighborhood:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
+       <label className="block text-sm font-medium">Cidade<input autoComplete="address-level2" maxLength={100} value={customer.city||""} onChange={e=>setCustomer(v=>({...v,city:e.target.value}))} className="block mt-2 w-full bg-[var(--agade-card)] rounded-xl border border-[var(--agade-border)] p-3 text-base"/></label>
       </fieldset>
-      <button type="submit" disabled={profileState==="saving"||profileState==="loading"||avatarBusy} className="rounded-xl bg-[#a95e46] text-white px-6 min-h-12 disabled:opacity-50">{profileState==="saving"?"Salvando…":"Salvar minha ficha"}</button>
+      <button type="submit" disabled={profileState==="saving"||profileState==="loading"||avatarBusy} className="rounded-xl bg-[var(--agade-accent)] text-white px-6 min-h-12 disabled:opacity-50">{profileState==="saving"?"Salvando…":"Salvar minha ficha"}</button>
       {profileMessage&&<p role="status" className="text-sm leading-relaxed">{profileMessage}</p>}
-     </form>:<p className="mt-8 border-t border-[#d4bfb1] pt-7 text-sm text-[#69564e]">Sua ficha poderá ser preenchida aqui quando a área privada estiver configurada.</p>}
-     <p className="text-xs text-[#69564e] leading-relaxed mt-7">O histórico de pedidos ainda não está integrado e nenhuma compra pode ser realizada nesta etapa.</p>
-     <button type="button" className="mt-7 min-h-12 inline-flex gap-3 items-center rounded-xl border border-[#785254] px-5" onClick={logout}><LogOut size={17}/> Sair da conta</button>
+     </form>:<p className="mt-8 border-t border-[var(--agade-border)] pt-7 text-sm text-[var(--agade-muted)]">Sua ficha poderá ser preenchida aqui quando a área privada estiver configurada.</p>}
+     <p className="text-xs text-[var(--agade-muted)] leading-relaxed mt-7">O histórico de pedidos ainda não está integrado e nenhuma compra pode ser realizada nesta etapa.</p>
+     <button type="button" className="mt-7 min-h-12 inline-flex gap-3 items-center rounded-xl border border-[var(--agade-accent)] px-5" onClick={logout}><LogOut size={17}/> Sair da conta</button>
     </div>:<>
-     <div className="flex gap-3 items-center mb-6"><Mail size={22} className="text-[#a95e46]"/><h2 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>{mode==="login"?"Entrar":mode==="register"?"Criar conta":"Recuperar senha"}</h2></div>
-     {!enabled?<div role="status" className="bg-[#fffaf2] p-5 rounded-xl text-sm text-[#69564e] leading-relaxed">O acesso está em preparação. Não estamos recebendo dados de login por esta página neste momento.</div>:
+     <div className="flex gap-3 items-center mb-6"><Mail size={22} className="text-[var(--agade-accent-text)]"/><h2 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>{mode==="login"?"Entrar":mode==="register"?"Criar conta":"Recuperar senha"}</h2></div>
+     {!enabled?<div role="status" className="bg-[var(--agade-page)] p-5 rounded-xl text-sm text-[var(--agade-muted)] leading-relaxed">O acesso está em preparação. Não estamos recebendo dados de login por esta página neste momento.</div>:
       <>
       <div className="flex gap-2 mb-7" role="group" aria-label="Tipo de acesso">
-       {([{key:"login",title:"Entrar"},{key:"register",title:"Cadastrar"}] as const).map(item=><button type="button" key={item.key} aria-pressed={mode===item.key} onClick={()=>{setMode(item.key);setMessage("");setState("idle");setPassword("");setPasswordAgain("")}} className={`min-h-11 flex-1 rounded-full border px-4 text-sm font-semibold ${mode===item.key?"bg-[#785254] text-white":"border-[#785254] text-[#785254]"}`}>{item.title}</button>)}
+       {([{key:"login",title:"Entrar"},{key:"register",title:"Cadastrar"}] as const).map(item=><button type="button" key={item.key} aria-pressed={mode===item.key} onClick={()=>{setMode(item.key);setMessage("");setState("idle");setPassword("");setPasswordAgain("")}} className={`min-h-11 flex-1 rounded-full border px-4 text-sm font-semibold ${mode===item.key?"bg-[var(--agade-accent)] text-white":"border-[var(--agade-accent)] text-[var(--agade-accent-text)]"}`}>{item.title}</button>)}
       </div>
       <form onSubmit={submit} className="space-y-5">
-       <label htmlFor="account-email" className="block text-sm font-medium">E-mail<input id="account-email" type="email" required autoComplete="email" maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} className="block mt-2 w-full rounded-xl border border-[#b5a094] bg-[#fffaf2] px-4 py-3 text-base outline-offset-2 focus-visible:outline-[#a95e46]" placeholder="voce@exemplo.com"/></label>
+       <label htmlFor="account-email" className="block text-sm font-medium">E-mail<input id="account-email" type="email" required autoComplete="email" maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} className="block mt-2 w-full rounded-xl border border-[var(--agade-border)] bg-[var(--agade-page)] px-4 py-3 text-base outline-offset-2 focus-visible:outline-[var(--agade-accent)]" placeholder="voce@exemplo.com"/></label>
        {(mode==="login"||mode==="register")&&<div>
         <label htmlFor="account-password" className="block text-sm font-medium">Senha {mode==="register"?"(mínimo de 12 caracteres)":""}</label>
-        <div className="flex items-center mt-2 rounded-xl border border-[#b5a094] bg-[#fffaf2]">
+        <div className="flex items-center mt-2 rounded-xl border border-[var(--agade-border)] bg-[var(--agade-page)]">
          <input id="account-password" type={showPassword?"text":"password"} required autoComplete={mode==="register"?"new-password":"current-password"} minLength={mode==="register"?12:undefined} value={password} onChange={e=>setPassword(e.target.value)} className="min-w-0 flex-1 bg-transparent px-4 py-3 text-base outline-offset-2"/>
          <button type="button" onClick={()=>setShowPassword(!showPassword)} className="min-w-12 min-h-12 flex items-center justify-center" aria-label={showPassword?"Ocultar senha":"Mostrar senha"}>{showPassword?<EyeOff size={19}/>:<Eye size={19}/>}</button>
         </div>
        </div>}
-       {mode==="register"&&<label className="block text-sm font-medium">Confirme a senha<input type="password" autoComplete="new-password" minLength={12} required value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} className="block mt-2 w-full rounded-xl border border-[#b5a094] bg-[#fffaf2] px-4 py-3 text-base"/></label>}
-       {mode==="register"&&<p className="text-xs leading-relaxed text-[#69564e]">Ao se cadastrar, você aceita os <Link className="underline" to="/politicas">termos comerciais</Link> e toma ciência da <Link className="underline" to="/privacidade">Política de Privacidade</Link>. A newsletter é opcional e independente.</p>}
-       <button type="submit" disabled={busy} className="min-h-12 w-full rounded-xl bg-[#a95e46] hover:bg-[#884735] text-white px-6 py-4 text-sm font-semibold disabled:opacity-50">{busy?"Enviando…":mode==="login"?"Entrar com senha":mode==="register"?"Criar cadastro":"Enviar link para redefinir"}</button>
+       {mode==="register"&&<label className="block text-sm font-medium">Confirme a senha<input type="password" autoComplete="new-password" minLength={12} required value={passwordAgain} onChange={e=>setPasswordAgain(e.target.value)} className="block mt-2 w-full rounded-xl border border-[var(--agade-border)] bg-[var(--agade-page)] px-4 py-3 text-base"/></label>}
+       {mode==="register"&&<p className="text-xs leading-relaxed text-[var(--agade-muted)]">Ao se cadastrar, você aceita os <Link className="underline" to="/politicas">termos comerciais</Link> e toma ciência da <Link className="underline" to="/privacidade">Política de Privacidade</Link>. A newsletter é opcional e independente.</p>}
+       <button type="submit" disabled={busy} className="min-h-12 w-full rounded-xl bg-[var(--agade-accent)] hover:bg-[var(--agade-action-hover)] text-white px-6 py-4 text-sm font-semibold disabled:opacity-50">{busy?"Enviando…":mode==="login"?"Entrar com senha":mode==="register"?"Criar cadastro":"Enviar link para redefinir"}</button>
        {message&&<p role="status" aria-live="polite" className="text-sm leading-relaxed">{message}</p>}
       </form>
       <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm">
@@ -362,9 +362,9 @@ export default function Account(){
 
       </div>
       </>}
-     <p className="mt-7 text-xs leading-relaxed text-[#69564e]">A criação de conta não inscreve você na newsletter.</p>
+     <p className="mt-7 text-xs leading-relaxed text-[var(--agade-muted)]">A criação de conta não inscreve você na newsletter.</p>
     </>}
-    <Link to="/ajuda" className="inline-flex items-center gap-3 mt-9 min-h-11 text-sm border-b border-[#785254]">Precisa de ajuda? <ArrowRight size={17}/></Link>
+    <Link to="/ajuda" className="inline-flex items-center gap-3 mt-9 min-h-11 text-sm border-b border-[var(--agade-accent)]">Precisa de ajuda? <ArrowRight size={17}/></Link>
    </div>
   </div>
  </div>;
