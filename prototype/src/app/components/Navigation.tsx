@@ -38,7 +38,7 @@ export default function Navigation() {
     <nav aria-label="Navegação principal" className="agade-mainnav h-20 relative max-w-[1600px] mx-auto border-b border-[var(--agade-border)] px-5 sm:px-10 flex justify-between items-center">
       <div className="hidden lg:flex items-center gap-9 w-[35%]">
         {links.map(l=><Link to={l.to} aria-current={pathname===l.to?"page":undefined} key={l.to}
-          className="text-[11px] tracking-[.13em] font-medium hover:text-[var(--agade-accent)] transition-colors">{l.label}</Link>)}
+          className="text-[11px] tracking-[.13em] font-medium hover:text-[var(--agade-accent-text)] transition-colors">{l.label}</Link>)}
       </div>
       <button type="button" aria-label={open?"Fechar menu":"Abrir menu"} aria-expanded={open} aria-controls="agade-mobile-nav" onClick={()=>setOpen(!open)}
         className="lg:hidden p-2.5 min-w-11 min-h-11 -ml-2 focus-visible:outline-2 focus-visible:outline-offset-2">{open?<X size={22}/>:<Menu size={22}/>}</button>
@@ -47,7 +47,7 @@ export default function Navigation() {
         {<button type="button" onClick={switchTheme} className="agade-mode-toggle inline-flex items-center justify-center min-w-11 min-h-11 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2" aria-label={dark?"Ativar modo claro":"Ativar modo escuro"} title={dark?"Modo claro":"Modo escuro"}>{dark?<Sun size={20} strokeWidth={1.8}/>:<Moon size={20} strokeWidth={1.8}/>}</button>}
         <button type="button" onClick={()=>setSearchOpen(!searchOpen)} aria-label="Buscar óculos" aria-expanded={searchOpen} className="hidden sm:inline-flex items-center justify-center p-2.5 min-w-11 min-h-11 focus-visible:outline-2">
           <Search size={21} strokeWidth={1.6}/></button>
-        <button type="button" aria-label={`Abrir sacola com ${cart.quantity} itens`} onClick={()=>cart.setOpen(true)} className="p-2.5 min-w-11 min-h-11 relative hover:text-[var(--agade-accent)]"><ShoppingBag size={21} strokeWidth={1.6}/>{cart.quantity>0&&<span className="absolute -top-1 -right-1 bg-[var(--agade-accent)] text-white text-[9px] min-w-4 h-4 rounded-full flex items-center justify-center">{cart.quantity}</span>}</button>
+        <button type="button" aria-label={`Abrir sacola com ${cart.quantity} itens`} onClick={()=>cart.setOpen(true)} className="p-2.5 min-w-11 min-h-11 relative hover:text-[var(--agade-accent-text)]"><ShoppingBag size={21} strokeWidth={1.6}/>{cart.quantity>0&&<span className="absolute -top-1 -right-1 bg-[var(--agade-accent)] text-white text-[9px] min-w-4 h-4 rounded-full flex items-center justify-center">{cart.quantity}</span>}</button>
         <Link to="/conta" aria-label="Minha conta" className="hidden sm:inline-flex items-center justify-center p-2.5 min-w-11 min-h-11 hover:text-[#a34e3a]"><UserRound size={21} strokeWidth={1.6}/></Link>
         <Link to="/ajuda" aria-label="Ajuda" className="hidden sm:inline-flex p-2 hover:text-[#a34e3a]"><CircleHelp size={20} strokeWidth={1.6}/></Link>
         <Link to="/loja" className="hidden sm:inline-flex items-center gap-1 text-[11px] uppercase tracking-[.15em] hover:text-[#a34e3a]">
