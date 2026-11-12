@@ -59,7 +59,7 @@ export default function CartDrawer(){
     {items.length>0&&<footer className="border-t border-[var(--agade-border)] px-6 py-6">
      <div className="flex justify-between font-semibold mb-3"><span>Subtotal estimado</span><span>{money(total)}</span></div>
      <p className="text-xs leading-relaxed text-[var(--agade-muted)] mb-5">Estes preços são apenas uma referência da seleção. Valor, estoque e frete serão conferidos no servidor antes de futuras compras.</p>
-     <div className="w-full rounded-xl bg-[var(--agade-feature)] text-[var(--agade-accent)] py-4 px-5 text-center uppercase tracking-[.12em] text-xs font-semibold">Checkout ainda indisponível</div>
+     <div className="w-full rounded-xl bg-[var(--agade-feature)] text-[var(--agade-accent-text)] py-4 px-5 text-center uppercase tracking-[.12em] text-xs font-semibold">Checkout ainda indisponível</div>
      <button onClick={clear} type="button" className="mt-5 text-xs text-[var(--agade-muted)] underline underline-offset-4">Limpar sacola</button>
     </footer>}
    </aside>
