@@ -7,7 +7,7 @@ const money=(cents:number)=>new Intl.NumberFormat("pt-BR",{style:"currency",curr
 const photo=(id:number,w:number)=>`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 const serif={fontFamily:"var(--font-serif)"};
 function Action({to,children,outline=false}:{to:string;children:ReactNode;outline?:boolean}){
- return <Link to={to} className={`inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${outline?"border border-[var(--agade-accent)] text-[var(--agade-ink)] hover:bg-[#f1e6da]":"bg-[var(--agade-accent)] text-white hover:bg-[var(--agade-deep)]"}`}>
+ return <Link to={to} className={`inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${outline?"border border-[var(--agade-accent)] text-[var(--agade-ink)] hover:bg-[var(--agade-soft)]":"bg-[var(--agade-accent)] text-white hover:bg-[var(--agade-deep)]"}`}>
   {children}<ArrowUpRight size={18} aria-hidden="true"/>
  </Link>;
 }
