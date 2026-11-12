@@ -29,12 +29,12 @@ export default function Newsletter(){
    setMessage("Recebemos seu interesse. Quando nossas mensagens começarem, cada e-mail terá um link de descadastro.");
   }catch(err){setStatus("error");setMessage(err instanceof Error?err.message:"Erro de conexão.");}
  }
- return <section aria-labelledby="newsletter-title" className="bg-[#785254] text-white px-6 sm:px-10 py-16 md:py-20">
+ return <section aria-labelledby="newsletter-title" className="agade-newsletter px-6 sm:px-10 py-16 md:py-20">
   <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
    <div>
-    <p className="text-[11px] uppercase tracking-[.21em] text-[#fff1e4]/80 mb-5">AGADE / COMUNIDADE</p>
+    <p className="text-[11px] uppercase tracking-[.21em] opacity-75 mb-5">AGADE / COMUNIDADE</p>
     <h2 id="newsletter-title" className="text-3xl sm:text-5xl leading-[1.08] font-normal" style={{fontFamily:"var(--font-serif)"}}>Quer saber quando chegar?</h2>
-    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl text-[#fff1e4]">Estamos escolhendo os primeiros óculos da AGADE. Quando a lista estiver pronta, vamos contar por aqui.</p>
+    <p className="mt-5 text-sm sm:text-base leading-relaxed max-w-xl">Estamos escolhendo os primeiros óculos da AGADE. Quando a lista estiver pronta, vamos contar por aqui.</p>
    </div>
    <div>
     {enabled?<form onSubmit={submit} className="space-y-4">
@@ -53,7 +53,7 @@ export default function Newsletter(){
      </label>
      <div className="flex flex-wrap items-center gap-4 text-xs"><Link to="/privacidade" className="underline underline-offset-4 text-white/90">Privacidade</Link><Link to="/cancelar-newsletter" className="underline underline-offset-4 text-white/90">Como cancelar</Link></div>
      {status!=="idle"&&<p role="status" className="text-sm">{status==="sending"?"Registrando…":message}</p>}
-    </form>:<div role="status" className="border border-white/40 rounded-xl px-6 py-5 text-sm leading-relaxed">
+    </form>:<div role="status" className="agade-newsletter-panel rounded-xl px-6 py-5 text-sm leading-relaxed">
       Ainda não estamos recebendo inscrições por e-mail. Enquanto isso, acompanhe as novidades no <a href="https://www.instagram.com/itsagade/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Instagram @itsagade</a>.
     </div>}
    </div>
