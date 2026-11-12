@@ -12,9 +12,11 @@ const links = [
 export default function Navigation() {
   const {pathname,search}=useLocation();
   const solarHome=pathname==="/";
-  const brisa=solarHome&&new URLSearchParams(search).get("paleta")==="brisa";
-  const accent=brisa?"#397C83":"#D26B67";
-  const ink=brisa?"#173B4B":"#202D37";
+  const palette=new URLSearchParams(search).get("paleta");
+  const brisa=solarHome&&palette==="brisa";
+  const goiaba=solarHome&&palette==="solar";
+  const accent=brisa?"#397C83":goiaba?"#D26B67":"#2E6F95";
+  const ink=brisa?"#173B4B":goiaba?"#202D37":"#1E3D59";
   const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
