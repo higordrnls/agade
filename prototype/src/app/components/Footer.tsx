@@ -1,12 +1,12 @@
 import { Link } from "react-router";
 import Newsletter from "./Newsletter";
 export default function Footer(){
- return <><Newsletter/><footer className="bg-[#302429] text-[#fffaf2] px-6 sm:px-10 pt-16 sm:pt-20 pb-8">
+ return <><Newsletter/><footer className="agade-footer px-6 sm:px-10 pt-16 sm:pt-20 pb-8">
   <div className="max-w-[1440px] mx-auto">
-   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 pb-20 border-b border-white/25">
+   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 pb-16 border-b border-white/25">
     <div className="lg:col-span-2">
      <p className="text-xs uppercase tracking-[.2em] text-white/65 mb-7">AGADE EYEWEAR · BRASIL</p>
-     <p className="text-[clamp(3rem,8vw,8rem)] font-semibold tracking-[-.07em] leading-[.9] max-w-4xl">Feita pra quem<br/>gosta de olhar.</p>
+     <p className="agade-footer-title text-[clamp(3rem,6vw,6.1rem)] font-semibold tracking-[-.06em] leading-[.98] max-w-4xl">Feita pra quem<br/>gosta de olhar.</p>
     </div>
     <div className="flex flex-col gap-4 text-sm">
      <p className="text-xs tracking-[.2em] uppercase text-white/60 mb-3">Navegue</p>
