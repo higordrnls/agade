@@ -280,16 +280,16 @@ export default function Account(){
  return <div className="bg-[var(--agade-page)] min-h-[65vh] text-[var(--agade-ink)] px-6 sm:px-10 py-14 sm:py-20">
   <div className="max-w-[1120px] mx-auto grid md:grid-cols-[1fr_.95fr] gap-10 lg:gap-20">
    <div>
-    <p className="text-xs font-semibold tracking-[.17em] text-[var(--agade-accent)] uppercase mb-6">AGADE / SUA CONTA</p>
+    <p className="text-xs font-semibold tracking-[.17em] text-[var(--agade-accent-text)] uppercase mb-6">AGADE / SUA CONTA</p>
     <h1 className="text-[clamp(3.4rem,6vw,6.2rem)] leading-[1] tracking-[-.05em]" style={{fontFamily:"var(--font-serif)"}}>Seu espaço na AGADE.</h1>
     <p className="mt-7 text-[var(--agade-muted)] leading-relaxed max-w-md">Crie seu cadastro, entre com senha e mantenha seus dados atualizados. Quando a loja começar a vender, será possível consultar seus pedidos por aqui.</p>
     <div className="mt-10 border-t border-[var(--agade-border)] pt-7 flex items-start gap-3 text-sm text-[var(--agade-muted)]">
-     <LockKeyhole size={20} className="shrink-0 text-[var(--agade-accent)]"/> O acesso é protegido pelo Supabase Auth. Não armazenamos sua senha no cadastro de clientes.
+     <LockKeyhole size={20} className="shrink-0 text-[var(--agade-accent-text)]"/> O acesso é protegido pelo Supabase Auth. Não armazenamos sua senha no cadastro de clientes.
     </div>
    </div>
    <div className="bg-[var(--agade-feature)] rounded-2xl p-7 sm:p-10 self-start">
     {profile?<div>
-     <CheckCircle2 size={28} className="text-[var(--agade-leaf)] mb-4"/>
+     <CheckCircle2 size={28} className="text-[var(--agade-leaf-text)] mb-4"/>
      <h2 className="text-3xl mb-3" style={{fontFamily:"var(--font-serif)"}}>Minha conta</h2>
      <p className="text-sm break-all">{profile.email}</p>
      {recoveryMode?<form className="mt-8 space-y-4" onSubmit={updatePassword}>
@@ -337,11 +337,11 @@ export default function Account(){
      <p className="text-xs text-[var(--agade-muted)] leading-relaxed mt-7">O histórico de pedidos ainda não está integrado e nenhuma compra pode ser realizada nesta etapa.</p>
      <button type="button" className="mt-7 min-h-12 inline-flex gap-3 items-center rounded-xl border border-[var(--agade-accent)] px-5" onClick={logout}><LogOut size={17}/> Sair da conta</button>
     </div>:<>
-     <div className="flex gap-3 items-center mb-6"><Mail size={22} className="text-[var(--agade-accent)]"/><h2 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>{mode==="login"?"Entrar":mode==="register"?"Criar conta":"Recuperar senha"}</h2></div>
+     <div className="flex gap-3 items-center mb-6"><Mail size={22} className="text-[var(--agade-accent-text)]"/><h2 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>{mode==="login"?"Entrar":mode==="register"?"Criar conta":"Recuperar senha"}</h2></div>
      {!enabled?<div role="status" className="bg-[var(--agade-page)] p-5 rounded-xl text-sm text-[var(--agade-muted)] leading-relaxed">O acesso está em preparação. Não estamos recebendo dados de login por esta página neste momento.</div>:
       <>
       <div className="flex gap-2 mb-7" role="group" aria-label="Tipo de acesso">
-       {([{key:"login",title:"Entrar"},{key:"register",title:"Cadastrar"}] as const).map(item=><button type="button" key={item.key} aria-pressed={mode===item.key} onClick={()=>{setMode(item.key);setMessage("");setState("idle");setPassword("");setPasswordAgain("")}} className={`min-h-11 flex-1 rounded-full border px-4 text-sm font-semibold ${mode===item.key?"bg-[var(--agade-accent)] text-white":"border-[var(--agade-accent)] text-[var(--agade-accent)]"}`}>{item.title}</button>)}
+       {([{key:"login",title:"Entrar"},{key:"register",title:"Cadastrar"}] as const).map(item=><button type="button" key={item.key} aria-pressed={mode===item.key} onClick={()=>{setMode(item.key);setMessage("");setState("idle");setPassword("");setPasswordAgain("")}} className={`min-h-11 flex-1 rounded-full border px-4 text-sm font-semibold ${mode===item.key?"bg-[var(--agade-accent)] text-white":"border-[var(--agade-accent)] text-[var(--agade-accent-text)]"}`}>{item.title}</button>)}
       </div>
       <form onSubmit={submit} className="space-y-5">
        <label htmlFor="account-email" className="block text-sm font-medium">E-mail<input id="account-email" type="email" required autoComplete="email" maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} className="block mt-2 w-full rounded-xl border border-[var(--agade-border)] bg-[var(--agade-page)] px-4 py-3 text-base outline-offset-2 focus-visible:outline-[var(--agade-accent)]" placeholder="voce@exemplo.com"/></label>
