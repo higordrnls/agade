@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { loadStorefrontCatalog, type StorefrontState } from "../data/storefrontCatalog";
@@ -12,48 +12,35 @@ function Action({to,children,outline=false}:{to:string;children:ReactNode;outlin
  </Link>;
 }
 export default function Home(){
- const {search}=useLocation();
- const variant=new URLSearchParams(search).get("paleta");
- const brisa=variant==="brisa";
- const solar=variant==="solar";
- const theme=brisa?{
-  "--agade-page":"#FFFFFF","--agade-ink":"#173B4B","--agade-muted":"#36565A",
-  "--agade-accent":"#397C83","--agade-soft":"#E7F2F2","--agade-feature":"#BBDCE5",
-  "--agade-highlight":"#E1AD9D","--agade-deep":"#397C83","--agade-caption":"#36565A",
- }:solar?{
-  "--agade-page":"#FFFFFF","--agade-ink":"#202D37","--agade-muted":"#465962",
-  "--agade-accent":"#D26B67","--agade-soft":"#FBEAEC","--agade-feature":"#E0F1DF",
-  "--agade-highlight":"#F0C96A","--agade-deep":"#4C826A","--agade-caption":"#465962",
- }:{
-  "--agade-page":"#FFFFFF","--agade-ink":"#1F405A","--agade-muted":"#486170",
-  "--agade-accent":"#D96C75","--agade-soft":"#EAF4FA","--agade-feature":"#EEF7F0",
-  "--agade-highlight":"#E7C76A","--agade-deep":"#2E6F95","--agade-caption":"#486170",
+ // Direção única: Brasil cotidiano, luz natural e hierarquia editorial.
+ // Cores brasileiras como referência cultural, não como garantia de conversão.
+ const theme={
+  "--agade-page":"#FFFFFF",
+  "--agade-ink":"#173F70",
+  "--agade-muted":"#3F5667",
+  "--agade-accent":"#B94737",
+  "--agade-soft":"#FFFFFF",
+  "--agade-feature":"#E4F2F8",
+  "--agade-highlight":"#F1B844",
+  "--agade-deep":"#17699D",
+  "--agade-caption":"#476174",
  };
-
  const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
  useEffect(()=>{let alive=true;loadStorefrontCatalog().then(data=>{if(alive)setCatalog(data)});return()=>{alive=false}},[]);
  const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
  return <div style={theme as React.CSSProperties} className="overflow-x-hidden bg-[var(--agade-page)] text-[var(--agade-ink)]">
-  <div className="flex flex-wrap items-center justify-between gap-3 px-6 sm:px-10 py-3 bg-white border-b border-black/10" aria-label="Experimento visual da AGADE">
-   <span className="text-[11px] uppercase tracking-[.12em] font-semibold">Estudo de cor · homepage</span>
-   <div className="flex flex-wrap items-center gap-2 text-xs">
-    <Link to="/?paleta=solar" aria-current={solar?"page":undefined} className={solar?"px-4 py-2 rounded-full bg-[#D26B67] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>01 · Solar goiaba</Link>
-    <Link to="/?paleta=brisa" aria-current={brisa?"page":undefined} className={brisa?"px-4 py-2 rounded-full bg-[#397C83] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>02 · Brisa azul</Link>
-    <Link to="/?paleta=hibrida" aria-current={!brisa&&!solar?"page":undefined} className={!brisa&&!solar?"px-4 py-2 rounded-full bg-[#2E6F95] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>03 · Solar híbrida</Link>
-   </div>
-  </div>
   {/* No celular, o produto no rosto aparece ANTES do texto — e dentro da primeira dobra. */}
-  <section className="bg-[var(--agade-soft)] lg:grid lg:grid-cols-[47%_53%]" aria-labelledby="home-hero">
+  <section className="bg-white lg:grid lg:grid-cols-[47%_53%]" aria-labelledby="home-hero">
    <div className="relative min-h-[320px] h-[47svh] max-h-[540px] sm:h-[55svh] lg:h-auto lg:min-h-[650px] lg:order-2 bg-[var(--agade-deep)] overflow-hidden">
     <img src={photo(9485735,1600)} alt="Referência editorial: pessoa usando óculos de sol entre folhas tropicais" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[center_35%]"/>
     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent" aria-hidden="true"/>
     <p className="absolute left-5 bottom-4 sm:left-9 text-white text-[10px] tracking-wide leading-relaxed max-w-[270px]">Fotografia de referência · os óculos retratados não são produtos da AGADE</p>
    </div>
    <div className="flex flex-col justify-center lg:order-1 px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] py-10 sm:py-16 lg:py-24">
-    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-accent)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
-    <h1 id="home-hero" className="text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-accent)]">Do seu jeito.</span></h1>
+    <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-deep)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
+    <h1 id="home-hero" className="text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-deep)]">Do seu jeito.</span></h1>
     <p className="mt-5 sm:mt-8 text-[15px] sm:text-lg text-[var(--agade-muted)] leading-relaxed max-w-md">Estamos preparando a primeira seleção da AGADE. Armações para experimentar, sair de casa e usar de verdade.</p>
-    <div className="mt-7 sm:mt-9"><Action to="/loja">Conhecer a seleção</Action></div>
+    <div className="mt-7 sm:mt-9"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-deep)] text-white hover:bg-[var(--agade-ink)] transition-colors">Conhecer a seleção <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
     <p className="mt-8 lg:mt-20 text-xs text-[var(--agade-muted)]">Uma curadoria independente, ainda em construção.</p>
    </div>
   </section>
@@ -124,7 +111,7 @@ export default function Home(){
 
   <section className="bg-[var(--agade-deep)] text-white px-5 sm:px-10 py-14 sm:py-20">
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-7">
-    <div><p className="text-xs uppercase tracking-[.14em] text-white/80 font-semibold mb-3">AGADE / EM BREVE</p>
+    <div><p className="text-xs uppercase tracking-[.14em] text-white/90 font-semibold mb-3">AGADE / EM BREVE</p>
      <h2 className="text-[clamp(2.8rem,5vw,5.7rem)] leading-[1] tracking-[-.05em]" style={serif}>A seleção está quase tomando forma.</h2></div>
     <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-white text-[var(--agade-deep)] hover:bg-[var(--agade-soft)] transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
    </div>
