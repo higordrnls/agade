@@ -93,9 +93,16 @@ async function currentSession(){
 }
 async function fetchCustomer():Promise<CustomerProfile|null>{
  const session=await currentSession();
- const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?select=*&limit=1`,{headers:apiHeaders(session.access_token)});
- if(!response.ok)throw Error("Não foi possível carregar seus dados.");
+ const user=await fetchProfile(session);
+ // Scope explicitly to the signed-in user in addition to Supabase RLS.
+ const query=new URLSearchParams({select:"*",user_id:`eq.${user.id}`,limit:"1"});
+ const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?${query}`,{
+  headers:{...apiHeaders(session.access_token),"Cache-Control":"no-cache"},
+  cache:"no-store"
+ });
+ if(!response.ok)throw Error("Não foi possível carregar sua ficha. Verifique a conexão com o banco.");
  const rows=await response.json();
+ if(!Array.isArray(rows))throw Error("Resposta inesperada ao consultar a ficha.");
  return rows.length?rows[0]:null;
 }
 async function saveCustomer(customer:CustomerProfile):Promise<void>{
@@ -103,8 +110,8 @@ async function saveCustomer(customer:CustomerProfile):Promise<void>{
  if(customer.gender_identity==="self_described"&&!(customer.gender_self_description||"").trim())throw Error("Descreva sua identidade de gênero.");
  const session=await currentSession();
  const user=await fetchProfile(session);
- const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?on_conflict=user_id`,{
-  method:"POST",headers:{...apiHeaders(session.access_token),Prefer:"resolution=merge-duplicates,return=minimal"},
+ const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?on_conflict=user_id&select=user_id,full_name,gender_identity,gender_self_description`,{
+  method:"POST",headers:{...apiHeaders(session.access_token),Prefer:"resolution=merge-duplicates,return=representation"},
   body:JSON.stringify({
    ...customer,user_id:user.id,
    full_name:customer.full_name.trim(),phone_mobile:digits(customer.phone_mobile||"")||null,
@@ -112,7 +119,14 @@ async function saveCustomer(customer:CustomerProfile):Promise<void>{
    demographic_consent:customer.demographic_consent
   })
  });
- if(!response.ok)throw Error("Não foi possível salvar os dados. Confira se a migração do cadastro foi aplicada.");
+ if(!response.ok)throw Error("O banco não aceitou o cadastro. Verifique as permissões e tente novamente.");
+ const saved=await response.json();
+ if(!Array.isArray(saved)||saved.length!==1||saved[0]?.user_id!==user.id)
+  throw Error("O banco não confirmou a gravação da sua ficha.");
+ // A successful request is not enough: immediately verify the row through the same read path used after refresh.
+ const persisted=await fetchCustomer();
+ if(!persisted || persisted.full_name!==customer.full_name.trim() || persisted.gender_identity!==customer.gender_identity)
+  throw Error("Não foi possível confirmar a persistência da ficha. Nenhum sucesso foi anunciado.");
 }
 async function uploadAvatar(file:File):Promise<string>{
  if(file.size>2*1024*1024)throw Error("A imagem pode ter no máximo 2 MB.");
