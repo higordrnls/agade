@@ -19,7 +19,7 @@ export default function Guide(){
   <section className="max-w-[1450px] mx-auto px-6 sm:px-10 py-20 md:py-24" aria-label="O que observar ao escolher um óculos">
    <div className="grid md:grid-cols-2 gap-x-10 gap-y-12">
     {topics.map(({Icon,number,title,detail})=><article key={number} className="border-t border-[var(--agade-border)] pt-7">
-     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[var(--agade-accent)]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
+     <div className="flex items-start justify-between mb-8"><span className="text-xs tracking-[.2em] text-[var(--agade-accent-text)]">{number} / GUIA</span><Icon size={27} strokeWidth={1.5} aria-hidden="true"/></div>
      <h2 className="text-3xl sm:text-4xl mb-5 tracking-tight" style={{fontFamily:"var(--font-serif)"}}>{title}</h2>
      <p className="text-[var(--agade-muted)] leading-relaxed max-w-md">{detail}</p>
     </article>)}
@@ -27,7 +27,7 @@ export default function Guide(){
   </section>
   <section className="bg-[var(--agade-feature)] px-6 sm:px-10 py-20">
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-    <div><p className="uppercase text-xs tracking-[.2em] text-[var(--agade-deep)] mb-5">DA INFORMAÇÃO À ESCOLHA</p>
+    <div><p className="uppercase text-xs tracking-[.2em] text-[var(--agade-deep-text)] mb-5">DA INFORMAÇÃO À ESCOLHA</p>
      <h2 className="text-3xl sm:text-5xl" style={{fontFamily:"var(--font-serif)"}}>Tudo começa pelo seu olhar.</h2>
      <p className="mt-6 max-w-2xl leading-relaxed text-[var(--agade-muted)]">Nas páginas individuais exibimos apenas as características registradas para cada variação. Caso uma informação esteja ausente, não presumimos que o produto tenha aquela característica.</p>
     </div>
