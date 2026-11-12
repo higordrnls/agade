@@ -179,7 +179,7 @@ test('all public pages use shared AGADE surfaces and the global theme selector',
  assert.match(root,/agade-experiment min-h-screen/);
  assert.match(nav,/agade-mode-toggle/);
  assert.doesNotMatch(nav,/solarHome&&<button/);
- const css=readFileSync(new URL('../styles/agade-preview.css',import.meta.url),'utf8');
+ const css=readFileSync(new URL('../src/styles/agade-preview.css',import.meta.url),'utf8');
  assert.match(css,/--agade-page:#121212/);
  assert.match(css,/--agade-card:#202020/);
  assert.match(css,/--agade-accent-text:#F4A5A9/);
