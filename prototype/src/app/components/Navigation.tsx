@@ -10,17 +10,21 @@ const links = [
   {to:"/ajuda",label:"AJUDA"},
 ];
 export default function Navigation() {
-  const {pathname}=useLocation();
+  const {pathname,search}=useLocation();
+  const solarHome=pathname==="/";
+  const brisa=solarHome&&new URLSearchParams(search).get("paleta")==="brisa";
+  const accent=brisa?"#397C83":"#D26B67";
+  const ink=brisa?"#163D4B":"#202D37";
   const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
   const [searchOpen,setSearchOpen]=useState(false);
   useEffect(()=>{setOpen(false);setSearchOpen(false)},[pathname]);
-  return <header className="fixed top-0 inset-x-0 z-50 bg-[#fffaf2] text-[#45322f]">
-    <div className="h-8 bg-[#a95e46] text-white flex items-center justify-center px-4 text-[10px] sm:text-xs font-medium tracking-[.17em] uppercase">
+  return <header className="fixed top-0 inset-x-0 z-50 bg-[#fffaf2] text-[#45322f]" style={solarHome?{backgroundColor:"#FFFFFF",color:ink}:undefined}>
+    <div className="h-8 bg-[#a95e46] text-white flex items-center justify-center px-4 text-[10px] sm:text-xs font-medium tracking-[.17em] uppercase" style={solarHome?{backgroundColor:accent}:undefined}>
       SOL, EXPRESSÃO E UM JEITO NOSSO DE VER
     </div>
-    <nav aria-label="Navegação principal" className="h-20 relative max-w-[1600px] mx-auto border-b border-[#aa765e]/30 px-5 sm:px-10 flex justify-between items-center">
+    <nav aria-label="Navegação principal" className="h-20 relative max-w-[1600px] mx-auto border-b border-[#aa765e]/30 px-5 sm:px-10 flex justify-between items-center" style={solarHome?{borderColor:"#D7E2E0"}:undefined}>
       <div className="hidden lg:flex items-center gap-9 w-[35%]">
         {links.map(l=><Link to={l.to} aria-current={pathname===l.to?"page":undefined} key={l.to}
           className="text-[11px] tracking-[.13em] font-medium hover:text-[#102e90] transition-colors">{l.label}</Link>)}
@@ -44,7 +48,7 @@ export default function Navigation() {
         <button className="bg-[#a34e3a] text-white px-5 text-xs uppercase tracking-wider" type="submit">Buscar</button>
       </form>}
     </nav>
-    {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-[#fff7ed] flex flex-col gap-5 shadow-sm">
+    {open && <div id="agade-mobile-nav" className="lg:hidden border-b border-black/10 px-6 py-6 bg-[#fff7ed] flex flex-col gap-5 shadow-sm" style={solarHome?{backgroundColor:"#FFFFFF"}:undefined}>
       <form action="/loja" role="search" className="flex items-center gap-2 border border-[#e6d3c5] bg-white rounded-2xl p-2 mb-2"><label htmlFor="mobile-catalog-search" className="sr-only">Buscar óculos</label><input id="mobile-catalog-search" name="busca" type="search" placeholder="Buscar óculos" className="min-w-0 flex-1 px-2 py-2 text-sm bg-transparent"/><button type="submit" aria-label="Pesquisar" className="min-w-11 min-h-11 flex items-center justify-center rounded-xl bg-[#a95e46] text-white"><Search size={18}/></button></form>
       {links.map(l=><Link key={l.to} to={l.to} className="text-lg tracking-wide" onClick={()=>setOpen(false)}>{l.label}</Link>)}
       <Link to="/conta" className="text-lg tracking-wide" onClick={()=>setOpen(false)}>MINHA CONTA</Link>
