@@ -14,24 +14,12 @@ function Action({to,children,outline=false}:{to:string;children:ReactNode;outlin
 export default function Home(){
  // Direção única: Brasil cotidiano, luz natural e hierarquia editorial.
  // Cores brasileiras como referência cultural, não como garantia de conversão.
- const theme={
-  "--agade-page":"#FFFFFF",
-  "--agade-ink":"#173F70",
-  "--agade-muted":"#3F5667",
-  "--agade-accent":"#B94737",
-  "--agade-soft":"#FFFFFF",
-  "--agade-feature":"#E4F2F8",
-  "--agade-highlight":"#F1B844",
-  "--agade-leaf":"#287A58",
-  "--agade-deep":"#17699D",
-  "--agade-caption":"#476174",
- };
  const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
  useEffect(()=>{let alive=true;loadStorefrontCatalog().then(data=>{if(alive)setCatalog(data)});return()=>{alive=false}},[]);
  const featured=catalog.status==="ready"?catalog.products.slice(0,4):[];
- return <div style={theme as React.CSSProperties} className="overflow-x-hidden bg-[var(--agade-page)] text-[var(--agade-ink)]">
+ return <div className="agade-home overflow-x-hidden bg-[var(--agade-page)] text-[var(--agade-ink)]">
   {/* No celular, o produto no rosto aparece ANTES do texto — e dentro da primeira dobra. */}
-  <section className="bg-white lg:grid lg:grid-cols-[47%_53%]" aria-labelledby="home-hero">
+  <section className="bg-[var(--agade-page)] lg:grid lg:grid-cols-[47%_53%]" aria-labelledby="home-hero">
    <div className="relative min-h-[320px] h-[47svh] max-h-[540px] sm:h-[55svh] lg:h-auto lg:min-h-[650px] lg:order-2 bg-[var(--agade-deep)] overflow-hidden">
     <img src={photo(9485735,1600)} alt="Referência editorial: pessoa usando óculos de sol entre folhas tropicais" fetchPriority="high" loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-cover object-[center_35%]"/>
     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent" aria-hidden="true"/>
@@ -39,7 +27,7 @@ export default function Home(){
    </div>
    <div className="flex flex-col justify-center lg:order-1 px-6 sm:px-12 lg:pl-[max(3rem,calc((100vw-1450px)/2))] py-10 sm:py-16 lg:py-24">
     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-deep)] mb-4 sm:mb-7">AGADE / ÓCULOS DE SOL</p>
-    <h1 id="home-hero" className="text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-deep)]">Do seu jeito.</span></h1>
+    <h1 id="home-hero" className="agade-hero-title text-[clamp(3.3rem,7.1vw,7.3rem)] leading-[.94] tracking-[-.065em] max-w-[680px]" style={serif}>Óculos de sol.<br/><span className="text-[var(--agade-deep)]">Do seu jeito.</span></h1>
     <p className="mt-5 sm:mt-8 text-[15px] sm:text-lg text-[var(--agade-muted)] leading-relaxed max-w-md">Estamos preparando a primeira seleção da AGADE. Armações para experimentar, sair de casa e usar de verdade.</p>
     <div className="mt-7 sm:mt-9"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-deep)] text-white hover:bg-[var(--agade-ink)] transition-colors">Conhecer a seleção <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
     <p className="mt-8 lg:mt-20 text-xs text-[var(--agade-muted)]">Uma curadoria independente, ainda em construção.</p>
@@ -115,7 +103,7 @@ export default function Home(){
    <div className="max-w-[1450px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-7">
     <div><p className="text-xs uppercase tracking-[.14em] text-white/90 font-semibold mb-3">AGADE / EM BREVE</p>
      <h2 className="text-[clamp(2.8rem,5vw,5.7rem)] leading-[1] tracking-[-.05em]" style={serif}>A seleção está quase tomando forma.</h2></div>
-    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-white text-[var(--agade-deep)] hover:bg-[var(--agade-soft)] transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
+    <div className="self-start md:self-end"><Link to="/loja" className="inline-flex min-h-12 items-center justify-between gap-8 rounded-full px-6 py-3 text-sm font-semibold bg-[var(--agade-page)] text-[var(--agade-deep)] hover:bg-[var(--agade-soft)] transition-colors">Conheça a AGADE <ArrowUpRight size={18} aria-hidden="true"/></Link></div>
    </div>
   </section>
 
