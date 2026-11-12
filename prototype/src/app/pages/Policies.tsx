@@ -24,22 +24,22 @@ export default function Policies(){
     {[{Icon:RotateCcw,title:"7 dias",text:"Direito de arrependimento nas compras realizadas à distância."},
     {Icon:ShieldCheck,title:"90 dias",text:"Prazo legal para reclamar de vícios aparentes em produtos duráveis."},
     {Icon:Truck,title:"Frete informado",text:"Entrega paga pelo cliente e valor apresentado antes da compra."}].map(({Icon,title,text})=><div key={title} className="border-t-2 border-[var(--agade-leaf)] pt-6">
-     <Icon size={25} className="mb-6 text-[var(--agade-accent)]" aria-hidden="true"/>
+     <Icon size={25} className="mb-6 text-[var(--agade-accent-text)]" aria-hidden="true"/>
      <h2 className="text-3xl mb-4" style={{fontFamily:"var(--font-serif)"}}>{title}</h2><p className="text-sm leading-relaxed max-w-sm">{text}</p>
     </div>)}
    </div>
    <div className="grid lg:grid-cols-12 gap-10">
-    <div className="lg:col-span-4"><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent)] mb-5">INFORMAÇÕES ESSENCIAIS</p>
+    <div className="lg:col-span-4"><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent-text)] mb-5">INFORMAÇÕES ESSENCIAIS</p>
      <h2 className="text-4xl sm:text-5xl" style={{fontFamily:"var(--font-serif)"}}>Sem letra miúda.</h2>
      <p className="text-sm leading-relaxed mt-7 text-[var(--agade-muted)]">Estas orientações seguem o CDC e o Decreto do Comércio Eletrônico. Antes das primeiras vendas, precisamos publicar os dados de identificação do fornecedor e concluir o fluxo operacional de atendimento e estorno.</p>
     </div>
     <div className="lg:col-span-8 border-t border-[var(--agade-accent)]/35">{faq.map(item=><details key={item.title} className="border-b border-[var(--agade-accent)]/30 py-6 group">
-     <summary className="cursor-pointer list-none font-semibold text-lg focus-visible:outline-2 focus-visible:outline-[var(--agade-accent)]">{item.title} <span className="float-right text-[var(--agade-accent)] group-open:rotate-45 transition-transform">+</span></summary>
+     <summary className="cursor-pointer list-none font-semibold text-lg focus-visible:outline-2 focus-visible:outline-[var(--agade-accent)]">{item.title} <span className="float-right text-[var(--agade-accent-text)] group-open:rotate-45 transition-transform">+</span></summary>
      <p className="mt-5 leading-relaxed max-w-3xl text-[var(--agade-muted)]">{item.text}</p>
     </details>)}</div>
    </div>
    <div className="mt-20 bg-[var(--agade-feature)] p-8 sm:p-12 flex flex-col sm:flex-row sm:justify-between gap-7">
-    <div><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent)] mb-4">FALE COM A GENTE</p>
+    <div><p className="text-xs uppercase tracking-[.2em] text-[var(--agade-accent-text)] mb-4">FALE COM A GENTE</p>
      <h2 className="text-3xl sm:text-4xl mb-3" style={{fontFamily:"var(--font-serif)"}}>Atendimento humano.</h2>
      <p className="text-sm max-w-xl leading-relaxed">Para dúvidas sobre esta política e futuras compras, escreva para nosso atendimento. O canal de WhatsApp ainda está sendo preparado.</p>
     </div>
