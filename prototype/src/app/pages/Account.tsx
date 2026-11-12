@@ -169,6 +169,7 @@ export default function Account(){
  const [avatarBusy,setAvatarBusy]=useState(false);
  const [profileState,setProfileState]=useState<"loading"|"idle"|"saving"|"saved"|"error">("idle");
  const [profileMessage,setProfileMessage]=useState("");
+ const [profileExists,setProfileExists]=useState<boolean|null>(null);
  const [recoveryMode,setRecoveryMode]=useState(false);
  useEffect(()=>{
   if(!enabled)return;
@@ -198,13 +199,13 @@ export default function Account(){
   setProfileState("loading");
   fetchCustomer().then(async record=>{
    if(!active)return;
-   setCustomer({...blankProfile,...record});setProfileState("idle");
+   setCustomer({...blankProfile,...record});setProfileExists(!!record);setProfileMessage(record?"Ficha recuperada do banco. Você pode editar os campos.":"Ainda não encontramos uma ficha salva para esta conta.");setProfileState("idle");
    if(record?.avatar_path)try{
     const objectUrl=await fetchAvatar(record.avatar_path);
     if(active)setAvatar(objectUrl);else URL.revokeObjectURL(objectUrl);
    }catch{/* Não divulgar dados privados da foto. */}
   })
-  .catch(()=>{if(active){setProfileState("error");setProfileMessage("O cadastro complementar ainda não está disponível. O login continua funcionando.")}});
+  .catch(()=>{if(active){setProfileState("error");setProfileMessage("Não conseguimos carregar a ficha do banco. Não preencha novamente: confira a sessão e tente recarregar.")}});
   return()=>{active=false};
  },[profile?.id]);
  useEffect(()=>()=>{if(avatar)URL.revokeObjectURL(avatar)},[avatar]);
@@ -268,7 +269,7 @@ export default function Account(){
   if(customer.postal_code&&!/^\d{8}$/.test(digits(customer.postal_code))){setProfileState("error");setProfileMessage("Informe um CEP com 8 dígitos.");return}
   if(customer.state_code&&!/^[A-Z]{2}$/.test(customer.state_code)){setProfileState("error");setProfileMessage("Informe uma UF válida.");return}
   setProfileState("saving");
-  try{await saveCustomer(customer);setProfileState("saved");setProfileMessage("Dados salvos com sucesso.")}
+  try{await saveCustomer(customer);setProfileExists(true);setProfileState("saved");setProfileMessage("Ficha salva e recuperada do banco com sucesso. Você pode editá-la a qualquer momento.")}
   catch(e){setProfileState("error");setProfileMessage(e instanceof Error?e.message:"Falha ao salvar seus dados.")}
  }
  async function chooseAvatar(file:File|undefined){
@@ -287,7 +288,7 @@ export default function Account(){
   finally{setAvatarBusy(false)}
  }
  async function logout(){
-  const current=readSession();clearSession();setProfile(null);setCustomer(blankProfile);setAvatar(null);setRecoveryMode(false);setState("idle");
+  const current=readSession();clearSession();setProfile(null);setCustomer(blankProfile);setProfileExists(null);setAvatar(null);setRecoveryMode(false);setState("idle");
   if(current)try{await fetch(`${projectUrl}/auth/v1/logout`,{method:"POST",headers:apiHeaders(current.access_token)})}catch{/* sessão local encerrada */}
  }
  const busy=state==="sending"||state==="loading";
@@ -314,6 +315,9 @@ export default function Account(){
      </form>:null}
      {message&&<p className="mt-4 text-sm" role="status">{message}</p>}
      {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-6 border-t border-[#d4bfb1] pt-7">
+      {profileState==="loading"&&<p role="status" className="rounded-xl bg-white p-4 text-sm">Carregando sua ficha salva…</p>}
+      {profileState==="error"&&<div role="alert" className="rounded-xl bg-white p-4 text-sm leading-relaxed">{profileMessage} <button type="button" onClick={()=>window.location.reload()} className="block mt-3 underline font-semibold">Tentar carregar novamente</button></div>}
+      {profileState!=="loading"&&profileState!=="error"&&profileExists===false&&<p role="status" className="rounded-xl bg-white p-4 text-sm">Esta conta ainda não tem uma ficha registrada no banco. Preencha os dados abaixo e salve.</p>}
       <h3 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>Minha ficha</h3>
       <p className="text-xs leading-relaxed text-[#69564e]">Seus dados ficam em uma área privada. A seleção de uma opção no campo de gênero é necessária para completar esta ficha, inclusive “Prefiro não declarar”. O uso de dados demográficos para pesquisa é separado e depende da sua autorização.</p>
       <div className="flex items-center gap-4">
