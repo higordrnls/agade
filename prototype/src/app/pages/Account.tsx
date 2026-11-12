@@ -93,9 +93,16 @@ async function currentSession(){
 }
 async function fetchCustomer():Promise<CustomerProfile|null>{
  const session=await currentSession();
- const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?select=*&limit=1`,{headers:apiHeaders(session.access_token)});
- if(!response.ok)throw Error("Não foi possível carregar seus dados.");
+ const user=await fetchProfile(session);
+ // Scope explicitly to the signed-in user in addition to Supabase RLS.
+ const query=new URLSearchParams({select:"*",user_id:`eq.${user.id}`,limit:"1"});
+ const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?${query}`,{
+  headers:{...apiHeaders(session.access_token),"Cache-Control":"no-cache"},
+  cache:"no-store"
+ });
+ if(!response.ok)throw Error("Não foi possível carregar sua ficha. Verifique a conexão com o banco.");
  const rows=await response.json();
+ if(!Array.isArray(rows))throw Error("Resposta inesperada ao consultar a ficha.");
  return rows.length?rows[0]:null;
 }
 async function saveCustomer(customer:CustomerProfile):Promise<void>{
@@ -103,8 +110,8 @@ async function saveCustomer(customer:CustomerProfile):Promise<void>{
  if(customer.gender_identity==="self_described"&&!(customer.gender_self_description||"").trim())throw Error("Descreva sua identidade de gênero.");
  const session=await currentSession();
  const user=await fetchProfile(session);
- const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?on_conflict=user_id`,{
-  method:"POST",headers:{...apiHeaders(session.access_token),Prefer:"resolution=merge-duplicates,return=minimal"},
+ const response=await fetch(`${projectUrl}/rest/v1/customer_profiles?on_conflict=user_id&select=user_id,full_name,gender_identity,gender_self_description`,{
+  method:"POST",headers:{...apiHeaders(session.access_token),Prefer:"resolution=merge-duplicates,return=representation"},
   body:JSON.stringify({
    ...customer,user_id:user.id,
    full_name:customer.full_name.trim(),phone_mobile:digits(customer.phone_mobile||"")||null,
@@ -112,7 +119,14 @@ async function saveCustomer(customer:CustomerProfile):Promise<void>{
    demographic_consent:customer.demographic_consent
   })
  });
- if(!response.ok)throw Error("Não foi possível salvar os dados. Confira se a migração do cadastro foi aplicada.");
+ if(!response.ok)throw Error("O banco não aceitou o cadastro. Verifique as permissões e tente novamente.");
+ const saved=await response.json();
+ if(!Array.isArray(saved)||saved.length!==1||saved[0]?.user_id!==user.id)
+  throw Error("O banco não confirmou a gravação da sua ficha.");
+ // A successful request is not enough: immediately verify the row through the same read path used after refresh.
+ const persisted=await fetchCustomer();
+ if(!persisted || persisted.full_name!==customer.full_name.trim() || persisted.gender_identity!==customer.gender_identity)
+  throw Error("Não foi possível confirmar a persistência da ficha. Nenhum sucesso foi anunciado.");
 }
 async function uploadAvatar(file:File):Promise<string>{
  if(file.size>2*1024*1024)throw Error("A imagem pode ter no máximo 2 MB.");
@@ -155,6 +169,7 @@ export default function Account(){
  const [avatarBusy,setAvatarBusy]=useState(false);
  const [profileState,setProfileState]=useState<"loading"|"idle"|"saving"|"saved"|"error">("idle");
  const [profileMessage,setProfileMessage]=useState("");
+ const [profileExists,setProfileExists]=useState<boolean|null>(null);
  const [recoveryMode,setRecoveryMode]=useState(false);
  useEffect(()=>{
   if(!enabled)return;
@@ -184,13 +199,13 @@ export default function Account(){
   setProfileState("loading");
   fetchCustomer().then(async record=>{
    if(!active)return;
-   setCustomer({...blankProfile,...record});setProfileState("idle");
+   setCustomer({...blankProfile,...record});setProfileExists(!!record);setProfileMessage(record?"Ficha recuperada do banco. Você pode editar os campos.":"Ainda não encontramos uma ficha salva para esta conta.");setProfileState("idle");
    if(record?.avatar_path)try{
     const objectUrl=await fetchAvatar(record.avatar_path);
     if(active)setAvatar(objectUrl);else URL.revokeObjectURL(objectUrl);
    }catch{/* Não divulgar dados privados da foto. */}
   })
-  .catch(()=>{if(active){setProfileState("error");setProfileMessage("O cadastro complementar ainda não está disponível. O login continua funcionando.")}});
+  .catch(()=>{if(active){setProfileState("error");setProfileMessage("Não conseguimos carregar a ficha do banco. Não preencha novamente: confira a sessão e tente recarregar.")}});
   return()=>{active=false};
  },[profile?.id]);
  useEffect(()=>()=>{if(avatar)URL.revokeObjectURL(avatar)},[avatar]);
@@ -254,7 +269,7 @@ export default function Account(){
   if(customer.postal_code&&!/^\d{8}$/.test(digits(customer.postal_code))){setProfileState("error");setProfileMessage("Informe um CEP com 8 dígitos.");return}
   if(customer.state_code&&!/^[A-Z]{2}$/.test(customer.state_code)){setProfileState("error");setProfileMessage("Informe uma UF válida.");return}
   setProfileState("saving");
-  try{await saveCustomer(customer);setProfileState("saved");setProfileMessage("Dados salvos com sucesso.")}
+  try{await saveCustomer(customer);setProfileExists(true);setProfileState("saved");setProfileMessage("Ficha salva e recuperada do banco com sucesso. Você pode editá-la a qualquer momento.")}
   catch(e){setProfileState("error");setProfileMessage(e instanceof Error?e.message:"Falha ao salvar seus dados.")}
  }
  async function chooseAvatar(file:File|undefined){
@@ -273,7 +288,7 @@ export default function Account(){
   finally{setAvatarBusy(false)}
  }
  async function logout(){
-  const current=readSession();clearSession();setProfile(null);setCustomer(blankProfile);setAvatar(null);setRecoveryMode(false);setState("idle");
+  const current=readSession();clearSession();setProfile(null);setCustomer(blankProfile);setProfileExists(null);setAvatar(null);setRecoveryMode(false);setState("idle");
   if(current)try{await fetch(`${projectUrl}/auth/v1/logout`,{method:"POST",headers:apiHeaders(current.access_token)})}catch{/* sessão local encerrada */}
  }
  const busy=state==="sending"||state==="loading";
@@ -300,6 +315,9 @@ export default function Account(){
      </form>:null}
      {message&&<p className="mt-4 text-sm" role="status">{message}</p>}
      {customerProfileEnabled?<form onSubmit={submitCustomer} className="mt-8 space-y-6 border-t border-[#d4bfb1] pt-7">
+      {profileState==="loading"&&<p role="status" className="rounded-xl bg-white p-4 text-sm">Carregando sua ficha salva…</p>}
+      {profileState==="error"&&<div role="alert" className="rounded-xl bg-white p-4 text-sm leading-relaxed">{profileMessage} <button type="button" onClick={()=>window.location.reload()} className="block mt-3 underline font-semibold">Tentar carregar novamente</button></div>}
+      {profileState!=="loading"&&profileState!=="error"&&profileExists===false&&<p role="status" className="rounded-xl bg-white p-4 text-sm">Esta conta ainda não tem uma ficha registrada no banco. Preencha os dados abaixo e salve.</p>}
       <h3 className="text-2xl" style={{fontFamily:"var(--font-serif)"}}>Minha ficha</h3>
       <p className="text-xs leading-relaxed text-[#69564e]">Seus dados ficam em uma área privada. A seleção de uma opção no campo de gênero é necessária para completar esta ficha, inclusive “Prefiro não declarar”. O uso de dados demográficos para pesquisa é separado e depende da sua autorização.</p>
       <div className="flex items-center gap-4">

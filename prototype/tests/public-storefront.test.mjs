@@ -172,3 +172,13 @@ test('gender question requires an explicit response and supports diverse identit
  assert.match(account,/Prefiro não declarar/);
  assert.doesNotMatch(account,/Nenhuma resposta de gênero é obrigatória/);
 });
+
+test('customer success requires confirmed row and a fresh read, scoped to auth user',()=>{
+ const page=src('pages/Account.tsx');
+ assert.match(page,/return=representation/);
+ assert.match(page,/saved\.length!==1/);
+ assert.match(page,/const persisted=await fetchCustomer\(\)/);
+ assert.match(page,/persisted\.full_name!==customer\.full_name\.trim\(\)/);
+ assert.match(page,/cache:"no-store"/);
+ assert.match(page,/user_id:\`eq\.\$\{user\.id\}\`/);
+});
