@@ -25,7 +25,7 @@ export default function Home(){
   "--agade-accent":"#D26B67","--agade-soft":"#FBEAEC","--agade-feature":"#E0F1DF",
   "--agade-highlight":"#F0C96A","--agade-deep":"#4C826A","--agade-caption":"#465962",
  }:{
-  "--agade-page":"#FFFFFF","--agade-ink":"#1E3D59","--agade-muted":"#486170",
+  "--agade-page":"#FFFFFF","--agade-ink":"#1F405A","--agade-muted":"#486170",
   "--agade-accent":"#D96C75","--agade-soft":"#EAF4FA","--agade-feature":"#EEF7F0",
   "--agade-highlight":"#E7C76A","--agade-deep":"#2E6F95","--agade-caption":"#486170",
  };
