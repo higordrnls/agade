@@ -15,7 +15,7 @@ export default function Home(){
  const {search}=useLocation();
  const brisa=new URLSearchParams(search).get("paleta")==="brisa";
  const theme=brisa?{
-  "--agade-page":"#FFFFFF","--agade-ink":"#163D4B","--agade-muted":"#36565A",
+  "--agade-page":"#FFFFFF","--agade-ink":"#173B4B","--agade-muted":"#36565A",
   "--agade-accent":"#397C83","--agade-soft":"#E7F2F2","--agade-feature":"#BBDCE5",
   "--agade-highlight":"#E1AD9D","--agade-deep":"#397C83","--agade-caption":"#36565A",
  }:{
