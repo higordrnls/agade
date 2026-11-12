@@ -22,6 +22,7 @@ export default function Home(){
   "--agade-soft":"#FFFFFF",
   "--agade-feature":"#E4F2F8",
   "--agade-highlight":"#F1B844",
+  "--agade-leaf":"#287A58",
   "--agade-deep":"#17699D",
   "--agade-caption":"#476174",
  };
@@ -45,6 +46,7 @@ export default function Home(){
    </div>
   </section>
 
+  <div aria-hidden="true" className="h-1.5 w-full bg-[var(--agade-highlight)]"/>
   <section aria-labelledby="home-inspiration" className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28">
    <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-10 lg:gap-20 items-center">
     <div className="grid grid-cols-[1.15fr_.8fr] gap-3 sm:gap-5 items-end">
@@ -62,7 +64,7 @@ export default function Home(){
      </figure>
     </div>
     <div className="lg:pl-4">
-     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-accent)] mb-5">De onde vem a inspiração</p>
+     <p className="text-xs font-semibold uppercase tracking-[.14em] text-[var(--agade-leaf)] mb-5">De onde vem a inspiração</p>
      <h2 id="home-inspiration" className="text-[clamp(2.5rem,4.5vw,5.1rem)] leading-[1.02] tracking-[-.05em]" style={serif}>A gente presta atenção nas coisas que encontra por aí.</h2>
      <p className="text-[var(--agade-muted)] leading-relaxed mt-6 max-w-md">Uma fachada bonita, o sol entrando pela janela, alguém passando na rua com um óculos que combina perfeitamente com a pessoa. São essas imagens que ficam na cabeça.</p>
      <Link to="/sobre" className="mt-8 inline-flex min-h-12 items-center gap-3 text-sm font-medium border-b border-[var(--agade-accent)] text-[var(--agade-ink)]">Mais sobre a AGADE <ArrowRight size={17}/></Link>
@@ -99,7 +101,7 @@ export default function Home(){
   <section className="max-w-[1450px] mx-auto px-5 sm:px-10 py-16 sm:py-24 lg:py-28" aria-labelledby="home-guide">
    <div className="grid md:grid-cols-[1fr_.8fr] gap-8 md:gap-16 items-center">
     <div>
-     <p className="text-xs uppercase tracking-[.14em] text-[var(--agade-accent)] font-semibold mb-4">Antes de escolher</p>
+     <p className="text-xs uppercase tracking-[.14em] text-[var(--agade-leaf)] font-semibold mb-4">Antes de escolher</p>
      <h2 id="home-guide" className="text-[clamp(2.8rem,5vw,5.8rem)] leading-[1.02] tracking-[-.05em]" style={serif}>Bonito no rosto.<br/>Bom de usar.</h2>
     </div>
     <div className="max-w-lg md:justify-self-end">
