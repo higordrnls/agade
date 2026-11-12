@@ -13,15 +13,21 @@ function Action({to,children,outline=false}:{to:string;children:ReactNode;outlin
 }
 export default function Home(){
  const {search}=useLocation();
- const brisa=new URLSearchParams(search).get("paleta")==="brisa";
+ const variant=new URLSearchParams(search).get("paleta");
+ const brisa=variant==="brisa";
+ const solar=variant==="solar";
  const theme=brisa?{
   "--agade-page":"#FFFFFF","--agade-ink":"#173B4B","--agade-muted":"#36565A",
   "--agade-accent":"#397C83","--agade-soft":"#E7F2F2","--agade-feature":"#BBDCE5",
   "--agade-highlight":"#E1AD9D","--agade-deep":"#397C83","--agade-caption":"#36565A",
- }:{
+ }:solar?{
   "--agade-page":"#FFFFFF","--agade-ink":"#202D37","--agade-muted":"#465962",
   "--agade-accent":"#D26B67","--agade-soft":"#FBEAEC","--agade-feature":"#E0F1DF",
   "--agade-highlight":"#F0C96A","--agade-deep":"#4C826A","--agade-caption":"#465962",
+ }:{
+  "--agade-page":"#FFFFFF","--agade-ink":"#1E3D59","--agade-muted":"#486170",
+  "--agade-accent":"#D96C75","--agade-soft":"#EAF4FA","--agade-feature":"#EEF7F0",
+  "--agade-highlight":"#E7C76A","--agade-deep":"#2E6F95","--agade-caption":"#486170",
  };
 
  const [catalog,setCatalog]=useState<StorefrontState>({status:"unconfigured",products:[]});
@@ -31,8 +37,9 @@ export default function Home(){
   <div className="flex flex-wrap items-center justify-between gap-3 px-6 sm:px-10 py-3 bg-white border-b border-black/10" aria-label="Experimento visual da AGADE">
    <span className="text-[11px] uppercase tracking-[.12em] font-semibold">Estudo de cor · homepage</span>
    <div className="flex flex-wrap items-center gap-2 text-xs">
-    <Link to="/?paleta=solar" aria-current={!brisa?"page":undefined} className={!brisa?"px-4 py-2 rounded-full bg-[#D26B67] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>01 · Solar goiaba</Link>
+    <Link to="/?paleta=solar" aria-current={solar?"page":undefined} className={solar?"px-4 py-2 rounded-full bg-[#D26B67] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>01 · Solar goiaba</Link>
     <Link to="/?paleta=brisa" aria-current={brisa?"page":undefined} className={brisa?"px-4 py-2 rounded-full bg-[#397C83] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>02 · Brisa azul</Link>
+    <Link to="/?paleta=hibrida" aria-current={!brisa&&!solar?"page":undefined} className={!brisa&&!solar?"px-4 py-2 rounded-full bg-[#2E6F95] text-white":"px-4 py-2 rounded-full border border-black/20 text-[#202D37]"}>03 · Solar híbrida</Link>
    </div>
   </div>
   {/* No celular, o produto no rosto aparece ANTES do texto — e dentro da primeira dobra. */}
