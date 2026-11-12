@@ -28,16 +28,16 @@ export default function NewsletterUnsubscribe(){
  }
  return <div className="min-h-[65vh] bg-[var(--agade-page)] text-[var(--agade-ink)] px-6 sm:px-12 py-16 sm:py-24">
   <div className="max-w-xl mx-auto">
-   <p className="text-xs uppercase tracking-[.17em] font-semibold text-[var(--agade-accent)] mb-6">AGADE / PRIVACIDADE</p>
+   <p className="text-xs uppercase tracking-[.17em] font-semibold text-[var(--agade-accent-text)] mb-6">AGADE / PRIVACIDADE</p>
    <h1 className="text-[clamp(2.9rem,6vw,5rem)] leading-[1.03] tracking-tight" style={{fontFamily:"var(--font-serif)"}}>Você decide o que recebe.</h1>
    <p className="mt-6 text-[var(--agade-muted)] leading-relaxed">O envio de novidades é opcional. Você pode sair da lista sem precisar excluir sua conta da loja.</p>
    <div className="mt-9 bg-[var(--agade-feature)] rounded-2xl p-7 sm:p-9">
     {state==="done"?<div role="status">
-     <MailCheck size={30} className="mb-5 text-[var(--agade-leaf)]"/>
+     <MailCheck size={30} className="mb-5 text-[var(--agade-leaf-text)]"/>
      <h2 className="text-2xl mb-3" style={{fontFamily:"var(--font-serif)"}}>Tudo certo.</h2>
      <p className="text-sm leading-relaxed">{message}</p>
     </div>:!enabled||!valid?<div role="status">
-     <ShieldCheck size={27} className="mb-5 text-[var(--agade-accent)]"/>
+     <ShieldCheck size={27} className="mb-5 text-[var(--agade-accent-text)]"/>
      <p className="leading-relaxed text-sm">Este link não está disponível ou expirou. Para solicitar o descadastro, escreva para <a href="mailto:atendimento@agade.com?subject=Descadastro%20newsletter%20AGADE" className="underline underline-offset-4 break-all">atendimento@agade.com</a>.</p>
     </div>:<>
      <p className="text-sm text-[var(--agade-muted)] mb-6">Confirma que deseja deixar de receber novidades no endereço abaixo?</p>
