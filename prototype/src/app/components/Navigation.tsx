@@ -16,7 +16,7 @@ export default function Navigation() {
   const brisa=solarHome&&palette==="brisa";
   const goiaba=solarHome&&palette==="solar";
   const accent=brisa?"#397C83":goiaba?"#D26B67":"#2E6F95";
-  const ink=brisa?"#173B4B":goiaba?"#202D37":"#1E3D59";
+  const ink=brisa?"#173B4B":goiaba?"#202D37":"#1F405A";
   const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
