@@ -10,13 +10,10 @@ const links = [
   {to:"/ajuda",label:"AJUDA"},
 ];
 export default function Navigation() {
-  const {pathname,search}=useLocation();
+  const {pathname}=useLocation();
   const solarHome=pathname==="/";
-  const palette=new URLSearchParams(search).get("paleta");
-  const brisa=solarHome&&palette==="brisa";
-  const goiaba=solarHome&&palette==="solar";
-  const accent=brisa?"#397C83":goiaba?"#D26B67":"#2E6F95";
-  const ink=brisa?"#173B4B":goiaba?"#202D37":"#1F405A";
+  const accent="#17699D";
+  const ink="#173F70";
   const cart=useCart();
   const [open,setOpen]=useState(false);
   const [query,setQuery]=useState("");
@@ -26,7 +23,7 @@ export default function Navigation() {
     <div className="h-8 bg-[#a95e46] text-white flex items-center justify-center px-4 text-[10px] sm:text-xs font-medium tracking-[.17em] uppercase" style={solarHome?{backgroundColor:accent}:undefined}>
       SOL, EXPRESSÃO E UM JEITO NOSSO DE VER
     </div>
-    <nav aria-label="Navegação principal" className="h-20 relative max-w-[1600px] mx-auto border-b border-[#aa765e]/30 px-5 sm:px-10 flex justify-between items-center" style={solarHome?{borderColor:"#D7E2E0"}:undefined}>
+    <nav aria-label="Navegação principal" className="h-20 relative max-w-[1600px] mx-auto border-b border-[#aa765e]/30 px-5 sm:px-10 flex justify-between items-center" style={solarHome?{borderColor:"#C5DFED"}:undefined}>
       <div className="hidden lg:flex items-center gap-9 w-[35%]">
         {links.map(l=><Link to={l.to} aria-current={pathname===l.to?"page":undefined} key={l.to}
           className="text-[11px] tracking-[.13em] font-medium hover:text-[#102e90] transition-colors">{l.label}</Link>)}
