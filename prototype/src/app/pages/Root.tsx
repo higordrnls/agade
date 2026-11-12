@@ -7,8 +7,9 @@ import { CartProvider } from "../context/CartContext";
 
 export default function Root() {
   const { pathname } = useLocation();
+  const isHome=pathname==="/";
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [pathname]);
-  return <CartProvider><div className="min-h-screen bg-white">
+  return <CartProvider><div className={isHome?"agade-experiment min-h-screen":"min-h-screen bg-white"}>
     <a href="#conteudo-principal" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:p-3">Ir para o conteúdo</a>
     <Navigation />
     <main id="conteudo-principal" className="pt-28"><Outlet /></main>
