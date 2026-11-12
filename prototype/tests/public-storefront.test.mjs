@@ -172,3 +172,20 @@ test('gender question requires an explicit response and supports diverse identit
  assert.match(account,/Prefiro não declarar/);
  assert.doesNotMatch(account,/Nenhuma resposta de gênero é obrigatória/);
 });
+
+test('catalog database migration is empty-by-default and limits public access to filtered RPC',()=>{
+ const migration=readFileSync(new URL('../../supabase/migrations/20261112_catalog_inventory_foundation.sql',import.meta.url),'utf8');
+ for(const table of ['agade_catalog_products','agade_catalog_variants','agade_catalog_images','agade_inventory_balances']){
+  assert.match(migration,new RegExp('alter table public\\.'+table+' enable row level security'));
+  assert.match(migration,new RegExp('revoke all on public\\.'+table+' from public, anon, authenticated'));
+ }
+ assert.match(migration,/create or replace function public\.list_storefront_catalog\(\)/);
+ assert.match(migration,/p\.status='published'/);
+ assert.match(migration,/v\.status='available'/);
+ assert.match(migration,/b\.on_hand>b\.reserved/);
+ assert.match(migration,/im\.is_hero=true/);
+ assert.match(migration,/v\.price_cents>0/);
+ assert.match(migration,/grant execute on function public\.list_storefront_catalog\(\) to anon, authenticated/);
+ assert.doesNotMatch(migration,/insert into public\.agade_catalog_products/i);
+ assert.doesNotMatch(migration,/grant (?:insert|update|delete) on public\.agade_/i);
+});
