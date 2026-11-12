@@ -18,7 +18,7 @@ export default function Privacy(){
    </div>
   </header>
   <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-20 grid lg:grid-cols-12 gap-12">
-   <aside className="lg:col-span-4"><p className="text-xs tracking-[.2em] uppercase text-[var(--agade-accent)] mb-5">INFORMAÇÃO TRANSPARENTE</p>
+   <aside className="lg:col-span-4"><p className="text-xs tracking-[.2em] uppercase text-[var(--agade-accent-text)] mb-5">INFORMAÇÃO TRANSPARENTE</p>
     <h2 className="text-3xl sm:text-4xl" style={{fontFamily:"var(--font-serif)"}}>Clareza em cada etapa.</h2>
     <p className="text-sm text-[var(--agade-muted)] mt-6 leading-relaxed">Nossa operação ainda está sendo estruturada. Por isso, os serviços ainda não habilitados são descritos como futuros, sem simular tratamentos de dados que não ocorreram.</p>
    </aside>
@@ -27,7 +27,7 @@ export default function Privacy(){
      <h2 className="text-2xl sm:text-3xl mb-5" style={{fontFamily:"var(--font-serif)"}}>{x.heading}</h2><p className="text-[var(--agade-muted)] leading-relaxed">{x.body}</p>
     </section>)}
     <div className="bg-[var(--agade-feature)] p-7 sm:p-10 mt-12">
-     <p className="text-xs uppercase tracking-[.2em] mb-5 text-[var(--agade-accent)]">FALE CONOSCO</p>
+     <p className="text-xs uppercase tracking-[.2em] mb-5 text-[var(--agade-accent-text)]">FALE CONOSCO</p>
      <a className="inline-flex items-center gap-2 underline underline-offset-4 break-all" href="mailto:atendimento@agade.com"><Mail size={18}/>atendimento@agade.com</a>
      <p className="text-xs text-[var(--agade-muted)] mt-5">Política informativa em elaboração; os dados legais completos serão publicados antes da operação de vendas.</p>
     </div>
